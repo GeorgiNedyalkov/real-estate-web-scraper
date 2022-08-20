@@ -14,6 +14,13 @@ async function getPropertyPrices() {
 
   // select the proper html from an id selector
   const propertyContainer = $("div#adrows_7818733");
+
+  const propertiesContainer = $("div.content_container_list");
+
+  const properties = propertiesContainer.find("div.listtop-item");
+
+  console.log(properties.text());
+
   const propertyParameters = [];
 
   propertyContainer.find("div.listtop-item-params").each((i, element) => {
@@ -21,7 +28,7 @@ async function getPropertyPrices() {
     const property = {};
     property.name = $element.find("div.ads-params-row").text();
     // get the text of every single element in the adrows div
-    console.log(property);
+    // console.log(property);
   });
 }
 
