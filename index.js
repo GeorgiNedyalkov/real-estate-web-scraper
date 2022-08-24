@@ -4,32 +4,18 @@ const cheerio = require("cheerio");
 const urlAloListingsChannel =
   "https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23";
 
-async function getPropertyPrices() {
-  // create a get request for the webpage that we need to exctract data from
-  const { data } = await axios.get(urlAloListingsChannel);
+const urlOneBedroomApartments =
+  "https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23&p[413]=1574";
 
-  // Working with cheerio
-  // First we need to load the HTML
+async function getOneBedroomApartments() {
+  // request the data (html) from the url using axios
+  const { data } = await axios.get(urlOneBedroomApartments);
+  // Load the html
   const $ = cheerio.load(data);
-
-  // select the proper html from an id selector
-  const propertyContainer = $("div#adrows_7818733");
-
-  const propertiesContainer = $("div.content_container_list");
-
-  const properties = propertiesContainer.find("div.listtop-item");
-
-  console.log(properties.text());
-
-  const propertyParameters = [];
-
-  propertyContainer.find("div.listtop-item-params").each((i, element) => {
-    const $element = $(element);
-    const property = {};
-    property.name = $element.find("div.ads-params-row").text();
-    // get the text of every single element in the adrows div
-    // console.log(property);
-  });
+  // Select a single apartment
+  const apartment = $("#adrows_8216642");
+  // Select all the apartments in the content container
+  const apartmentsContainer = $("#content_container");
 }
 
-getPropertyPrices();
+getOneBedroomApartments();

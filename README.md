@@ -9,7 +9,6 @@ Tasks:
 - [] Collect the apartment price data.
 - [] Store the prices in a collection.
 - [] Calculate the average price.
-
 - [] Create a CMA report
 
 Steps:
