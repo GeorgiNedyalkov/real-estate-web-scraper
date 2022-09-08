@@ -1,54 +1,46 @@
-const axios = require("axios");
-const cheerio = require("cheerio");
-
-const urlAloListingsChannel =
-  "https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23";
+const axios = require("axios")
+const cheerio = require("cheerio")
 
 const urlOneBedroomApartments =
-  "https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23&p[413]=1574";
+  "https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23&p[413]=1574"
+
+const topListings = []
+const vipListings = []
 
 async function getOneBedroomApartments() {
   // request the data (html) from the url using axios
-  const { data } = await axios.get(urlOneBedroomApartments);
+  const { data } = await axios.get(urlOneBedroomApartments)
   // Load the html
-  const $ = cheerio.load(data);
-  // Select a single apartment
-  const apartment = $("#adrows_8216642");
-  // Select all the apartments in the content container
-  const apartmentsContainer = $("#content_container");
+  const $ = cheerio.load(data)
 
-  // Select all listing apartments
+  // Select all the apartments in the content container
+  const apartmentsContainer = $("#content_container")
+
   const topListingApartments = apartmentsContainer
     .find(".listtop-item")
     .each((i, element) => {
-      const $element = $(element);
-      const topListing = {};
-      // get the titles of all listings
-      topListing.title = $element.find(".listtop-item-title").text();
+      const $element = $(element)
+      const topListing = {}
+      topListing.title = $element.find(".listtop-item-title").text()
+      topListing.parameters = $element.find(".ads-params-single").text()
+      topListings.push(topListing)
+    })
 
-      // find the parameters of all listings
-      topListing.price = $element.find(".ads-params-single").text();
+  const vipListingsApartments = apartmentsContainer
+    .find(".listvip-params")
+    .each((i, listing) => {
+      const $listing = $(listing)
+      const vipListing = {}
+      vipListing.title = $listing.find(".listvip-item-header").text()
+      vipListing.parameters = $listing.find(".listvip-item-content").text()
+      vipListings.push(vipListing)
+    })
 
-      // select only the price of the listing
-      const topListingParameters = topListing.price.split(" ");
+  console.log("Top Listings:")
+  console.log(topListings)
 
-      const topListingPrices = topListingParameters[0];
-
-      const pricesStrings = [];
-      pricesStrings.push(topListingPrices.slice(0, 6).replace(/\s+/g, ""));
-
-      const prices = pricesStrings.map((price) => Number(price));
-    });
+  console.log("Vip Listings:`")
+  console.log(vipListings)
 }
 
-getOneBedroomApartments();
-
-function calculateAverageValue(arr) {
-  let numberOfElements = arr.length;
-
-  let sumElements = arr.reduce((previousValue, currentValue) => {
-    return previousValue + currentValue;
-  });
-
-  return sumElements / numberOfElements;
-}
+getOneBedroomApartments()
