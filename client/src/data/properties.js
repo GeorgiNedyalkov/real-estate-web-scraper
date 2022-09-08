@@ -1,0 +1,40 @@
+const properties = [
+  {
+    title: "Двустаен апартамент до МОЛ 'Плаза'",
+    type: "1 bed",
+    location: "Izgrev",
+    price: 60000,
+    pricePerSqMeters: 923,
+    size: 65,
+    construction: "Тухла",
+    yearBuilt: 2022,
+    phase: "В строеж",
+    floor: "Непоследен",
+  },
+  {
+    title: "Двустаен апартамент в ж.к. Изгрев",
+    type: "1 bed",
+    location: "Izgrev",
+    price: 67590,
+    size: 60,
+    pricePerSqMeters: 1126,
+    yearBuilt: 2020,
+    construction: "Тухла",
+    phase: "В строеж",
+    floor: "3 етаж Непоследен",
+  },
+  {
+    title: "Двустаен апартамент в ж.к. Изгрев БЕЗ КОМИСИОННА",
+    type: "1 bed",
+    location: "Izgrev",
+    price: 72360,
+    size: 80,
+    pricePerSqMeters: 900,
+    construction: "Тухла",
+    yearBuilt: 2022,
+    floor: "Непоследен",
+    phase: "В строеж",
+  },
+]
+
+module.exports = properties

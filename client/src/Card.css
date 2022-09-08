@@ -1,0 +1,14 @@
+.card {
+    background-color: #f0f0f0;
+    border: 1px solid gray;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px #575656;
+    margin-top: 50px;
+    padding: 20px;
+    width: 200px;
+    height: 100px;
+}
+
+.card__stats {
+    font-size: 1.2rem;
+}

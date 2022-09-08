@@ -1,0 +1,10 @@
+body {
+    font-family: sans-serif;
+}
+
+.main__key-stats {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 35vh;
+}
