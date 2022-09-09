@@ -94,4 +94,48 @@ function divideString(s) {
   return parameters
 }
 
-console.log(divideString(str))
+// console.log(divideString(str))
+
+//
+// 74 000 EUR (1 121.21 EUR/кв.м)Двустаен апартамент в Изгрев66 кв.мПанел1992 г.7 етажПоследен етаж
+// 73 000 EUR (1 303.34 EUR/кв.м)Двустаен апартамент в Изгрев56 кв.мТухла2005 г.5 етажНепоследен
+// 67 530 EUR (1 007.91 EUR/кв.м)Двустаен апартамент в Изгрев67 кв.мТухла2022 г.8 етажНепоследенВ строеж
+// 62 640 EUR (835.20 EUR/кв.м)Двустаен апартамент в Изгрев75 кв.мТухла2022 г.4 етажНепоследенВ строеж
+// 67 590 EUR (834.44 EUR/кв.м)Двустаен апартамент в Изгрев81 кв.мТухла2022 г.3 етажНепоследенВ строеж
+// 72 360 EUR (904.50 EUR/кв.м)Двустаен апартамент в Изгрев80 кв.мТухла2022 г.5 етажНепоследенВ строеж
+// 53 000 EUR (917.27 EUR/кв.м)Двустаен апартамент в Изгрев57.78 кв.мТухла2 етаж
+// 67 530 EUR (1 007.91 EUR/кв.м)Двустаен апартамент в Изгрев67 кв.мТухла2022 г.8 етажНепоследенВ строеж
+// 68 000 EUR (1 003.99 EUR/кв.м)Двустаен апартамент в Изгрев68 кв.мТухла2022 г.5 етажНепоследенВ строеж
+
+function parseInput(s) {
+  let parameters = {}
+
+  let numbers = []
+
+  for (let char of s) {
+    if (!isNaN(char) || char == ".") {
+      numbers.push(char)
+    }
+  }
+
+  let numbersArr = numbers
+    .join("")
+    .split(" ")
+    .filter((element) => element.length > 0)
+
+  parameters.price = +numbersArr[0].replace(/\s/, "")
+  parameters.pricePerSqMeter = +numbersArr[1].replace(/\s/, "").slice(0, -1)
+  parameters.size = +numbersArr[2]
+  parameters.year = numbersArr[3]
+  parameters.floor = numbersArr[4]
+
+  return parameters
+}
+
+let testStr =
+  "61 830 EUR (1 104.11 EUR/кв.м)Двустаен апартамент в Изгрев56 кв.мТухла2022 г.6 етажНепоследенВ строеж"
+
+let testStr2 =
+  "53 000 EUR (917.27 EUR/кв.м)Двустаен апартамент в Изгрев57.78 кв.мТухла2 етаж"
+console.log(parseInput(testStr))
+console.log(parseInput(testStr2))

@@ -26,3 +26,21 @@ install cheerio
 
 figure out the right selector for the data you want to exctract
 #adrows_7818733
+
+## Example property data scruture
+
+JSON:
+
+```javascript
+{
+    "title": String,
+    "type": String,
+    "location": String,
+    "price": Number,
+    "size": Number,
+    "construction": String,
+    "yearBuilt": Number,
+    "phase": String,
+    "floor": Number,
+}
+```
