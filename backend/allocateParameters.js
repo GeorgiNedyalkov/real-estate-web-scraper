@@ -1,7 +1,5 @@
 // 73 000 EUR (1 303.34 EUR/кв.м)56 кв.мТухла2005 г.5 етажНепоследен
 
-const { compareDocumentPosition } = require("domutils")
-
 // Give the above string divide the different parts into separate object properties.
 
 let str = "73 000 EUR (1 303.34 EUR/кв.м)56 кв.мТухла2005 г.5 етажНепоследен"
@@ -40,15 +38,38 @@ function divideString(s) {
     s.length
   )
 
-  console.log(removedSize)
-
   // select the construction type
   let constructionType = ""
 
+  if (/Тухла/.test(s)) {
+    constructionType = "Тухла"
+  } else if (/Панел/.test(s)) {
+    constructionType = "Панел"
+  } else if (/ЕПК.ПК/.test(s)) {
+    constructionType = "ЕПК/ПК"
+  } else if (/Гредоред/.test(s)) {
+    constructionType = "Гредоред"
+  }
+
   // select the year built
-  let yearBuilt = 2000
-  // select the floor
-  let floor = 0
+  let yearBuilt = 0
+
+  let yearAndFloor = []
+
+  for (let char of removedSize) {
+    let test = Number(char)
+
+    if (isNaN(test)) {
+      continue
+    } else {
+      yearAndFloor.push(char)
+    }
+  }
+
+  let arr = yearAndFloor.join("").split(" ")
+
+  let floor = +arr[1]
+  let year = +arr[0]
 
   // bool - last or not
   let lastFloor = false
@@ -59,13 +80,15 @@ function divideString(s) {
     lastFloor = false
   }
 
-  // create properties of object
-  //   parameters.price = price
-  //   parameters.pricePerSqueareMeter = pricePerSqueareMeter
-  //   parameters.size = size
-  parameters.floor = floor
-  parameters.yearBuilt = yearBuilt
+  console.log(s)
 
+  // create properties of object
+  parameters.price = price
+  parameters.pricePerSqueareMeter = pricePerSqueareMeter
+  parameters.size = size
+  parameters.constructionType = constructionType
+  parameters.yearBuilt = year
+  parameters.floor = floor
   parameters.lastFloor = lastFloor
 
   return parameters
