@@ -34,22 +34,34 @@ async function getOneBedroomApartments() {
     .each((i, listing) => {
       const $listing = $(listing)
       const vipListing = {}
-      vipListing.title = $listing.find(".listvip-item-header").text()
-      const parameters = $listing.find(".listvip-item-content").text()
 
-      vipListing.parameters = parameters
+      vipListing.title = $listing
+        .find(".listvip-item-header")
+        .text()
+        .replace(/\t/gm, "")
+        .replace(/\n/gm, "")
+
+      vipListing.parameters = $listing
+        .find(".listvip-item-content")
+        .text()
+        .replace(/\n/g, "")
+        .replace(/\t/g, "")
+
+      vipListing.parameters = parseInput(vipListing.parameters)
+
       vipListings.push(vipListing)
     })
-
-  console.log(topListings)
   console.log(vipListings)
+
+  // return await topListings
 }
 
 getOneBedroomApartments()
 
+// getOneBedroomApartments().then((data) => console.log(data))
+
 function parseInput(s) {
   let parameters = {}
-
   let numbers = []
 
   for (let char of s) {
