@@ -1,5 +1,6 @@
 {
   "name": "web_scrapping",
+  "type": "module",
   "version": "1.0.0",
   "description": "An application use to scrape real estate property market prices from listing websites.",
   "main": "index.js",

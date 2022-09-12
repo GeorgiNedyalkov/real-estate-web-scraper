@@ -107,7 +107,7 @@ function divideString(s) {
 // 67 530 EUR (1 007.91 EUR/кв.м)Двустаен апартамент в Изгрев67 кв.мТухла2022 г.8 етажНепоследенВ строеж
 // 68 000 EUR (1 003.99 EUR/кв.м)Двустаен апартамент в Изгрев68 кв.мТухла2022 г.5 етажНепоследенВ строеж
 
-function parseInput(s) {
+export default function parseInput(s) {
   let parameters = {}
 
   let numbers = []

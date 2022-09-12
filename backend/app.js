@@ -1,5 +1,6 @@
-const axios = require("axios")
-const cheerio = require("cheerio")
+import axios from "axios"
+import { load } from "cheerio"
+import parseInput from "./allocateParameters.js"
 
 const urlOneBedroomApartments =
   "https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23&p[413]=1574"
@@ -11,7 +12,7 @@ async function getOneBedroomApartments() {
   // request the data (html) from the url using axios
   const { data } = await axios.get(urlOneBedroomApartments)
   // Load the html
-  const $ = cheerio.load(data)
+  const $ = load(data)
 
   // Select all the apartments in the content container
   const apartmentsContainer = $("#content_container")
@@ -25,6 +26,8 @@ async function getOneBedroomApartments() {
       const parameters = $element.find(".ads-params-single").text()
 
       topListing.parameters = parseInput(parameters)
+
+      console.log(topListing)
 
       topListings.push(topListing)
     })
@@ -49,37 +52,14 @@ async function getOneBedroomApartments() {
 
       vipListing.parameters = parseInput(vipListing.parameters)
 
+      console.log(vipListing)
+
       vipListings.push(vipListing)
     })
-  console.log(vipListings)
 
-  // return await topListings
+  // return await [topListings, vipListings]
 }
 
 getOneBedroomApartments()
 
 // getOneBedroomApartments().then((data) => console.log(data))
-
-function parseInput(s) {
-  let parameters = {}
-  let numbers = []
-
-  for (let char of s) {
-    if (!isNaN(char) || char == ".") {
-      numbers.push(char)
-    }
-  }
-
-  let numbersArr = numbers
-    .join("")
-    .split(" ")
-    .filter((element) => element.length > 0)
-
-  parameters.price = +numbersArr[0].replace(/\s/, "")
-  parameters.pricePerSqMeter = +numbersArr[1].replace(/\s/, "").slice(0, -1)
-  parameters.size = +numbersArr[2]
-  parameters.year = numbersArr[3]
-  parameters.floor = numbersArr[4]
-
-  return parameters
-}
