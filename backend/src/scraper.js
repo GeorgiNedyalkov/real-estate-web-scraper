@@ -1,6 +1,6 @@
 import axios from "axios"
 import { load } from "cheerio"
-import parseInput from "./allocateParameters.js"
+import parseInput from "./utils.js"
 
 const urlOneBedroomApartments =
   "https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23&p[413]=1574"
@@ -8,9 +8,9 @@ const urlOneBedroomApartments =
 const topListings = []
 const vipListings = []
 
-async function getOneBedroomApartments() {
+export default async function getOneBedroomApartments(url) {
   // request the data (html) from the url using axios
-  const { data } = await axios.get(urlOneBedroomApartments)
+  const { data } = await axios.get(url)
   // Load the html
   const $ = load(data)
 
@@ -22,13 +22,13 @@ async function getOneBedroomApartments() {
     .each((i, element) => {
       const $element = $(element)
       const topListing = {}
-      topListing.title = $element.find(".listtop-item-title").text()
-      const parameters = $element.find(".ads-params-single").text()
 
+      topListing.title = $element.find(".listtop-item-title").text()
+
+      const parameters = $element.find(".ads-params-single").text()
       topListing.parameters = parseInput(parameters)
 
-      console.log(topListing)
-
+      // console.log(topListing)
       topListings.push(topListing)
     })
 
@@ -52,14 +52,26 @@ async function getOneBedroomApartments() {
 
       vipListing.parameters = parseInput(vipListing.parameters)
 
-      console.log(vipListing)
+      // console.log(vipListing)
 
       vipListings.push(vipListing)
     })
 
-  // return await [topListings, vipListings]
+  return await [topListings, vipListings]
 }
 
-getOneBedroomApartments()
+getOneBedroomApartments(urlOneBedroomApartments).then((data) => {
+  return data
+})
 
-// getOneBedroomApartments().then((data) => console.log(data))
+// getOneBedroomApartments(urlOneBedroomApartments)
+
+// Scraper multiple pages
+
+// let page = 2
+
+// const urlPages = `https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23&p[413]=1574&page=${page}`
+
+// // for (let i = 6; page <= i; i--) {
+// //   getOneBedroomApartments(urlPages)
+// // }

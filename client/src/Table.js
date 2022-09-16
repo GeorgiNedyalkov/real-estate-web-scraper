@@ -14,10 +14,10 @@ function Table() {
           <th className="table__header-title">Size</th>
           <th className="table__header-title">Price</th>
           <th className="table__header-title">Price sq.m.</th>
-          <th className="table__header-title">Year</th>
-          <th className="table__header-title">Construction</th>
-          <th className="table__header-title">Phase</th>
-          <th className="table__header-title">Floor</th>
+          {/* <th className="table__header-title">Year</th> */}
+          {/* <th className="table__header-title">Construction</th> */}
+          {/* <th className="table__header-title">Phase</th> */}
+          {/* <th className="table__header-title">Floor</th> */}
         </thead>
         <tbody>
           {apartments.map((apartment) => (
@@ -27,10 +27,10 @@ function Table() {
               <td>{apartment.size}</td>
               <td>{apartment.price}</td>
               <td>{apartment.pricePerSqMeters}</td>
-              <td>{apartment.yearBuilt}</td>
-              <td>{apartment.construction}</td>
-              <td>{apartment.phase}</td>
-              <td>{apartment.floor}</td>
+              {/* <td>{apartment.yearBuilt}</td> */}
+              {/* <td>{apartment.construction}</td> */}
+              {/* <td>{apartment.phase}</td> */}
+              {/* <td>{apartment.floor}</td> */}
             </tr>
           ))}
         </tbody>

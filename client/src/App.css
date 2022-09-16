@@ -8,3 +8,11 @@ body {
     justify-content: space-around;
     height: 35vh;
 }
+
+
+.main__table {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}

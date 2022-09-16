@@ -2,8 +2,23 @@ import "./App.css"
 import Header from "./Header"
 import Card from "./Card"
 import Table from "./Table"
+import axios from "axios"
+import scraper from "./api/scraper"
+import { useState, useEffect } from "react"
 
 function App() {
+  // async function loadApartments() {
+  //   const res = await axios.get("https://localhost:3000/properties")
+  //   const apartments = res.json()
+  // }
+
+  const [apartments, setApartments] = useState([])
+
+  useEffect(() => {
+    setApartments(scraper)
+    console.log(apartments)
+  }, [apartments])
+
   return (
     <div className="App">
       <Header />
