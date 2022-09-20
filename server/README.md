@@ -52,3 +52,5 @@ app.delete("/api/v1/apartments/:id")
 - Create a get all properties functionlity
 
 ## Add notfound and error handler functions
+
+## Refactor controllers with an asyncronous wrapper

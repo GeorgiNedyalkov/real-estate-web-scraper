@@ -1,79 +1,55 @@
 const Apartment = require("../models/apartment")
+const asyncWrapper = require("../middlewares/asyncWrapper")
+const { createCustomError } = require("../errors/custom-error")
 
-const getAllApartments = async (req, res) => {
-  try {
-    const apartments = await Apartment.find({})
-    res.status(200).json({ numberOfApartments: apartments.length, apartments })
-  } catch (error) {
-    res.status(500).json({ msg: error })
+const getAllApartments = asyncWrapper(async (req, res) => {
+  const apartments = await Apartment.find({})
+  res.status(200).json({ apartments })
+})
+
+const createApartment = asyncWrapper(async (req, res) => {
+  const apartment = await Apartment.create(req.body)
+  res.status(201).json({ apartment })
+})
+
+const getApartment = asyncWrapper(async (req, res, next) => {
+  const { id: apartmentID } = req.params
+  const apartment = await Apartment.findOne({ _id: apartmentID })
+
+  if (!apartment) {
+    return next(createCustomError(`No apartment with id: ${apartmentID}`, 404))
   }
-}
+  res.status(200).json({ apartment })
+})
 
-const createApartment = async (req, res) => {
-  try {
-    const apartment = await Apartment.create(req.body)
-    res.status(201).json({ apartment })
-  } catch (error) {
-    res.status(500).json({ msg: error })
-  }
-}
+const updateApartment = asyncWrapper(async (req, res) => {
+  const { id: apartmentID } = req.params
 
-const getApartment = async (req, res) => {
-  try {
-    const { id: apartmentID } = req.params
-    const apartment = await Apartment.findOne({ _id: apartmentID })
-
-    if (!apartment) {
-      return res
-        .status(404)
-        .json({ msg: `No apartment with id: ${apartmentID}` })
+  const apartment = await Apartment.findOneAndUpdate(
+    { _id: apartmentID },
+    req.body,
+    {
+      new: true,
+      runValidators: true,
     }
-    res.status(200).json({ apartment })
-  } catch (error) {
-    res.status(500).json({ msg: error })
+  )
+
+  if (!apartment) {
+    return next(createCustomError(`No apartment with id: ${apartmentID}`, 404))
   }
-}
 
-const updateApartment = async (req, res) => {
-  try {
-    const { id: apartmentID } = req.params
+  res.status(200).json({ apartment })
+})
 
-    const apartment = await Apartment.findOneAndUpdate(
-      { _id: apartmentID },
-      req.body,
-      {
-        new: true,
-        runValidators: true,
-      }
-    )
+const deleteApartment = asyncWrapper(async (req, res) => {
+  const { id: apartmentID } = req.params
+  const apartment = await Apartment.findOneAndDelete({ _id: apartmentID })
 
-    if (!apartment) {
-      return res
-        .status(404)
-        .json({ msg: `No apartment with id: ${apartmentID}` })
-    }
-
-    res.status(200).json({ apartment })
-  } catch (error) {
-    res.status(500).json({ msg: error })
+  if (!apartment) {
+    return next(createCustomError(`No apartment with id: ${apartmentID}`, 404))
   }
-}
-
-const deleteApartment = async (req, res) => {
-  try {
-    const { id: apartmentID } = req.params
-    const apartment = await Apartment.findOneAndDelete({ _id: apartmentID })
-
-    if (!apartment) {
-      return res
-        .status(404)
-        .json({ msg: `No apartment with id: ${apartmentID}` })
-    }
-    res.status(200).json({ apartment })
-  } catch (error) {
-    res.status(500).json({ msg: error })
-  }
-}
+  res.status(200).json({ apartment })
+})
 
 module.exports = {
   getAllApartments,

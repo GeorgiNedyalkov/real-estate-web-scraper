@@ -1,10 +1,10 @@
-const errorHandler = (error, req, res, next) => {
-  const statusCode = res.statusCode === 200 ? 500 : res.statusCode
-  res.status(statusCode)
-  res.json({
-    message: error.message,
-    stack: process.env.NODE_ENV === "production" ? "pancake" : error.stack,
-  })
+const { CustomAPIError } = require("../errors/custom-error")
+
+const errorHandlerMiddleware = (err, req, res, next) => {
+  if (err instanceof CustomAPIError) {
+    return res.status(err.statusCode).json({ msg: err.message })
+  }
+  return res.status(500).json({ msg: `Something went wrong, please try again` })
 }
 
-module.exports = errorHandler
+module.exports = errorHandlerMiddleware

@@ -25,16 +25,14 @@ app.use(
 // Serve Static Files
 app.use(express.static("./public"))
 
-// // not found middleware and error middlewares
-// app.use(errorHandler)
-// app.use(notFound)
-
 // routes
-
-// root route
 app.use("/api/v1/apartments", apartments)
 
-const port = process.env.PORT || 3002
+// middlewares
+app.use(notFound)
+app.use(errorHandler)
+
+const port = process.env.PORT || 3000
 
 const start = async () => {
   try {
