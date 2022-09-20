@@ -1,13 +1,12 @@
 import axios from "axios"
 import { load } from "cheerio"
-import parseInput from "../utils/utils"
+import parseInput from "./utils.js"
 
 const urlOneBedroomApartments =
   "https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23&p[413]=1574"
 
 const topListings = []
 const vipListings = []
-const listings = []
 
 async function getOneBedroomApartments(url) {
   // request the data (html) from the url using axios
@@ -31,7 +30,6 @@ async function getOneBedroomApartments(url) {
 
       // console.log(topListing)
       topListings.push(topListing)
-      listings.push(topListing)
     })
 
   const vipListingsApartments = apartmentsContainer
@@ -55,17 +53,18 @@ async function getOneBedroomApartments(url) {
       vipListing.parameters = parseInput(vipListing.parameters)
 
       // console.log(vipListing)
+
       vipListings.push(vipListing)
-      listings.push(vipListing)
     })
 
-  return await listings
-  // return await [topListings, vipListings]
+  return await [topListings, vipListings]
 }
 
 getOneBedroomApartments(urlOneBedroomApartments).then((data) => {
   return data
 })
+
+export default getOneBedroomApartments
 
 // getOneBedroomApartments(urlOneBedroomApartments)
 
@@ -78,5 +77,3 @@ getOneBedroomApartments(urlOneBedroomApartments).then((data) => {
 // // for (let i = 6; page <= i; i--) {
 // //   getOneBedroomApartments(urlPages)
 // // }
-
-export default getOneBedroomApartments

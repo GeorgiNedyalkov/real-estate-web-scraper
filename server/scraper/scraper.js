@@ -1,6 +1,6 @@
-import axios from "axios"
-import { load } from "cheerio"
-import parseInput from "./utils.js"
+const { load } = require("cheerio")
+const parseInput = require("./utils")
+const axios = require("axios")
 
 const urlOneBedroomApartments =
   "https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23&p[413]=1574"
@@ -8,9 +8,9 @@ const urlOneBedroomApartments =
 const topListings = []
 const vipListings = []
 
-export default async function getOneBedroomApartments(url) {
+async function getOneBedroomApartments() {
   // request the data (html) from the url using axios
-  const { data } = await axios.get(url)
+  const { data } = await axios.get(urlOneBedroomApartments)
   // Load the html
   const $ = load(data)
 
@@ -28,7 +28,6 @@ export default async function getOneBedroomApartments(url) {
       const parameters = $element.find(".ads-params-single").text()
       topListing.parameters = parseInput(parameters)
 
-      // console.log(topListing)
       topListings.push(topListing)
     })
 
@@ -52,17 +51,17 @@ export default async function getOneBedroomApartments(url) {
 
       vipListing.parameters = parseInput(vipListing.parameters)
 
-      // console.log(vipListing)
-
       vipListings.push(vipListing)
     })
 
   return await [topListings, vipListings]
 }
 
-getOneBedroomApartments(urlOneBedroomApartments).then((data) => {
-  return data
-})
+// getOneBedroomApartments(urlOneBedroomApartments).then((data) => {
+//   return data
+// })
+
+module.exports = getOneBedroomApartments
 
 // getOneBedroomApartments(urlOneBedroomApartments)
 

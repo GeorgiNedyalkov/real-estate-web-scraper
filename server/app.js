@@ -4,7 +4,12 @@ const helmet = require("helmet")
 const cors = require("cors")
 const apartments = require("./routes/apartments")
 const connectDB = require("./db/connect")
+const axios = require("axios")
+const cheerio = require("cheerio")
 require("dotenv").config()
+
+// scraper
+const getOneBedroomApartments = require("./scraper/scraper")
 
 const notFound = require("./middlewares/not-found")
 const errorHandler = require("./middlewares/error-handler")
@@ -27,6 +32,18 @@ app.use(express.static("./public"))
 
 // routes
 app.use("/api/v1/apartments", apartments)
+
+app.get("/api/v1/test", async (req, res) => {
+  try {
+    const scraperData = await getOneBedroomApartments()
+    return res.status(200).json({
+      numberOfhits: scraperData.length,
+      result: scraperData,
+    })
+  } catch (error) {
+    console.log(error)
+  }
+})
 
 // middlewares
 app.use(notFound)

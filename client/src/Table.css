@@ -21,3 +21,7 @@ td {
     text-align: center;
 }
 
+.table__row {
+    height: 50px;
+    width: 90%;
+}

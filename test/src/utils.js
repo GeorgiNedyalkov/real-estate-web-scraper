@@ -1,13 +1,3 @@
-function calculateAverageValue(arr) {
-  let numberOfElements = arr.length
-
-  let sumElements = arr.reduce((previousValue, currentValue) => {
-    return previousValue + currentValue
-  })
-
-  return sumElements / numberOfElements
-}
-
 export default function parseInput(s) {
   let parameters = {}
 
