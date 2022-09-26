@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import "./Table.css"
-import properties from "../src/data/properties"
+import properties from "../data/properties"
 
 function Table() {
   const [apartments, setApartments] = useState(properties)

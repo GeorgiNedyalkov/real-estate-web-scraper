@@ -1,11 +1,13 @@
-import "./App.css"
-import Header from "./Header"
-import Card from "./Card"
-import Table from "./Table"
 import { useState, useEffect } from "react"
+import "./App.css"
+import Header from "./components/Header"
+import Card from "./components/Card"
+import Table from "./components/Table"
+
 import properties from "./data/properties"
 import calcAverageValue from "./utils/utils"
-import { listApartments } from "./api/api"
+
+import { listApartments } from "./api/API"
 
 function App() {
   const [apartments, setApartments] = useState([])
@@ -18,7 +20,9 @@ function App() {
   useEffect(() => {
     ;(async () => {
       const loggedApartments = await listApartments()
-      setLogApartments(loggedApartments.apartments)
+      console.log(loggedApartments.result[0])
+      const newLogApartments = [...loggedApartments.result[0]]
+      setLogApartments(newLogApartments)
     })()
   }, [])
 
@@ -44,7 +48,7 @@ function App() {
   return (
     <div className="app">
       <Header />
-      <h4>Number of properties: {apartments.length}</h4>
+      <h4>Number of properties: {logApartments.length}</h4>
 
       <div className="main__key-stats">
         <Card title="Smallest Size" stat={minSize + " sq.m."} />
@@ -62,18 +66,20 @@ function App() {
         <Card title="Maximum Sales Price" stat={maxPrice} />
       </div>
 
-      <div className="main__table">{/* <Table /> */}</div>
+      <div className="main__table">
+        <Table />
+      </div>
 
       <div className="test">
         <h2>Database test</h2>
-        {logApartments.map((apartment) => (
+        {logApartments.map(({ title, parameters }) => (
           <tr>
-            <td>{apartment.title}</td>
-            <td>{apartment.price}</td>
-            <td>{apartment.pricePerSqMeters}</td>
-            <td>{apartment.size}</td>
-            <td>{apartment.construction}</td>
-            <td>{apartment.type}</td>
+            <td>{title}</td>
+            <td>{parameters.price}</td>
+            <td>{parameters.pricePerSqMeters}</td>
+            <td>{parameters.size}</td>
+            <td>{parameters.year}</td>
+            <td>{parameters.floor}</td>
           </tr>
         ))}
       </div>
