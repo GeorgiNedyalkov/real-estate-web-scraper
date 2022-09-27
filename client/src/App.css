@@ -25,3 +25,7 @@ body {
     justify-content: center;
     width: 100%;
 }
+
+.test tr {
+    background-color: green;
+}

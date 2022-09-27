@@ -17,15 +17,17 @@ function App() {
     setApartments(properties)
   }, [apartments])
 
+  // todo: create a custome useFetch hook
   useEffect(() => {
     ;(async () => {
       const loggedApartments = await listApartments()
-      console.log(loggedApartments.result[0])
       const newLogApartments = [...loggedApartments.result[0]]
       setLogApartments(newLogApartments)
+      // console.log(logApartments)
     })()
   }, [])
 
+  // todo: remove all of this functionality to a different file
   let prices = []
   let pricesPerSqMeter = []
   let sizes = []
@@ -36,20 +38,19 @@ function App() {
     sizes.push(flat.size)
   })
 
-  let maxPrice = Math.max(...prices)
   let minPrice = Math.min(...prices)
-
-  let maxPriceSqMeter = Math.max(...pricesPerSqMeter)
-  let minPriceSqmeter = Math.min(...pricesPerSqMeter)
-
-  let maxSize = Math.max(...sizes)
+  let maxPrice = Math.max(...prices)
   let minSize = Math.min(...sizes)
+  let maxSize = Math.max(...sizes)
+  let minPriceSqmeter = Math.min(...pricesPerSqMeter)
+  let maxPriceSqMeter = Math.max(...pricesPerSqMeter)
 
   return (
     <div className="app">
       <Header />
       <h4>Number of properties: {logApartments.length}</h4>
 
+      {/* Create a Main Stats Component to hold all of the statistics */}
       <div className="main__key-stats">
         <Card title="Smallest Size" stat={minSize + " sq.m."} />
         <Card title="Average Size" stat={calcAverageValue(sizes) + " sq.m."} />
@@ -72,6 +73,7 @@ function App() {
 
       <div className="test">
         <h2>Database test</h2>
+        {/* add a key property */}
         {logApartments.map(({ title, parameters }) => (
           <tr>
             <td>{title}</td>

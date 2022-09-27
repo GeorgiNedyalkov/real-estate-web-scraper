@@ -24,11 +24,9 @@ async function getOneBedroomApartments(url) {
       const topListing = {}
 
       topListing.title = $element.find(".listtop-item-title").text()
-
       const parameters = $element.find(".ads-params-single").text()
       topListing.parameters = parseInput(parameters)
 
-      // console.log(topListing)
       topListings.push(topListing)
     })
 
@@ -52,28 +50,37 @@ async function getOneBedroomApartments(url) {
 
       vipListing.parameters = parseInput(vipListing.parameters)
 
-      // console.log(vipListing)
-
       vipListings.push(vipListing)
     })
 
   return await [topListings, vipListings]
 }
 
-getOneBedroomApartments(urlOneBedroomApartments).then((data) => {
-  return data
-})
+// get the first page
+async function getFirstPage() {
+  getOneBedroomApartments(urlOneBedroomApartments).then((data) => {
+    console.log(data[0])
+    console.log(data[1])
+    return data
+  })
+}
 
-export default getOneBedroomApartments
+// get all pages
+async function getAllProperties() {
+  let page = 2
+  let data = []
+  while (page <= 6) {
+    let url = `https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23&p[413]=1574&page=${page}`
+    data = [...(await getOneBedroomApartments(url))]
+    page++
+  }
+  console.log(data[1])
+  console.log(data[1].length)
 
-// getOneBedroomApartments(urlOneBedroomApartments)
+  return data[1]
+}
 
-// Scraper multiple pages
+await getFirstPage(urlOneBedroomApartments)
+await getAllProperties()
 
-// let page = 2
-
-// const urlPages = `https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23&p[413]=1574&page=${page}`
-
-// // for (let i = 6; page <= i; i--) {
-// //   getOneBedroomApartments(urlPages)
-// // }
+export default { getOneBedroomApartments, getAllProperties }
