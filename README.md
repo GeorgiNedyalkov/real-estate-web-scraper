@@ -2,9 +2,11 @@
 
 Web Scraper for Real Estate Market Prices.
 
+## About
+
 Collects information for apartments from listing channels for Izgrev neighborhood.
 
-## MVP specification:
+## MVP specification
 
 - Scrapes the information for one bedroom properties only.
 - Displays the properties in a table.
@@ -12,7 +14,7 @@ Collects information for apartments from listing channels for Izgrev neighborhoo
 - Filter functionality based on different parameters.
 - Backend API for the storage of the data and updating every day.
 
-## Features:
+## Features
 
 - Collects all the information for properties listend on listing channels.
   First only [alo.bg](www.alo.bg) for one bedroom properties
@@ -35,7 +37,31 @@ Collects information for apartments from listing channels for Izgrev neighborhoo
 The user inputs information about the home. Afterwards a report is generated with the 5 closest properties
 to these characteristics.
 
-## Example property data scruture
+## User Stories
+
+User Types:
+
+- Investors
+- Agents
+- Buyers
+- Sellers
+- Loaners
+- Developers
+
+1. Developers
+   Quickly determine what is the average price for a specific property type in a given neighborhood.
+
+- View the average price per property type (1, 2, 3 bedroom).
+- View the cheapest and most expensive prices for a type of property.
+- View the average size of the property for the given type.
+- View the number of properties offered based on three progress completion phases:
+  - Completed
+  - In Progress
+  - Pre construction
+- View the number of properties based on different construction type.
+- Compare different properties based on floor, year built, completion progress, size range and price range.
+
+## Property data scruture
 
 JSON:
 
@@ -52,3 +78,7 @@ JSON:
     "floor": Number,
 }
 ```
+
+<!-- ## Testing
+
+## Contributing -->
