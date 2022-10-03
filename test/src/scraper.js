@@ -53,34 +53,33 @@ async function getOneBedroomApartments(url) {
       vipListings.push(vipListing)
     })
 
-  return await [topListings, vipListings]
+  return await [...topListings, ...vipListings]
 }
 
 // get the first page
-async function getFirstPage() {
-  getOneBedroomApartments(urlOneBedroomApartments).then((data) => {
-    console.log(data[0])
-    console.log(data[1])
+async function getFirstPage(url) {
+  getOneBedroomApartments(url).then((data) => {
+    console.log(data)
+    console.log(data.length)
     return data
   })
 }
-
 // get all pages
-async function getAllProperties() {
-  let page = 2
+async function getAllProperties(url) {
   let data = []
+  let page = 2
+  let onebedUrl = `https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23&p[413]=1574&page=${page}`
   while (page <= 6) {
-    let url = `https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23&p[413]=1574&page=${page}`
     data = [...(await getOneBedroomApartments(url))]
     page++
   }
-  console.log(data[1])
-  console.log(data[1].length)
-
   return data[1]
 }
 
-await getFirstPage(urlOneBedroomApartments)
-await getAllProperties()
+let twobedUrl = `https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23&p[413]=1575`
+let threeBedUrl = `https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23&p[413]=1576`
+
+await getFirstPage(twobedUrl)
+// await getAllProperties()
 
 export default { getOneBedroomApartments, getAllProperties }
