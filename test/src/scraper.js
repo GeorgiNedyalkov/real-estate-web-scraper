@@ -48,6 +48,9 @@ async function getOneBedroomApartments(url) {
         .replace(/\n/g, "")
         .replace(/\t/g, "")
 
+      console.log(vipListing.parameters)
+      console.log("------------")
+
       vipListing.parameters = parseInput(vipListing.parameters)
 
       vipListings.push(vipListing)
@@ -80,6 +83,7 @@ let twobedUrl = `https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?regi
 let threeBedUrl = `https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23&p[413]=1576`
 
 await getFirstPage(twobedUrl)
+
 // await getAllProperties()
 
 export default { getOneBedroomApartments, getAllProperties }

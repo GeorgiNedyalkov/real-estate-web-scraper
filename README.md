@@ -5,6 +5,7 @@ Web Scraper for Real Estate Market Prices.
 ## About
 
 Collects information for apartments from listing channels for Izgrev neighborhood.
+The scraper collects data for apartment listings from [alo.bg](www.alo.bg), sorts the apartments based on price, performs calclulations for average price, size and price per sqare meters, and displays the information in easy to read format.
 
 ## MVP specification
 
