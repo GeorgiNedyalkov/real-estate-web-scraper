@@ -1,0 +1,16 @@
+table, th, tr, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 20px;
+    margin: 100px 0px;
+}
+
+tr {
+    height: 50px;
+}
+
+thead {
+    background-color: rgba(0, 0, 0, 0.85);
+    color: white;
+}
+

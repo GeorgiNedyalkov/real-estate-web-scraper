@@ -1,0 +1,8 @@
+.header {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: var(--clr-black);
+    color: var(--clr-white);
+    height: 7vh;
+    padding: 20px;
+}

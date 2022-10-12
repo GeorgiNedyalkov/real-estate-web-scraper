@@ -1,0 +1,21 @@
+.statsBoard__title {
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.statsBoard__counters {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.statsBoard__averageStats {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}

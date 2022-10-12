@@ -1,0 +1,32 @@
+.averageStat__wraper {
+    display: grid;
+    border: 1px solid grey;   
+    border-radius: var(--radius);
+    box-shadow: var(--light-shadow) ;
+    padding: 20px;
+    margin-top: 50px;
+    width: 15vw;
+}
+
+.lowHigh {
+    display: flex;
+    justify-content: space-between;
+}
+
+.averageStat__title, .averageStat__stat {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+
+.greenbar {
+    background-color: var(--clr-green-light);
+    width: 100%;
+    height: 20px;
+    border-radius: var(--radius);
+}
+
+.prices {
+    display: flex;
+    justify-content: space-between;
+}
