@@ -51,18 +51,10 @@ const deleteApartment = asyncWrapper(async (req, res) => {
   res.status(200).json({ apartment })
 })
 
-//  Testing Delete All Apartments Route
-const deleteAllApartments = asyncWrapper(async (req, res) => {
-  const deletedApartments = await Apartment.deleteMany({ price: { $gte: 0 } })
-  console.log("data deleted")
-  res.status(200).json({ deletedApartments })
-})
-
 module.exports = {
   getAllApartments,
   createApartment,
   getApartment,
   updateApartment,
   deleteApartment,
-  deleteAllApartments,
 }

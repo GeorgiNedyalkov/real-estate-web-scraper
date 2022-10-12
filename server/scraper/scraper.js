@@ -1,76 +1,67 @@
-const { load } = require("cheerio")
 const parseInput = require("./utils")
 const axios = require("axios")
+const { load } = require("cheerio")
 
-const urlOneBedroomApartments =
-  "https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23&p[413]=1574"
-
-const topListings = []
-const vipListings = []
-
-async function getOneBedroomApartments() {
-  // request the data (html) from the url using axios
-  const { data } = await axios.get(urlOneBedroomApartments)
-  // Load the html
+async function getApartments(url) {
+  const { data } = await axios.get(url)
   const $ = load(data)
 
-  // Select all the apartments in the content container
+  const topListings = []
+  const vipListings = []
+
   const apartmentsContainer = $("#content_container")
 
-  const topListingApartments = apartmentsContainer
-    .find(".listtop-item")
-    .each((i, element) => {
-      const $element = $(element)
-      const topListing = {}
+  apartmentsContainer.find(".listtop-item").each((i, element) => {
+    const $element = $(element)
+    const topListing = {}
+    topListing.title = $element.find(".listtop-item-title").text()
+    const parameters = $element.find(".ads-params-single").text()
 
-      topListing.title = $element.find(".listtop-item-title").text()
+    topListing.parameters = parseInput(parameters)
+    topListings.push(topListing)
+  })
 
-      const parameters = $element.find(".ads-params-single").text()
-      topListing.parameters = parseInput(parameters)
+  apartmentsContainer.find(".listvip-params").each((i, listing) => {
+    const $listing = $(listing)
+    const vipListing = {}
 
-      topListings.push(topListing)
-    })
+    vipListing.title = $listing
+      .find(".listvip-item-header")
+      .text()
+      .replace(/\t/gm, "")
+      .replace(/\n/gm, "")
 
-  const vipListingsApartments = apartmentsContainer
-    .find(".listvip-params")
-    .each((i, listing) => {
-      const $listing = $(listing)
-      const vipListing = {}
+    vipListing.parameters = $listing
+      .find(".listvip-item-content")
+      .text()
+      .replace(/\n/g, "")
+      .replace(/\t/g, "")
 
-      vipListing.title = $listing
-        .find(".listvip-item-header")
-        .text()
-        .replace(/\t/gm, "")
-        .replace(/\n/gm, "")
+    vipListing.parameters = parseInput(vipListing.parameters)
+    vipListings.push(vipListing)
+  })
 
-      vipListing.parameters = $listing
-        .find(".listvip-item-content")
-        .text()
-        .replace(/\n/g, "")
-        .replace(/\t/g, "")
-
-      vipListing.parameters = parseInput(vipListing.parameters)
-
-      vipListings.push(vipListing)
-    })
-
-  return await [topListings, vipListings]
+  return [...topListings, ...vipListings]
 }
 
-// getOneBedroomApartments(urlOneBedroomApartments).then((data) => {
-//   return data
-// })
+// get the first page
+async function getFirstPage(url) {
+  getApartments(url).then((data) => {
+    console.log(data)
+    return data
+  })
+}
 
-module.exports = getOneBedroomApartments
+let oneBedUrl = `https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23&p[413]=1574`
+let twoBedUrl = `https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23&p[413]=1575`
+let threeBedUrl = `https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23&p[413]=1576`
 
-// getOneBedroomApartments(urlOneBedroomApartments)
+getFirstPage(oneBedUrl)
 
-// Scraper multiple pages
+// const oneBedApartments = await getFirstPage(oneBedUrl)
+// const twoBedApartments = await getFirstPage(twoBedUrl)
 
-// let page = 2
+// console.log(oneBedApartments)
+// console.log(twoBedApartments)
 
-// const urlPages = `https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23&p[413]=1574&page=${page}`
-
-// // for (let i = 6; page <= i; i--) {
-// //   getOneBedroomApartments(urlPages)
-// // }
+module.exports = getApartments

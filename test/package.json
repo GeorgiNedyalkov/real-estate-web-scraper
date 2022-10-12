@@ -5,7 +5,8 @@
   "description": "An application use to scrape real estate property market prices from listing websites.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --watchAll --verbose",
+    "start": "node src/scraper.js"
   },
   "repository": {
     "type": "git",
@@ -21,5 +22,9 @@
     "axios": "^0.27.2",
     "cheerio": "^1.0.0-rc.12",
     "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.1.1",
+    "jest": "^29.1.2"
   }
 }

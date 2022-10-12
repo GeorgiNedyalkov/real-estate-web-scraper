@@ -51,7 +51,8 @@ async function getApartments(url) {
 // get the first page
 async function getFirstPage(url) {
   getApartments(url).then((data) => {
-    console.log(data)
+    console.table(data)
+    console.log(data.length)
     return data
   })
 }
@@ -62,9 +63,19 @@ let threeBedUrl = `https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?re
 
 // const oneBedApartments = await getFirstPage(oneBedUrl)
 // const twoBedApartments = await getFirstPage(twoBedUrl)
-const threeBedroomApartments = await getFirstPage(threeBedUrl)
+// const threeBedroomApartments = await getFirstPage(threeBedUrl)
 
-// console.log(oneBedApartments)
-// console.log(twoBedApartments)
+async function getAllPages(url) {
+  for (let i = 1; i <= 3; i++) {
+    if (i === 1) {
+      getFirstPage(url)
+    } else {
+      let newUrl = url + `&page=${i}`
+      getFirstPage(newUrl)
+    }
+  }
+}
+
+await getAllPages(oneBedUrl)
 
 export default { getApartments }

@@ -13,6 +13,14 @@ function App() {
   const [apartments, setApartments] = useState([])
   const [logApartments, setLogApartments] = useState([])
 
+  // const fetchApartments = async () => {
+  //   try {
+  //     const response = fetch("")
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
+
   useEffect(() => {
     setApartments(properties)
   }, [apartments])

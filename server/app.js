@@ -9,10 +9,11 @@ const cheerio = require("cheerio")
 require("dotenv").config()
 
 // scraper
-const getOneBedroomApartments = require("./scraper/scraper")
+const getApartments = require("./scraper/scraper")
 
 const notFound = require("./middlewares/not-found")
 const errorHandler = require("./middlewares/error-handler")
+const { getApartment } = require("./controllers/apartments")
 
 const app = express()
 
@@ -33,15 +34,18 @@ app.use(express.static("./public"))
 // routes
 app.use("/api/v1/apartments", apartments)
 
-app.get("/api/v1/test", async (req, res) => {
+app.get("/api/v1/oneBedroomApartments", async (req, res) => {
   try {
-    const scraperData = await getOneBedroomApartments()
+    const scraperData = await getApartments(
+      `https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23&p[413]=1574`
+    )
     return res.status(200).json({
-      numberOfhits: scraperData.length,
       result: scraperData,
     })
   } catch (error) {
-    console.log(error)
+    return res.status(500).json({
+      error: error.toString(),
+    })
   }
 })
 
