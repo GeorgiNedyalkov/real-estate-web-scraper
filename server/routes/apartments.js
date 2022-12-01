@@ -1,5 +1,5 @@
-const { Router } = require("express")
-const router = Router()
+const { Router } = require("express");
+const router = Router();
 
 const {
   getAllApartments,
@@ -7,13 +7,13 @@ const {
   getApartment,
   updateApartment,
   deleteApartment,
-} = require("../controllers/apartments")
+} = require("../controllers/apartments");
 
-router.route("/").get(getAllApartments).post(createApartment)
+router.route("/").get(getAllApartments).post(createApartment);
 router
   .route("/:id")
   .get(getApartment)
   .patch(updateApartment)
-  .delete(deleteApartment)
+  .delete(deleteApartment);
 
-module.exports = router
+module.exports = router;
