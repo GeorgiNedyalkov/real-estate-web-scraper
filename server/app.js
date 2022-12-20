@@ -31,6 +31,21 @@ app.use(express.static("./public"));
 // routes
 app.use("/api/v1/apartments", apartments);
 
+app.get("/api/v1/oneBedroomApartments", async (req, res) => {
+  try {
+    const scraperData = await getApartments(
+      `https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23&p[413]5=1574`
+    );
+    return res.status(200).json({
+      result: scraperData,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      error: error.toString(),
+    });
+  }
+});
+
 app.get("/api/v1/twoBedroomApartments", async (req, res) => {
   try {
     const scraperData = await getApartments(
@@ -46,10 +61,25 @@ app.get("/api/v1/twoBedroomApartments", async (req, res) => {
   }
 });
 
-app.get("/api/v1/oneBedroomApartments", async (req, res) => {
+app.get("/api/v1/threeBedroomApartments", async (req, res) => {
   try {
     const scraperData = await getApartments(
-      `https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23&p[413]5=1574`
+      `https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23&p[413]=1576`
+    );
+    return res.status(200).json({
+      result: scraperData,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      error: error.toString(),
+    });
+  }
+});
+
+app.get("/api/v1/studios", async (req, res) => {
+  try {
+    const scraperData = await getApartments(
+      `https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23&p[413]=1573`
     );
     return res.status(200).json({
       result: scraperData,
