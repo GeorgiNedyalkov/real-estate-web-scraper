@@ -1,9 +1,9 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
 const requiredNumber = {
   type: Number,
   required: true,
-}
+};
 
 const ApartmentSchema = new mongoose.Schema(
   {
@@ -19,8 +19,8 @@ const ApartmentSchema = new mongoose.Schema(
     description: String,
   },
   { timestamps: true }
-)
+);
 
-const Apartment = mongoose.model("Apartments", ApartmentSchema)
+const Apartment = mongoose.model("Apartments", ApartmentSchema);
 
-module.exports = Apartment
+module.exports = Apartment;

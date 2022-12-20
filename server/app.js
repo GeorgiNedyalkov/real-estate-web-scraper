@@ -4,8 +4,6 @@ const helmet = require("helmet");
 const cors = require("cors");
 const apartments = require("./routes/apartments");
 const connectDB = require("./db/connect");
-const axios = require("axios");
-const cheerio = require("cheerio");
 require("dotenv").config();
 
 // scraper
@@ -13,7 +11,6 @@ const getApartments = require("./scraper/scraper");
 
 const notFound = require("./middlewares/not-found");
 const errorHandler = require("./middlewares/error-handler");
-const { getApartment } = require("./controllers/apartments");
 
 const app = express();
 
@@ -34,10 +31,25 @@ app.use(express.static("./public"));
 // routes
 app.use("/api/v1/apartments", apartments);
 
+app.get("/api/v1/twoBedroomApartments", async (req, res) => {
+  try {
+    const scraperData = await getApartments(
+      `https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23&p[413]=1575`
+    );
+    return res.status(200).json({
+      result: scraperData,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      error: error.toString(),
+    });
+  }
+});
+
 app.get("/api/v1/oneBedroomApartments", async (req, res) => {
   try {
     const scraperData = await getApartments(
-      `https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23&p[413]=1574`
+      `https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23&p[413]5=1574`
     );
     return res.status(200).json({
       result: scraperData,

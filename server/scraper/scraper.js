@@ -47,21 +47,14 @@ async function getApartments(url) {
 // get the first page
 async function getFirstPage(url) {
   getApartments(url).then((data) => {
-    console.log(data);
     return data;
   });
 }
 
-let oneBedUrl = `https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23&p[413]=1574`;
-let twoBedUrl = `https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23&p[413]=1575`;
-let threeBedUrl = `https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23&p[413]=1576`;
+const oneBedUrl = `https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23&p[413]=1574`;
+const twoBedUrl = `https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23&p[413]=1575`;
+const threeBedUrl = `https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23&p[413]=1576`;
 
 getFirstPage(oneBedUrl);
-
-// const oneBedApartments = await getFirstPage(oneBedUrl)
-// const twoBedApartments = await getFirstPage(twoBedUrl)
-
-// console.log(oneBedApartments)
-// console.log(twoBedApartments)
 
 module.exports = getApartments;
