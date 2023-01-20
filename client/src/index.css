@@ -31,6 +31,10 @@ table {
     border-collapse: collapse;
 }
 
+th {
+    text-align: center;
+}
+
 th:first-child {
     width: 30px;
 }
@@ -48,6 +52,10 @@ th, td {
 
 td {
     text-align: right;
+}
+
+td:nth-child(6), td:nth-child(7), td:nth-child(8) {
+    text-align: center;
 }
 
 .propertyTable {

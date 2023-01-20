@@ -12,14 +12,27 @@ const Table = ({ apartments }) => {
       </thead>
       <tbody>
         {apartments.map((apartment, index) => {
-          const { price, size, pricePerSqMeter, id } = apartment;
+          const {
+            title,
+            price,
+            size,
+            pricePerSqMeter,
+            id,
+            constructionType,
+            floor,
+            completionProgress,
+          } = apartment;
+
           return (
             <tr key={id}>
               <td>{index + 1}</td>
-              <td className="left">{apartment.title.slice(0, 25)}...</td>
+              <td className="left">{title.slice(0, 25)}...</td>
               <td>€{price.toLocaleString()}</td>
               <td>{size}</td>
               <td>{Number(pricePerSqMeter.toFixed(0))}</td>
+              <td>{completionProgress}</td>
+              <td>{constructionType}</td>
+              <td>{floor}</td>
             </tr>
           );
         })}
@@ -36,4 +49,7 @@ const columns = [
   { assessor: "price", label: "Price" },
   { assessor: "size", label: "Size" },
   { assessor: "pricePerSqMeter", label: "Price / sq.m." },
+  { assessor: "completionProgress", label: "Completion Progress" },
+  { assessor: "constructionType", label: "Construction Type" },
+  { assessor: "floor", label: "Floor" },
 ];
