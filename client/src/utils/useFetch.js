@@ -7,10 +7,10 @@ export const useFetch = () => {
   const [loading, setLoading] = useState(true);
 
   const getApartments = async () => {
+    setLoading(true);
     const res = await fetch(twoBedsUrl);
     const data = await res.json();
     setApartments(data.result);
-    console.log(data.result);
     setLoading(false);
   };
 
@@ -18,5 +18,5 @@ export const useFetch = () => {
     getApartments();
   }, []);
 
-  return { apartments, loading, setApartments };
+  return { apartments, loading, setApartments, setLoading };
 };

@@ -229,3 +229,20 @@ li {
     color: greenyellow;
 }
 
+/* buttons */
+.filter__button {
+    font-family: "Lato";
+    width: 100px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    border-radius: 5px;
+    color: white;
+    background-color: #25242B;
+    border: none;
+    font-size: 1em;
+    margin-bottom: 10px;
+}
+
