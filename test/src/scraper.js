@@ -5,43 +5,62 @@ import parseInput from "./utils.js";
 async function getApartments(url) {
   // request the data (html) from the url using axios
   const { data } = await axios.get(url);
+
   // Load the html
   const $ = load(data);
 
+  // save the listings in top and vip listings
   const topListings = [];
   const vipListings = [];
 
   // Select all the apartments in the content container
   const apartmentsContainer = $("#content_container");
 
+  const totalPages = $(".obiavicnt").text();
+  console.log(totalPages);
+
+  // top listings
   apartmentsContainer.find(".listtop-item").each((i, element) => {
     const $element = $(element);
-    const topListing = {};
+    let topListing = {};
 
-    topListing.title = $element.find(".listtop-item-title").text();
-    const parameters = $element.find(".ads-params-single").text();
+    let title = $element.find(".listtop-item-title").text();
+    let parameters = $element.find(".ads-params-single").text();
 
-    topListing.parameters = parseInput(parameters);
+    parameters = parseInput(parameters);
+
+    topListing = {
+      title,
+      ...parameters,
+    };
+
     topListings.push(topListing);
   });
 
+  // normal listings
   apartmentsContainer.find(".listvip-params").each((i, listing) => {
     const $listing = $(listing);
-    const vipListing = {};
+    let vipListing = {};
 
-    vipListing.title = $listing
+    let title = $listing
       .find(".listvip-item-header")
       .text()
       .replace(/\t/gm, "")
       .replace(/\n/gm, "");
 
-    vipListing.parameters = $listing
+    let parameters = $listing
       .find(".listvip-item-content")
       .text()
       .replace(/\n/g, "")
       .replace(/\t/g, "");
 
-    vipListing.parameters = parseInput(vipListing.parameters);
+    const parsedParameters = parseInput(parameters);
+
+    vipListing = {
+      title,
+      ...parsedParameters,
+    };
+
     vipListings.push(vipListing);
   });
 
@@ -66,16 +85,17 @@ let threeBedUrl = `https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?re
 // const threeBedroomApartments = await getFirstPage(threeBedUrl)
 
 async function getAllPages(url) {
-  for (let i = 1; i <= 3; i++) {
+  for (let i = 1; i <= 6; i++) {
     if (i === 1) {
-      getFirstPage(url);
+      await getFirstPage(url);
     } else {
       let newUrl = url + `&page=${i}`;
-      getFirstPage(newUrl);
+      await getFirstPage(newUrl);
     }
   }
 }
 
-await getAllPages(oneBedUrl);
+await getFirstPage(oneBedUrl);
+// await getAllPages(oneBedUrl);
 
 export default { getApartments };
