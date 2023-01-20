@@ -12,7 +12,7 @@ const Table = ({ apartments }) => {
       </thead>
       <tbody>
         {apartments.map((apartment, index) => {
-          const { price, size, pricePerSqMeter, id } = apartment.parameters;
+          const { price, size, pricePerSqMeter, id } = apartment;
           return (
             <tr key={id}>
               <td>{index + 1}</td>

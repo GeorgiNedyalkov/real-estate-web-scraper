@@ -7,7 +7,7 @@ function App() {
   const { apartments, loading } = useFetch();
 
   const marketCap = apartments.reduce(
-    (prev, current) => prev + current.parameters.price,
+    (prev, current) => prev + current.price,
     0
   );
 

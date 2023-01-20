@@ -59,7 +59,6 @@ async function getApartments(url) {
 // get the first page
 async function getFirstPage(url) {
   getApartments(url).then((data) => {
-    console.log(data);
     return data;
   });
 }
