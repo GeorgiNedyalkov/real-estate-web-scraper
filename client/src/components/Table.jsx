@@ -34,6 +34,6 @@ const columns = [
   { assessor: "id", label: "ID" },
   { assessor: "title", label: "Title" },
   { assessor: "price", label: "Price" },
-  { assessor: "pricePerSqMeter", label: "Price / sq.m." },
   { assessor: "size", label: "Size" },
+  { assessor: "pricePerSqMeter", label: "Price / sq.m." },
 ];

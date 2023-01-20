@@ -13,18 +13,19 @@ function App() {
 
   return (
     <div className="App">
+      <h1 className="logo">Homealytics</h1>
       <div className="container">
         {loading && <h1>Loading...</h1>}
 
-        <h1>Homealytics</h1>
-
-        <div>Today's total market prices. </div>
-        <p>
-          Total marketcap <b> €{marketCap.toLocaleString()}</b>
-        </p>
-        <p>
-          Number of one bed properties <b>{apartments.length}</b>
-        </p>
+        <div className="summary">
+          Today's total market prices.
+          <p>
+            Total market cap is <b> €{marketCap.toLocaleString()}</b>
+          </p>
+          <p>
+            Number of one bed properties <b>{apartments.length}</b>
+          </p>
+        </div>
 
         <div className="propertyTable">
           <Table apartments={apartments} />

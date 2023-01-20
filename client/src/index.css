@@ -28,15 +28,30 @@ h1 {
 /* Table */
 table {
     table-layout: fixed;
-    width: 100%;
     border-collapse: collapse;
-    border: 1px solid lightblue;
+}
+
+th:first-child {
+    width: 30px;
+}
+
+
+td:first-child, td:nth-child(2) {
+    text-align: left;
 }
 
 th, td {
-    border: 1px solid gray;
+    border-bottom: var(--border);
     padding: 5px 10px;
     padding: 0.5em;
+}
+
+td {
+    text-align: right;
+}
+
+.propertyTable {
+    margin: 20px 0px;
 }
 
 .pagination {
@@ -47,4 +62,9 @@ th, td {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.logo {
+    text-align: center;
+    margin: 20px;
 }
