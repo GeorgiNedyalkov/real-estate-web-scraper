@@ -1,23 +1,30 @@
 import "./App.css";
-import Navbar from "./components/Navbar";
-import Sidebar from "./components/Sidebar/Sidebar";
+import { useEffect, useState } from "react";
 import Table from "./components/Table";
 import { useFetch } from "./utils/useFetch";
 
 function App() {
-  const { apartments, loading } = useFetch();
+  const { apartments, loading, setApartments } = useFetch();
+  const [completionProgress, setCompletionProgress] = useState("");
+
+  const [averagePrice, setAveragePrice] = useState(0);
 
   const marketCap = apartments.reduce(
     (prev, current) => prev + current.price,
     0
   );
 
+  const filteredApartments = apartments.filter((a) => {
+    if (completionProgress === "") {
+      return apartments;
+    } else {
+      return a.completionProgress === completionProgress;
+    }
+  });
+
   return (
     <div className="App">
-      <Navbar />
       <div className="wrapper">
-        <Sidebar />
-
         <div className="display">
           <div className="container">
             {loading && <h1>Loading...</h1>}
@@ -37,7 +44,22 @@ function App() {
               </p>
             </div>
 
-            <Table apartments={apartments} />
+            <div className="stats"></div>
+
+            <div>
+              <h3>Contruction type</h3>
+              <select
+                name="construction progress"
+                onChange={(e) => setCompletionProgress(e.target.value)}
+              >
+                <option value="">--Choose a value--</option>
+                <option value="completed">Completed</option>
+                <option value="construction">In construction</option>
+                <option value="project">In Project</option>
+              </select>
+            </div>
+
+            <Table apartments={filteredApartments} />
           </div>
         </div>
       </div>

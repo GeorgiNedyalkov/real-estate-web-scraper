@@ -18,5 +18,5 @@ export const useFetch = () => {
     getApartments();
   }, []);
 
-  return { apartments, loading };
+  return { apartments, loading, setApartments };
 };

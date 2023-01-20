@@ -29,11 +29,11 @@ function parseInput(str) {
   // get the completion progress
   let completionProgress = "";
   if (/В проект/.test(str)) {
-    completionProgress = "В проект";
+    completionProgress = "project";
   } else if (/В строеж/.test(str)) {
-    completionProgress = "В строеж";
+    completionProgress = "construction";
   } else {
-    completionProgress = "готов или завършен";
+    completionProgress = "completed";
   }
 
   // check to see if apartment is on last floor
