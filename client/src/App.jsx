@@ -1,4 +1,5 @@
 import "./App.css";
+import Stat from "./components/Stat";
 import { useEffect, useState } from "react";
 import Table from "./components/Table";
 import { useFetch } from "./utils/useFetch";
@@ -44,7 +45,11 @@ function App() {
               </p>
             </div>
 
-            <div className="stats"></div>
+            <div className="stats">
+              <Stat value={75000} label="Average Price" percentChange={4.5} />
+              <Stat value={850} label="Price Per Sq.m." percentChange={-4.5} />
+              <Stat value={80} label="Average Size" percentChange={1} />
+            </div>
 
             <div>
               <h3>Contruction type</h3>
