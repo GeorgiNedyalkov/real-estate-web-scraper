@@ -190,3 +190,8 @@ li {
 .highlight {
     color: var(--color-primary);
 }
+
+.stats {
+    height: 200px;
+    background-color: white;
+}
