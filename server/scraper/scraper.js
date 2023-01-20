@@ -13,11 +13,17 @@ async function getApartments(url) {
 
   apartmentsContainer.find(".listtop-item").each((i, element) => {
     const $element = $(element);
-    const topListing = {};
-    topListing.title = $element.find(".listtop-item-title").text();
-    const parameters = $element.find(".ads-params-single").text();
+    let topListing = {};
+    let title = $element.find(".listtop-item-title").text();
+    let parameters = $element.find(".ads-params-single").text();
 
-    topListing.parameters = parseInput(parameters);
+    parameters = parseInput(parameters);
+
+    topListing = {
+      title,
+      ...parameters,
+    };
+
     topListings.push(topListing);
   });
 
@@ -47,6 +53,7 @@ async function getApartments(url) {
 // get the first page
 async function getFirstPage(url) {
   getApartments(url).then((data) => {
+    console.log(data);
     return data;
   });
 }

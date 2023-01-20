@@ -2,8 +2,6 @@ import "./App.css";
 import { useState, useEffect } from "react";
 import { useFetch } from "./utils/useFetch";
 import Table from "./components/Table";
-import { useMemo } from "react";
-import SampleTable from "./components/SampleTable";
 
 function App() {
   const { apartments, loading } = useFetch();
@@ -15,7 +13,7 @@ function App() {
 
   return (
     <div className="App">
-      {/* <div className="container">
+      <div className="container">
         {loading && <h1>Loading...</h1>}
 
         <h1>Homealytics</h1>
@@ -26,16 +24,11 @@ function App() {
         </p>
         <p>
           Number of one bed properties <b>{apartments.length}</b>
-        </p> */}
+        </p>
 
-      {/* <div className="propertyTable">
+        <div className="propertyTable">
           <Table apartments={apartments} />
         </div>
-      </div> */}
-
-      <div className="container">
-        <h1>Test</h1>
-        <SampleTable />
       </div>
     </div>
   );

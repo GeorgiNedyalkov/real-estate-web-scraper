@@ -10,6 +10,7 @@ export const useFetch = () => {
     const res = await fetch(twoBedsUrl);
     const data = await res.json();
     setApartments(data.result);
+    console.log(data.result);
     setLoading(false);
   };
 

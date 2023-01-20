@@ -18,7 +18,6 @@ async function getApartments(url) {
 
   // see the total pages
   const totalPages = $(".obiavicnt").text();
-  console.log(totalPages);
 
   // top listings
   apartmentsContainer.find(".listtop-item").each((i, element) => {
