@@ -2,7 +2,6 @@
 
 :root {
     --color-primary: hsl(266, 79%, 56%); 
-
     /* gray */
     --gray-10: hsl(0, 0%, 11%);
     --border: 1px solid lightgray;
@@ -24,7 +23,6 @@ h1 {
     font-size: 2em;
 }
 
-
 /* Table */
 table {
     table-layout: fixed;
@@ -38,7 +36,6 @@ th {
 th:first-child {
     width: 30px;
 }
-
 
 td:first-child, td:nth-child(2) {
     text-align: left;
@@ -59,7 +56,6 @@ td:nth-child(6), td:nth-child(7), td:nth-child(8) {
 }
 
 /* classes */
-
 .navbar {
     height: 60px;
     background-color: black;

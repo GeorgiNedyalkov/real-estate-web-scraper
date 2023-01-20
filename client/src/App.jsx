@@ -19,7 +19,7 @@ function App() {
         <Sidebar />
 
         <div className="display">
-          <div className="container">
+          {/* <div className="container">
             {loading && <h1>Loading...</h1>}
 
             <div className="summary">
@@ -35,7 +35,7 @@ function App() {
             </div>
 
             <Table apartments={apartments} />
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
