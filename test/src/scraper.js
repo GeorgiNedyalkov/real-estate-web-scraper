@@ -13,9 +13,10 @@ async function getApartments(url) {
   const topListings = [];
   const vipListings = [];
 
-  // Select all the apartments in the content container
+  // select all the apartments in the content container
   const apartmentsContainer = $("#content_container");
 
+  // see the total pages
   const totalPages = $(".obiavicnt").text();
   console.log(totalPages);
 
@@ -80,10 +81,6 @@ let oneBedUrl = `https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?regi
 let twoBedUrl = `https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23&p[413]=1575`;
 let threeBedUrl = `https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23&p[413]=1576`;
 
-// const oneBedApartments = await getFirstPage(oneBedUrl)
-// const twoBedApartments = await getFirstPage(twoBedUrl)
-// const threeBedroomApartments = await getFirstPage(threeBedUrl)
-
 async function getAllPages(url) {
   for (let i = 1; i <= 6; i++) {
     if (i === 1) {
@@ -96,6 +93,5 @@ async function getAllPages(url) {
 }
 
 await getFirstPage(oneBedUrl);
-// await getAllPages(oneBedUrl);
 
 export default { getApartments };
