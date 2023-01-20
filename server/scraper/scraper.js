@@ -29,21 +29,27 @@ async function getApartments(url) {
 
   apartmentsContainer.find(".listvip-params").each((i, listing) => {
     const $listing = $(listing);
-    const vipListing = {};
+    let vipListing = {};
 
-    vipListing.title = $listing
+    let title = $listing
       .find(".listvip-item-header")
       .text()
       .replace(/\t/gm, "")
       .replace(/\n/gm, "");
 
-    vipListing.parameters = $listing
+    let parameters = $listing
       .find(".listvip-item-content")
       .text()
       .replace(/\n/g, "")
       .replace(/\t/g, "");
 
-    vipListing.parameters = parseInput(vipListing.parameters);
+    const parsedParameters = parseInput(parameters);
+
+    vipListing = {
+      title,
+      ...parsedParameters,
+    };
+
     vipListings.push(vipListing);
   });
 
