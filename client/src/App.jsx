@@ -1,6 +1,8 @@
 import "./App.css";
-import { useFetch } from "./utils/useFetch";
+import Navbar from "./components/Navbar";
+import Sidebar from "./components/Sidebar";
 import Table from "./components/Table";
+import { useFetch } from "./utils/useFetch";
 
 function App() {
   const { apartments, loading } = useFetch();
@@ -12,24 +14,28 @@ function App() {
 
   return (
     <div className="App">
-      <h1 className="logo">Homealytics</h1>
-      <div className="container">
-        {loading && <h1>Loading...</h1>}
+      <Navbar />
+      <div className="wrapper">
+        <Sidebar />
 
-        <div className="summary">
-          <h1 className="title">
-            Today's real estate listings prices in Burgas.
-          </h1>
-          <p>
-            Total market cap is <b> €{marketCap.toLocaleString()}</b>
-          </p>
-          <p>
-            Number of one bed properties <b>{apartments.length}</b>
-          </p>
-        </div>
+        <div className="display">
+          <div className="container">
+            {loading && <h1>Loading...</h1>}
 
-        <div className="propertyTable">
-          <Table apartments={apartments} />
+            <div className="summary">
+              <h1 className="title">
+                Today's real estate listings prices in Burgas.
+              </h1>
+              <p>
+                Total market cap is <b> €{marketCap.toLocaleString()}</b>
+              </p>
+              <p>
+                Number of one bed properties <b>{apartments.length}</b>
+              </p>
+            </div>
+
+            <Table apartments={apartments} />
+          </div>
         </div>
       </div>
     </div>

@@ -3,7 +3,7 @@ import { columns } from "../data/columns";
 
 const Table = ({ apartments }) => {
   return (
-    <table>
+    <table className="propertyTable">
       <thead>
         <tr>
           {columns.map((column) => {
