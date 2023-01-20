@@ -1,5 +1,4 @@
 import "./App.css";
-import { useState, useEffect } from "react";
 import { useFetch } from "./utils/useFetch";
 import Table from "./components/Table";
 
@@ -18,7 +17,9 @@ function App() {
         {loading && <h1>Loading...</h1>}
 
         <div className="summary">
-          Today's total market prices.
+          <h1 className="title">
+            Today's real estate listings prices in Burgas.
+          </h1>
           <p>
             Total market cap is <b> €{marketCap.toLocaleString()}</b>
           </p>

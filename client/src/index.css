@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400;1,700&display=swap');
 
 :root {
+    --color-primary: hwb(266 21% 9%); 
+
     --border: 1px solid lightgray;
 }
 
@@ -20,10 +22,6 @@ h1 {
     font-size: 2em;
 }
 
-/* Containers */
-.container {
-    margin: 20px;
-}
 
 /* Table */
 table {
@@ -58,6 +56,12 @@ td:nth-child(6), td:nth-child(7), td:nth-child(8) {
     text-align: center;
 }
 
+
+/* Containers */
+.container {
+    margin: 20px;
+}
+
 .propertyTable {
     margin: 20px 0px;
 }
@@ -74,5 +78,14 @@ td:nth-child(6), td:nth-child(7), td:nth-child(8) {
 
 .logo {
     text-align: center;
+    color: var(--color-primary);
     margin: 20px;
+}
+
+.summary {
+    margin: 10px 0px;
+}
+
+.title {
+    margin-bottom: 10px;
 }
