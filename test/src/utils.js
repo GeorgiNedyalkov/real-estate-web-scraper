@@ -1,67 +1,67 @@
 export default function parseInput(str) {
   // store the information about the paramters of the apartments
-  let parameters = {}
+  let parameters = {};
 
   // get all the number data: price, pricePerSqMeters, size, year, floor
-  let numbers = []
+  let numbers = [];
   for (let char of str) {
     if (!isNaN(char) || char == ".") {
-      numbers.push(char)
+      numbers.push(char);
     }
   }
   let numbersArr = numbers
     .join("")
     .split(" ")
-    .filter((element) => element.length > 0)
+    .filter((element) => element.length > 0);
 
   // get the construction type
-  let constructionType = ""
+  let constructionType = "";
   if (/Тухла/.test(str)) {
-    constructionType = "Тухла"
+    constructionType = "Тухла";
   } else if (/Панел/.test(str)) {
-    constructionType = "Панел"
+    constructionType = "Панел";
   } else if (/ЕПК.ПК/.test(str)) {
-    constructionType = "ЕПК/ПК"
+    constructionType = "ЕПК/ПК";
   } else if (/Гредоред/.test(str)) {
-    constructionType = "Гредоред"
+    constructionType = "Гредоред";
   }
 
   // get the completion progress
-  let completionProgress = ""
+  let completionProgress = "";
   if (/В проект/.test(str)) {
-    completionProgress = "В проект"
+    completionProgress = "В проект";
   } else if (/В строеж/.test(str)) {
-    completionProgress = "В строеж"
+    completionProgress = "В строеж";
   } else {
-    completionProgress = "готов или завършен"
+    completionProgress = "готов или завършен";
   }
 
   // check to see if apartment is on last floor
-  let lastFloor = false
+  let lastFloor = false;
   if (/Последен/.test(str)) {
-    lastFloor = true
+    lastFloor = true;
   } else if (/Непоследен/.test(str)) {
-    lastFloor = false
+    lastFloor = false;
   }
 
   // check to see if apartment is on first floor
   if (/Първи жилищен/.test(str)) {
-    parameters.firstFloor = true
+    parameters.firstFloor = true;
   }
 
   // numerical data
-  parameters.price = +numbersArr[0].replace(/\s/, "")
-  parameters.pricePerSqMeter = +numbersArr[1].replace(/\s/, "").slice(0, -1)
-  parameters.size = +numbersArr[2]
-  parameters.year = +[...numbersArr[3]].slice(1, numbersArr[3].length).join("")
-  parameters.floor = +numbersArr[4] * 10
+  parameters.price = +numbersArr[0].replace(/\s/, "");
+  parameters.pricePerSqMeter = +numbersArr[1].replace(/\s/, "").slice(0, -1);
+  parameters.size = +numbersArr[2];
+  // parameters.year = +[...numbersArr[3]].slice(1, numbersArr[3].length).join("");
+  parameters.floor = +numbersArr[4] * 10;
 
   // text data
-  parameters.constructionType = constructionType
-  parameters.completionProgress = completionProgress
-  parameters.lastFloor = lastFloor
+  parameters.constructionType = constructionType;
+  parameters.completionProgress = completionProgress;
+  parameters.lastFloor = lastFloor;
 
-  return parameters
+  return parameters;
 }
 
 // console.log(
