@@ -248,6 +248,6 @@ li {
 }
 
 .active {
-    box-shadow: var(--color-primary) 0px 4px 15px 0px;
+    border: 1px solid var(--color-primary);
 }
 
