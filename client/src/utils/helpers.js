@@ -132,11 +132,9 @@ function filterRows(rows, filters) {
         return value == searchValue;
       }
       // if the value is a boolean: has a value of true or false
-      if (value == true || value == false) {
-        console.log(searchValue);
+      if (value === true || value === false) {
         return (
-          (searchValue === "true" && value) ||
-          (searchValue === "false" && !value)
+          (searchValue === true && value) || (searchValue === false && !value)
         );
       }
       return false;
