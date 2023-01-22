@@ -244,5 +244,10 @@ li {
     border: none;
     font-size: 1em;
     margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.active {
+    box-shadow: var(--color-primary) 0px 4px 15px 0px;
 }
 

@@ -7,7 +7,11 @@ import { BsFillFilterCircleFill } from "react-icons/bs";
 
 function App() {
   const { apartments, loading, setApartments } = useFetch();
+  console.log(apartments);
   const [hasFilters, setHasFilters] = useState(false);
+
+  const [filters, setFilters] = useState({});
+
   const [completionProgress, setCompletionProgress] = useState("");
   const [averagePrice, setAveragePrice] = useState(0);
   const [averageSize, setAverageSize] = useState(0);
@@ -27,7 +31,7 @@ function App() {
 
   function calcAveragePrice(apartments) {
     const newAveragePrice = Number(marketCap / apartments.length);
-    setAveragePrice(newAveragePrice.toFixed(0));
+    setAveragePrice(Number(newAveragePrice.toFixed(0)));
   }
 
   function calcAverageSize(apartments) {
@@ -76,14 +80,16 @@ function App() {
               />
               <Stat value={850} label="Price Per Sq.m." percentChange={-4.5} />
               <Stat
-                value={averageSize + "m2"}
+                value={averageSize + " m2"}
                 label="Average Size"
                 percentChange={1}
               />
             </div>
 
             <button
-              className="filter__button"
+              className={`${
+                hasFilters ? "filter__button active" : "filter__button "
+              }`}
               onClick={() => setHasFilters(!hasFilters)}
             >
               <BsFillFilterCircleFill />
