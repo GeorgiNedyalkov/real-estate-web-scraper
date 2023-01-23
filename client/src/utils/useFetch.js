@@ -1,21 +1,25 @@
 import { useState, useEffect } from "react";
 
-const twoBedsUrl = "http://localhost:3001/api/v1/twoBedroomApartments";
+const oneBedsUrl = "http://localhost:3001/api/v1/oneBedroomApartments";
 
 export const useFetch = () => {
   const [apartments, setApartments] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const getApartments = async () => {
+  const getApartments = async (url) => {
     setLoading(true);
-    const res = await fetch(twoBedsUrl);
-    const data = await res.json();
-    setApartments(data.result);
-    setLoading(false);
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+      setApartments(data.result);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
-    getApartments();
+    getApartments(oneBedsUrl);
   }, []);
 
   return { apartments, loading, setApartments, setLoading };

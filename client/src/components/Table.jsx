@@ -30,7 +30,7 @@ const Table = ({ apartments }) => {
               <td className="left">{title.slice(0, 25)}...</td>
               <td>€{price.toLocaleString()}</td>
               <td>{size}</td>
-              <td>{Number(pricePerSqMeter.toFixed(0))}</td>
+              <td>{Number(pricePerSqMeter)}</td>
               <td>{completionProgress}</td>
               <td>{constructionType}</td>
               <td>{floor}</td>
