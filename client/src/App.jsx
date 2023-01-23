@@ -4,12 +4,19 @@ import { useEffect, useState } from "react";
 import Table from "./components/Table";
 import { useFetch } from "./utils/useFetch";
 import { BsFillFilterCircleFill } from "react-icons/bs";
+import { IoBed } from "react-icons/io5";
+import getApartments from "./api/getApartments";
+
+const twoBedUrl = "http://localhost:3001/api/v1/twoBedroomApartments";
+const oneBedsUrl = "http://localhost:3001/api/v1/oneBedroomApartments";
 
 function App() {
   const { apartments, loading, setApartments } = useFetch();
-  const [hasFilters, setHasFilters] = useState(false);
 
+  const [hasFilters, setHasFilters] = useState(false);
   const [filters, setFilters] = useState({});
+
+  const [isActive, setIsActive] = useState(true);
 
   const [completionProgress, setCompletionProgress] = useState("");
   const [averagePrice, setAveragePrice] = useState(0);
@@ -49,9 +56,18 @@ function App() {
       (prev, current) => prev + current.size,
       0
     );
-
     const newAverageSize = totalSize / apartments.length;
     setAverageSize(newAverageSize);
+  }
+
+  async function getTwoBeds() {
+    const twoBeds = await getApartments(twoBedUrl);
+    setApartments(twoBeds);
+  }
+
+  async function getOneBeds() {
+    const oneBeds = await getApartments(oneBedsUrl);
+    setApartments(oneBeds);
   }
 
   useEffect(() => {
@@ -68,7 +84,7 @@ function App() {
         <div className="wrapper">
           <div className="display">
             <div className="container">
-              <div className="summary">
+              <div className="highlights">
                 <h1 className="title">
                   Today's real estate listings prices in{" "}
                   <b className="highlight">Burgas</b>.
@@ -80,6 +96,20 @@ function App() {
                 <p>
                   Number of one bed properties{" "}
                   <b className="highlight">{apartments.length}</b>
+                </p>
+                <p>
+                  The average price for one bed properties is{" "}
+                  <span className="highlight">
+                    €{averagePrice.toLocaleString()}{" "}
+                  </span>
+                  with an average size of{" "}
+                  <span className="highlight">
+                    {averageSize.toFixed(2)} sq.m.
+                  </span>
+                  resulting in an average price per sq.m. of{" "}
+                  <span className="highlight">
+                    {averagePricePerSqMeter.toLocaleString()} €/м2
+                  </span>
                 </p>
               </div>
 
@@ -99,6 +129,18 @@ function App() {
                   label="Average Size"
                   percentChange={1}
                 />
+              </div>
+
+              <h3 className="subheading">Choose apartment type:</h3>
+              <div className="apartment__type-btns">
+                <button className={`btn`} onClick={() => getOneBeds()}>
+                  <IoBed />
+                  One
+                </button>
+                <button className="btn" onClick={() => getTwoBeds()}>
+                  <IoBed />
+                  Two
+                </button>
               </div>
 
               <button

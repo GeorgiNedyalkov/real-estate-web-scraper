@@ -122,6 +122,10 @@ li {
     object-fit: cover;
 }
 
+.subheading {
+    margin-bottom: 10px;
+}
+
 .profile {
     margin-top: 50px;
     display: flex;
@@ -179,8 +183,9 @@ li {
     color: var(--color-primary);
 }
 
-.summary {
+.highlights {
     margin: 10px 0px;
+    line-height: 1.3em;
 }
 
 .title {
@@ -257,4 +262,35 @@ li {
     margin: 0 auto;
     align-items: center;
     justify-content: center;
+}
+
+.btn {
+    font-family: "Lato";
+    width: 100px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    border-radius: 5px;
+    color: white;
+    background-color: #25242B;
+    border: none;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    border: 1px solid var(--color-primary);
+}
+
+.activeBtn {
+    border: 1px solid var(--color-primary);
+}
+
+.apartment__type-btns {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
