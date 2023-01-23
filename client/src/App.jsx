@@ -160,7 +160,7 @@ function App() {
                     name="construction progress"
                     onChange={(e) => setCompletionProgress(e.target.value)}
                   >
-                    <option value="">--Choose a value--</option>
+                    <option value="">All Properties</option>
                     <option value="completed">Completed</option>
                     <option value="construction">In construction</option>
                     <option value="project">In Project</option>
