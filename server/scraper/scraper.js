@@ -1,4 +1,5 @@
 const parseInput = require("./utils");
+const neighborhoods = require("./neighborhoods");
 const axios = require("axios");
 const { load } = require("cheerio");
 
@@ -100,9 +101,14 @@ async function getAllApartments(url) {
     }
   }
 
+  console.log(apartments.length);
+  console.log(apartments);
   return apartments;
 }
 
-getAllApartments(oneBedUrl);
+const IZGREV_URL = neighborhoods[2].url;
+
+// getAllApartments(oneBedUrl);
+getAllApartments(IZGREV_URL);
 
 module.exports = getAllApartments;
