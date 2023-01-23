@@ -9,6 +9,7 @@
     /* gray */
     --gray-10: hsl(0, 0%, 11%);
     --border: 1px solid lightgray;
+    --border-radius: 5px;
 }
 
 *,
@@ -48,6 +49,7 @@ h6 {
 table {
     table-layout: fixed;
     border-collapse: collapse;
+    width: 1000px;
 }
 
 th {
@@ -59,11 +61,15 @@ td {
 }
 
 th:first-child {
-    width: 30px;
+    text-align: center;
+    width: 10px;
 }
 
-td:first-child, 
-td:nth-child(2) {
+th:nth-child(2) {
+    width: 300px;
+}
+
+td:first-child {
     text-align: left;
 }
 
@@ -166,7 +172,7 @@ select {
     flex: 2/3;
     padding: 30px;
     margin: 30px 30px;
-    border-radius: 5px;
+    border-radius: var(--border-radius);
     background-color: var(--gray-10);
     width: 300px;
     height: 80vh;
@@ -213,6 +219,10 @@ select {
     color: var(--color-primary);
 }
 
+.neighborhood__container {
+    margin-bottom: 20px;
+}
+
 /* Statistics */
 .stats {
     margin: 50px 0px;
@@ -222,7 +232,7 @@ select {
     justify-content: space-between;
     padding: 30px;
     background-color: #25242B;
-    border-radius: 5px;
+    border-radius: var(--border-radius);
 }
 
 .stat {
@@ -260,25 +270,17 @@ select {
     align-items: center;
     justify-content: center;
     gap: 5px;
-    border-radius: 5px;
     color: white;
     background-color: #25242B;
-    border: none;
     font-size: 1em;
     margin-bottom: 10px;
     cursor: pointer;
+    border: none;
+    border-radius: var(--border-radius);
 }
 
-.active {
+.filter__button:hover {
     border: 1px solid var(--color-primary);
-}
-
-.loader {
-    display: flex;
-    height: 100vh;
-    margin: 0 auto;
-    align-items: center;
-    justify-content: center;
 }
 
 .btn {
@@ -289,13 +291,13 @@ select {
     align-items: center;
     justify-content: center;
     gap: 5px;
-    border-radius: 5px;
     color: white;
     background-color: #25242B;
     border: none;
     font-size: 1.2em;
     margin-bottom: 10px;
     cursor: pointer;
+    border-radius: var(--border-radius);
 }
 
 .btn:hover {
@@ -311,3 +313,37 @@ select {
     align-items: center;
     gap: 10px;
 }
+
+.pagination {
+    width: 1000px;
+}
+
+.pagination__btn {
+    width: 100px;
+    background-color: #25242B;
+    color: var(--text-color);
+    font-size: 1em;
+    padding: 5px;
+    border: 1px solid var(--color-primary);
+    margin-bottom: 10px;
+    cursor: pointer;
+    border-radius: var(--border-radius);
+}
+
+.pagination__btn:hover {
+    color: #25242B;
+    background-color: #fefefe;
+}
+
+.active {
+    border: 1px solid var(--color-primary);
+}
+
+.loader {
+    display: flex;
+    height: 100vh;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+}
+

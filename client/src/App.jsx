@@ -9,14 +9,15 @@ import getApartments from "./api/getApartments";
 
 const twoBedUrl = "http://localhost:3001/api/v1/twoBedroomApartments";
 const oneBedsUrl = "http://localhost:3001/api/v1/oneBedroomApartments";
+const threeBedsUrl = "http://localhost:3001/api/v1/threeBedroomApartments";
 
 function App() {
   const { apartments, loading, setApartments } = useFetch();
 
+  const [neighborhood, setNeighborhood] = useState("Izgrev");
+
   const [hasFilters, setHasFilters] = useState(false);
   const [filters, setFilters] = useState({});
-
-  const [isActive, setIsActive] = useState(true);
 
   const [completionProgress, setCompletionProgress] = useState("");
   const [averagePrice, setAveragePrice] = useState(0);
@@ -60,14 +61,18 @@ function App() {
     setAverageSize(newAverageSize);
   }
 
+  async function getOneBeds() {
+    const oneBeds = await getApartments(oneBedsUrl);
+    setApartments(oneBeds);
+  }
+
   async function getTwoBeds() {
     const twoBeds = await getApartments(twoBedUrl);
     setApartments(twoBeds);
   }
-
-  async function getOneBeds() {
-    const oneBeds = await getApartments(oneBedsUrl);
-    setApartments(oneBeds);
+  async function getThreeBeds() {
+    const threeBeds = await getApartments(threeBedsUrl);
+    setApartments(threeBeds);
   }
 
   useEffect(() => {
@@ -131,6 +136,23 @@ function App() {
                 />
               </div>
 
+              <div className="neighborhood__container">
+                <h2 className="neighborhood">
+                  Neighbourhood{" "}
+                  <span className="highlight">{neighborhood}</span>
+                </h2>
+                <select
+                  name="neighborhood"
+                  onChange={(e) => setNeighborhood(e.target.value)}
+                >
+                  <option value="">Select neighborhood</option>
+                  <option value="Sarafovo">Sarafovo</option>
+                  <option value="Izgrev">Izgrev</option>
+                  <option value="Lazur">Lazur</option>
+                  <option value="Slaveikov">Slaveikov</option>
+                </select>
+              </div>
+
               <h3 className="subheading">Choose apartment type:</h3>
               <div className="apartment__type-btns">
                 <button className={`btn`} onClick={() => getOneBeds()}>
@@ -140,6 +162,10 @@ function App() {
                 <button className="btn" onClick={() => getTwoBeds()}>
                   <IoBed />
                   Two
+                </button>
+                <button className="btn" onClick={() => getThreeBeds()}>
+                  <IoBed />
+                  Three
                 </button>
               </div>
 

@@ -1,45 +1,50 @@
-import React from "react";
+import { useEffect, useState } from "react";
 
 const Pagination = ({
   rowsPerPage,
   activePage,
+  setActivePage,
   count,
   totalPages,
-  setActivePage,
 }) => {
   const beggining = activePage === 1 ? 1 : rowsPerPage * (activePage - 1) + 1;
-  const end = totalPages ? count : beginning + rowsPerPage - 1;
+  const end = activePage === totalPages ? count : beggining + rowsPerPage - 1;
 
   return (
     <>
       <div className="pagination">
-        <button disabled={activePage === 1} onClick={() => setActivePage(1)}>
+        <button
+          className="pagination__btn"
+          disabled={activePage === 1}
+          onClick={() => setActivePage(1)}
+        >
           ⏮ First
         </button>
         <button
+          className="pagination__btn"
           disabled={activePage === 1}
           onClick={() => setActivePage(activePage - 1)}
         >
           ⬅ Previous
         </button>
         <button
+          className="pagination__btn"
           disabled={activePage === totalPages}
           onClick={() => setActivePage(activePage + 1)}
         >
           ➡ Next
         </button>
         <button
+          className="pagination__btn"
           disabled={activePage === totalPages}
           onClick={() => setActivePage(totalPages)}
         >
           ⏭ Last
         </button>
       </div>
+      <p>Showing {beggining === end ? end : `${beggining} - ${end}`}</p>
       <p>
-        Page {activePage} of {totalPages}
-      </p>
-      <p>
-        Rows: {beggining == end ? end : `${beggining} - ${end}`} of {count}
+        Page {activePage} out of {totalPages}
       </p>
     </>
   );
