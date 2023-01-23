@@ -31,11 +31,11 @@
 - Add all other controllers and set up the routes based on REST API best practices
 
 ```javascript
-app.get("/api/v1/apartments")
-app.post("/api/v1/apartments")
-app.get("/api/v1/apartments/:id")
-app.patch("/api/v1/apartments/:id")
-app.delete("/api/v1/apartments/:id")
+app.get("/api/v1/apartments");
+app.post("/api/v1/apartments");
+app.get("/api/v1/apartments/:id");
+app.patch("/api/v1/apartments/:id");
+app.delete("/api/v1/apartments/:id");
 ```
 
 ## Set up Postman to test all routes
@@ -54,3 +54,14 @@ app.delete("/api/v1/apartments/:id")
 ## Add notfound and error handler functions
 
 ## Refactor controllers with an asyncronous wrapper
+
+## TODO:
+
+- Write tests for parsing function, get all pages function, get total pages function.
+- Figure out how to optimize
+- Write tests for properly parsed data
+
+To improve:
+
+- Collect more data
+- Make algorythm more efficient and simpler.

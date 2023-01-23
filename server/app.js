@@ -11,6 +11,7 @@ const getApartments = require("./scraper/scraper");
 
 const notFound = require("./middlewares/not-found");
 const errorHandler = require("./middlewares/error-handler");
+const getAllApartments = require("./scraper/scraper");
 
 const app = express();
 
@@ -33,7 +34,7 @@ app.use("/api/v1/apartments", apartments);
 
 app.get("/api/v1/oneBedroomApartments", async (req, res) => {
   try {
-    const scraperData = await getApartments(
+    const scraperData = await getAllApartments(
       `https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23&p[413]5=1574`
     );
     return res.status(200).json({
