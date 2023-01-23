@@ -14,6 +14,7 @@ function App() {
   const [completionProgress, setCompletionProgress] = useState("");
   const [averagePrice, setAveragePrice] = useState(0);
   const [averageSize, setAverageSize] = useState(0);
+  const [averagePricePerSqMeter, setAveragePricePerSqMeter] = useState(0);
 
   const marketCap = apartments.reduce(
     (prev, current) => prev + current.price,
@@ -29,8 +30,18 @@ function App() {
   });
 
   function calcAveragePrice(apartments) {
-    const newAveragePrice = Number(marketCap / apartments.length);
-    setAveragePrice(Number(newAveragePrice));
+    const newAveragePrice = Math.ceil(Number(marketCap / apartments.length));
+    setAveragePrice(newAveragePrice);
+  }
+
+  function calcAveragePricePerSqMeter(apartments) {
+    const totalPricePSQM = apartments.reduce(
+      (prev, current) => prev + current.pricePerSqMeter,
+      0
+    );
+    const totalApartments = apartments.length;
+    const newAveragePricePSQM = Math.ceil(totalPricePSQM / totalApartments);
+    setAveragePricePerSqMeter(newAveragePricePSQM);
   }
 
   function calcAverageSize(apartments) {
@@ -46,7 +57,8 @@ function App() {
   useEffect(() => {
     calcAveragePrice(filteredApartments);
     calcAverageSize(filteredApartments);
-  }, [apartments]);
+    calcAveragePricePerSqMeter(filteredApartments);
+  }, [filteredApartments]);
 
   return (
     <div className="App">
@@ -78,7 +90,7 @@ function App() {
                   percentChange={4.5}
                 />
                 <Stat
-                  value={850}
+                  value={averagePricePerSqMeter}
                   label="Price Per Sq.m."
                   percentChange={-4.5}
                 />
