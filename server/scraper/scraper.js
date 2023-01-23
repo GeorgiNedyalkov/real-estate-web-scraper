@@ -103,10 +103,6 @@ async function getAllApartments(url) {
   return apartments;
 }
 
-// getAllPages(oneBedUrl);
-// getAllPages(oneBedUrl);
-// getFirstPage(oneBedUrl);
-// getAllPages(twoBedUrl);
 getAllApartments(oneBedUrl);
 
 module.exports = getAllApartments;
