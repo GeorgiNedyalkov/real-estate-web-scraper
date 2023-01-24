@@ -5,10 +5,7 @@ export function calcAverage(objArr, key) {
   return total / objArr.length;
 }
 
-// console.log(calcAverage(mockApartments, ["size"]));
-// console.log(calcAverage(mockApartments, ["price"]));
-
-function findMode(objArr, key) {
+export function findMode(objArr, key) {
   // we need to take into consideration two or more modes
   const mode = {};
   let max = 0;
