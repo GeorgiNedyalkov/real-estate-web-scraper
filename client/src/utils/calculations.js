@@ -5,5 +5,45 @@ export function calcAverage(objArr, key) {
   return total / objArr.length;
 }
 
-console.log(calcAverage(mockApartments, ["size"]));
-console.log(calcAverage(mockApartments, ["price"]));
+// console.log(calcAverage(mockApartments, ["size"]));
+// console.log(calcAverage(mockApartments, ["price"]));
+
+function findMode(objArr, key) {
+  // we need to take into consideration two or more modes
+  const mode = {};
+  let max = 0;
+  let count = 0;
+
+  for (let i = 0; i < objArr.length; i++) {
+    const item = objArr[i][key];
+
+    if (mode[item]) {
+      mode[item]++;
+    } else {
+      mode[item] = 1;
+    }
+
+    if (count < mode[item]) {
+      max = item;
+      count = mode[item];
+    }
+  }
+
+  return max;
+}
+
+export function findMedian(objArr, key) {
+  let midIndex;
+
+  const sortedArr = objArr.sort((a, b) => b[key] - a[key]);
+  console.table(sortedArr);
+  const count = objArr.length;
+
+  if (count % 2 == 0) {
+    midIndex = objArr.length / 2;
+  } else {
+    midIndex = Math.ceil(count / 2);
+  }
+
+  return sortedArr[midIndex];
+}
