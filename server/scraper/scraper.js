@@ -67,9 +67,7 @@ async function getTotalPages(url) {
 
   // get total pages
   const totalListings = $(".obiavicnt").contents().text().split(" ")[0];
-  const totalPages = Math.ceil(Number(totalListings) / 30);
-
-  return totalPages;
+  return Math.ceil(Number(totalListings) / 30);
 }
 
 // get the first page
@@ -101,8 +99,6 @@ async function getAllApartments(url) {
     }
   }
 
-  console.log(apartments.length);
-  console.log(apartments);
   return apartments;
 }
 
