@@ -44,3 +44,5 @@ export function findMedian(objArr, key) {
 
   return sortedArr[midIndex];
 }
+
+console.log(findMedian(mockApartments, "price"));
