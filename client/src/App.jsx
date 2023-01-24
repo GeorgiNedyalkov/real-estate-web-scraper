@@ -1,14 +1,14 @@
+import { useEffect, useState } from "react";
 import "./App.css";
 import Stat from "./components/Stat";
-import { useEffect, useState } from "react";
 import Table from "./components/Table";
 import { useFetch } from "./utils/useFetch";
 import { BsFillFilterCircleFill } from "react-icons/bs";
 import { IoBed } from "react-icons/io5";
 import getApartments from "./api/getApartments";
 
-const twoBedUrl = "http://localhost:3001/api/v1/twoBedroomApartments";
 const oneBedsUrl = "http://localhost:3001/api/v1/oneBedroomApartments";
+const twoBedUrl = "http://localhost:3001/api/v1/twoBedroomApartments";
 const threeBedsUrl = "http://localhost:3001/api/v1/threeBedroomApartments";
 
 function App() {
