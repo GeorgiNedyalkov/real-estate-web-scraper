@@ -1,18 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallb } from "react";
 import "./App.css";
-import Stat from "./components/Stat";
-import Table from "./components/Table";
+import Stat from "./components/Stat/Stat";
+import Table from "./components/Table/Table";
 import { useFetch } from "./utils/useFetch";
 import { BsFillFilterCircleFill } from "react-icons/bs";
 import { IoBed } from "react-icons/io5";
-import getApartments from "./api/getApartments";
-
-const oneBedsUrl = "http://localhost:3001/api/v1/oneBedroomApartments";
-const twoBedUrl = "http://localhost:3001/api/v1/twoBedroomApartments";
-const threeBedsUrl = "http://localhost:3001/api/v1/threeBedroomApartments";
+import { getOneBeds, getTwoBeds, getThreeBeds } from "./api/getApartments";
 
 function App() {
   const { apartments, loading, setApartments } = useFetch();
+  console.log("app has rendered");
 
   const [neighborhood, setNeighborhood] = useState("Izgrev");
 
@@ -20,14 +17,15 @@ function App() {
   const [filters, setFilters] = useState({});
 
   const [completionProgress, setCompletionProgress] = useState("");
+
   const [averagePrice, setAveragePrice] = useState(0);
   const [averageSize, setAverageSize] = useState(0);
   const [averagePricePerSqMeter, setAveragePricePerSqMeter] = useState(0);
 
-  const marketCap = apartments.reduce(
-    (prev, current) => prev + current.price,
-    0
-  );
+  // const marketCap = apartments.reduce(
+  //   (prev, current) => prev + current.price,
+  //   0
+  // );
 
   const filteredApartments = apartments.filter((a) => {
     if (completionProgress === "") {
@@ -38,7 +36,7 @@ function App() {
   });
 
   function calcAveragePrice(apartments) {
-    const newAveragePrice = Math.ceil(Number(marketCap / apartments.length));
+    const newAveragePrice = Math.ceil(Number("marketCap" / apartments.length));
     setAveragePrice(newAveragePrice);
   }
 
@@ -59,20 +57,6 @@ function App() {
     );
     const newAverageSize = totalSize / apartments.length;
     setAverageSize(newAverageSize);
-  }
-
-  async function getOneBeds() {
-    const oneBeds = await getApartments(oneBedsUrl);
-    setApartments(oneBeds);
-  }
-
-  async function getTwoBeds() {
-    const twoBeds = await getApartments(twoBedUrl);
-    setApartments(twoBeds);
-  }
-  async function getThreeBeds() {
-    const threeBeds = await getApartments(threeBedsUrl);
-    setApartments(threeBeds);
   }
 
   useEffect(() => {
@@ -96,7 +80,7 @@ function App() {
                 </h1>
                 <p>
                   Total market cap is{" "}
-                  <b className="highlight"> €{marketCap.toLocaleString()}</b>
+                  <b className="highlight"> €{"100".toLocaleString()}</b>
                 </p>
                 <p>
                   Number of one bed properties{" "}
@@ -155,15 +139,30 @@ function App() {
 
               <h3 className="subheading">Choose apartment type:</h3>
               <div className="apartment__type-btns">
-                <button className={`btn`} onClick={() => getOneBeds()}>
+                <button
+                  className={`btn`}
+                  onClick={() => {
+                    setApartments(getOneBeds());
+                  }}
+                >
                   <IoBed />
                   One
                 </button>
-                <button className="btn" onClick={() => getTwoBeds()}>
+                <button
+                  className="btn"
+                  onClick={() => {
+                    setApartments(getTwoBeds());
+                  }}
+                >
                   <IoBed />
                   Two
                 </button>
-                <button className="btn" onClick={() => getThreeBeds()}>
+                <button
+                  className="btn"
+                  onClick={() => {
+                    setApartments(getThreeBeds());
+                  }}
+                >
                   <IoBed />
                   Three
                 </button>

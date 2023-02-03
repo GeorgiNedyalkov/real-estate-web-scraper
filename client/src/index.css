@@ -5,7 +5,7 @@
   --bg-color-dark: hsl(240, 6%, 10%);
   --bg-navbar: hsl(240, 12%, 6%);
   --bg-color: rgb(237, 235, 235);
-  --color-primary: hsl(266, 79%, 56%);
+  --color-primary: hsl(266, 43%, 48%);
   /* gray */
   --gray-10: hsl(0, 0%, 11%);
   --border: 1px solid lightgray;
@@ -211,7 +211,7 @@ select {
 }
 
 .title {
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 }
 
 .highlight {

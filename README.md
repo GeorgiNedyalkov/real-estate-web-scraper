@@ -80,6 +80,14 @@ JSON:
 }
 ```
 
-<!-- ## Testing
+## TODO
 
-## Contributing -->
+- To Implement:
+
+  - search by neighborhood
+
+- Bugs:
+  - filter
+  - calculation functions
+  - search by type
+- Deploy

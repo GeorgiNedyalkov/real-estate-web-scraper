@@ -1,5 +1,3 @@
-import mockApartments from "../data/mockData";
-
 function filterRows(rows, filters) {
   // if the filters are empty return the initial array
   if (Object.keys(filters).length === 0) return rows;
@@ -27,16 +25,4 @@ function filterRows(rows, filters) {
   });
 }
 
-// Tests with strings
-// console.log(filterRows(mockApartments, { title: "Арена" }));
-// console.log(filterRows(mockApartments, { completionProgress: "construction" }));
-// console.log(filterRows(mockApartments, { constructionType: "brick" }));
-
-// Tests with numbers
-// console.log(filterRows(mockApartments, { size: 96 }));
-// console.log(filterRows(mockApartments, { price: 100000 }));
-// console.log(filterRows(mockApartments, { pricerPerSqMeter: 96 }));
-
-// Test with booleans
-console.log(filterRows(mockApartments, { lastFloor: false }));
-console.log(filterRows(mockApartments, { lastFloor: true }));
+export default filterRows;

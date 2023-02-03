@@ -18,3 +18,7 @@ Cases:
     - if it is a boolean: check to see if the search value is true and the value is true || vice versa for false
     - if it is a number: check if the value is equal to the search value
     - return false if nothing else is true
+
+TODO:
+
+- Show apartments for a specific _neighborhood_

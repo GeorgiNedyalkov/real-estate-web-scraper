@@ -1,6 +1,4 @@
-import { mockApartments } from "../data/mockData.js";
-
-export function calcAverage(objArr, key) {
+export function calcAverage(key, objArr) {
   const total = objArr.reduce((prev, next) => prev + next[key], 0);
   return total / objArr.length;
 }
@@ -44,5 +42,3 @@ export function findMedian(objArr, key) {
 
   return sortedArr[midIndex];
 }
-
-console.log(findMedian(mockApartments, "price"));
