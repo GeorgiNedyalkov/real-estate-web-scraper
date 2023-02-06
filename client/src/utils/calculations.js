@@ -42,3 +42,7 @@ export function findMedian(objArr, key) {
 
   return sortedArr[midIndex];
 }
+
+export function calcMarketCap(apartments) {
+  return apartments.reduce((prev, next) => prev + next.price, 0);
+}

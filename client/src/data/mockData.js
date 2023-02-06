@@ -81,7 +81,7 @@ export const mockApartments = [
     title: "Тристаен апартамент в Арена Изгрев - 99 300 ЕвроИзгрев, Бургас",
   },
   {
-    id: 8,
+    id: 9,
     completionProgress: "construction",
     constructionType: "brick",
     floor: 1.1,
@@ -91,7 +91,7 @@ export const mockApartments = [
     title: "Тристаен апартамент в Арена Изгрев - 99 300 ЕвроИзгрев, Бургас",
   },
   {
-    id: 9,
+    id: 10,
     completionProgress: "project",
     constructionType: "brick",
     floor: 2,
@@ -102,7 +102,7 @@ export const mockApartments = [
       "Тристаен апартамент в Луксозен комплекс в кв. ”Изгрев”! ДИРЕКТНО ОТ СТРОИТЕЛ!Изгрев, Бургас",
   },
   {
-    id: 10,
+    id: 11,
     completionProgress: "construction",
     constructionType: "brick",
     floor: 5,
@@ -112,7 +112,7 @@ export const mockApartments = [
     title: "",
   },
   {
-    id: 11,
+    id: 12,
     completionProgress: "completed",
     constructionType: "brick",
     floor: null,
@@ -122,7 +122,7 @@ export const mockApartments = [
     title: "Южен, семеен имот с покрита веранда и двор Изгрев, Бургас",
   },
   {
-    id: 11,
+    id: 13,
     completionProgress: "completed",
     constructionType: "brick",
     floor: null,

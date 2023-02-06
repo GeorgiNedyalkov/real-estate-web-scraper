@@ -47,3 +47,5 @@ it("calculates the average value from an array of objects", () => {
   expect(averageSize).toBeCloseTo(102.7, 1);
   expect(averagePricePerSqMeter).toBeCloseTo(1002.23, 1);
 });
+
+it("find the median from an array of objects", () => {});

@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { columns } from "../../data/columns";
 import Pagination from "../Pagination/Pagination";
 
 const Table = ({ apartments }) => {
   const [activePage, setActivePage] = useState(1);
-  const rowsPerPage = 200;
+  const rowsPerPage = 20;
   const count = apartments.lenth;
   const totalPages = Math.ceil(count / rowsPerPage);
 
