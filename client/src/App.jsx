@@ -2,37 +2,67 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import Stat from "./components/Stats/Stat";
 import Table from "./components/Table/Table";
+import Button from "./components/Button/Button";
 import { useFetch } from "./utils/useFetch";
 import { BsFillFilterCircleFill } from "react-icons/bs";
 import { getOneBeds, getTwoBeds, getThreeBeds } from "./api/getApartments";
-import { calcAverage, calcMarketCap } from "./utils/calculations";
-import Title from "./components/Title/Title";
-import Button from "./components/Button/Button";
-import { Highlights } from "./components/Highlights/Highlights";
-import { mockApartments } from "./data/mockData";
 
 function App() {
   const { apartments, loading, setApartments } = useFetch();
-  const [marketCap, setMarketCap] = useState(0);
+  console.log("app has rendered");
+
   const [neighborhood, setNeighborhood] = useState("Izgrev");
   const [hasFilters, setHasFilters] = useState(false);
   const [filters, setFilters] = useState({});
+
   const [completionProgress, setCompletionProgress] = useState("");
 
   const [averagePrice, setAveragePrice] = useState(0);
   const [averageSize, setAverageSize] = useState(0);
   const [averagePricePerSqMeter, setAveragePricePerSqMeter] = useState(0);
 
-  useEffect(() => {
-    setApartments(mockApartments);
-    setAveragePrice(calcAverage("price", apartments));
-    setAverageSize(calcAverage("size", apartments));
-    setAveragePricePerSqMeter(calcAverage("pricePerSqMeter", apartments));
-  }, [apartments]);
+  // const marketCap = apartments.reduce(
+  //   (prev, current) => prev + current.price,
+  //   0
+  // );
+
+  const filteredApartments = apartments.filter((a) => {
+    if (completionProgress === "") {
+      return apartments;
+    } else {
+      return a.completionProgress === completionProgress;
+    }
+  });
+
+  function calcAveragePrice(apartments) {
+    const newAveragePrice = Math.ceil(Number("marketCap" / apartments.length));
+    setAveragePrice(newAveragePrice);
+  }
+
+  function calcAveragePricePerSqMeter(apartments) {
+    const totalPricePSQM = apartments.reduce(
+      (prev, current) => prev + current.pricePerSqMeter,
+      0
+    );
+    const totalApartments = apartments.length;
+    const newAveragePricePSQM = Math.ceil(totalPricePSQM / totalApartments);
+    setAveragePricePerSqMeter(newAveragePricePSQM);
+  }
+
+  function calcAverageSize(apartments) {
+    const totalSize = apartments.reduce(
+      (prev, current) => prev + current.size,
+      0
+    );
+    const newAverageSize = totalSize / apartments.length;
+    setAverageSize(newAverageSize);
+  }
 
   useEffect(() => {
-    setMarketCap(calcMarketCap(apartments));
-  }, [marketCap]);
+    calcAveragePrice(filteredApartments);
+    calcAverageSize(filteredApartments);
+    calcAveragePricePerSqMeter(filteredApartments);
+  }, [filteredApartments]);
 
   return (
     <div className="App">
@@ -42,14 +72,34 @@ function App() {
         <div className="wrapper">
           <div className="display">
             <div className="container">
-              <Title city="Burgas" />
-              <Highlights
-                marketCap={marketCap}
-                count={mockApartments.length}
-                averagePrice={averagePrice}
-                averageSize={averageSize}
-                averagePricePerSqMeter={averagePricePerSqMeter}
-              />
+              <div className="highlights">
+                <h1 className="title">
+                  Today's real estate listings prices in{" "}
+                  <b className="highlight">Burgas</b>.
+                </h1>
+                <p>
+                  Total market cap is{" "}
+                  <b className="highlight"> €{"100".toLocaleString()}</b>
+                </p>
+                <p>
+                  Number of one bed properties{" "}
+                  <b className="highlight">{apartments.length}</b>
+                </p>
+                <p>
+                  The average price for one bed properties is{" "}
+                  <span className="highlight">
+                    €{averagePrice.toLocaleString()}{" "}
+                  </span>
+                  with an average size of{" "}
+                  <span className="highlight">
+                    {averageSize.toFixed(2)} sq.m.
+                  </span>
+                  resulting in an average price per sq.m. of{" "}
+                  <span className="highlight">
+                    {averagePricePerSqMeter.toLocaleString()} €/м2
+                  </span>
+                </p>
+              </div>
 
               <div className="stats">
                 <Stat
@@ -88,11 +138,33 @@ function App() {
 
               <h3 className="subheading">Choose apartment type:</h3>
               <div className="apartment__type-btns">
-                <Button onClick={() => setApartments(getOneBeds())}>One</Button>
-                <Button onClick={() => setApartments(getTwoBeds())}>Two</Button>
-                <Button onClick={() => setApartments(getThreeBeds())}>
+                <button
+                  className={`btn`}
+                  onClick={() => {
+                    setApartments(getOneBeds());
+                  }}
+                >
+                  <IoBed />
+                  One
+                </button>
+                <button
+                  className="btn"
+                  onClick={() => {
+                    setApartments(getTwoBeds());
+                  }}
+                >
+                  <IoBed />
+                  Two
+                </button>
+                <button
+                  className="btn"
+                  onClick={() => {
+                    setApartments(getThreeBeds());
+                  }}
+                >
+                  <IoBed />
                   Three
-                </Button>
+                </button>
               </div>
 
               <button
@@ -120,7 +192,7 @@ function App() {
                 </div>
               )}
 
-              <Table apartments={apartments} />
+              <Table apartments={filteredApartments} />
             </div>
           </div>
         </div>
