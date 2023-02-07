@@ -3,7 +3,6 @@ const morgan = require("morgan");
 const helmet = require("helmet");
 const cors = require("cors");
 const apartments = require("./routes/apartments");
-const homeRoutes = require("./routes/homeRouter");
 const connectDB = require("./db/connect");
 require("dotenv").config();
 
@@ -30,8 +29,6 @@ app.use(express.static("./public"));
 
 // routes
 app.use("/api/v1/apartments", apartments);
-
-app.get();
 
 app.get("/api/v1/oneBedroomApartments", async (req, res) => {
   try {
