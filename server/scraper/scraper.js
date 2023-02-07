@@ -1,40 +1,29 @@
-const parseInput = require("./utils");
-const neighborhoods = require("./neighborhoods");
 const axios = require("axios");
 const { load } = require("cheerio");
-
-const oneBedUrl = `https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23&p[413]=1574`;
-const twoBedUrl = `https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23&p[413]=1575`;
-const threeBedUrl = `https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23&p[413]=1576`;
+const parseInput = require("./utils");
 
 async function getApartments(url) {
   const { data } = await axios.get(url);
-  const $ = load(data);
-
   const topListings = [];
   const vipListings = [];
+  const $ = load(data);
 
   const apartmentsContainer = $("#content_container");
-
   apartmentsContainer.find(".listtop-item").each((i, element) => {
     const $element = $(element);
-    let topListing = {};
     let title = $element.find(".listtop-item-title").text();
     let parameters = $element.find(".ads-params-single").text();
 
-    parameters = parseInput(parameters);
+    const parsedParameters = (parameters = parseInput(parameters));
 
-    topListing = {
+    topListings.push({
       title,
-      ...parameters,
-    };
-
-    topListings.push(topListing);
+      ...parsedParameters,
+    });
   });
 
   apartmentsContainer.find(".listvip-params").each((i, listing) => {
     const $listing = $(listing);
-    let vipListing = {};
 
     let title = $listing
       .find(".listvip-item-header")
@@ -50,12 +39,10 @@ async function getApartments(url) {
 
     const parsedParameters = parseInput(parameters);
 
-    vipListing = {
+    vipListings.push({
       title,
       ...parsedParameters,
-    };
-
-    vipListings.push(vipListing);
+    });
   });
 
   return [...topListings, ...vipListings];
@@ -65,21 +52,8 @@ async function getTotalPages(url) {
   const { data } = await axios.get(url);
   const $ = load(data);
 
-  // get total pages
   const totalListings = $(".obiavicnt").contents().text().split(" ")[0];
   return Math.ceil(Number(totalListings) / 30);
-}
-
-// get the first page
-// async function getFirstPage(url) {
-//   getApartments(url).then((data) => {
-//     console.log(data);
-//     return data;
-//   });
-// }
-
-async function getFirstPage(url) {
-  return await getApartments(url);
 }
 
 // get all pages
@@ -90,21 +64,23 @@ async function getAllApartments(url) {
 
   for (let i = 1; i <= totalPages; i++) {
     if (i === 1) {
-      const data = await getFirstPage(url);
+      const data = await getApartments(url);
       apartments.push(...data);
     } else {
       const newUrl = `${url}&page=${i}`;
-      const data = await getFirstPage(newUrl);
+      const data = await getApartments(newUrl);
       apartments.push(...data);
     }
+    console.log(totalPages);
+    console.table(apartments.length);
+    console.table(apartments);
   }
 
   return apartments;
 }
 
-const IZGREV_URL = neighborhoods[2].url;
-
-// getAllApartments(oneBedUrl);
-getAllApartments(IZGREV_URL);
+getAllApartments(
+  "https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23"
+);
 
 module.exports = getAllApartments;
