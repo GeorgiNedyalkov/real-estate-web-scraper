@@ -11,7 +11,7 @@ const ApartmentSchema = new mongoose.Schema(
     type: String,
     size: requiredNumber,
     price: requiredNumber,
-    pricePerSqMeters: requiredNumber,
+    pricePerSqMeter: requiredNumber,
     yearBuilt: Number,
     constructionType: String,
     completionPhase: String,

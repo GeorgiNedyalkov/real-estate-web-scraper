@@ -70,14 +70,6 @@ async function getTotalPages(url) {
   return Math.ceil(Number(totalListings) / 30);
 }
 
-// get the first page
-// async function getFirstPage(url) {
-//   getApartments(url).then((data) => {
-//     console.log(data);
-//     return data;
-//   });
-// }
-
 async function getFirstPage(url) {
   return await getApartments(url);
 }
