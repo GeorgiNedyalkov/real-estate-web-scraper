@@ -10,6 +10,7 @@ const {
 } = require("../controllers/apartments");
 
 router.route("/").get(getAllApartments).post(createApartment);
+
 router
   .route("/:id")
   .get(getApartment)

@@ -11,10 +11,10 @@ const ApartmentSchema = new mongoose.Schema(
     type: String,
     size: requiredNumber,
     price: requiredNumber,
-    priceSqMeters: requiredNumber,
+    pricePerSqMeters: requiredNumber,
     yearBuilt: Number,
-    construction: String,
-    phase: String,
+    constructionType: String,
+    completionPhase: String,
     floor: Number,
     description: String,
   },
@@ -24,3 +24,5 @@ const ApartmentSchema = new mongoose.Schema(
 const Apartment = mongoose.model("Apartments", ApartmentSchema);
 
 module.exports = Apartment;
+
+// TODO: construction type, type and completion phase must be enums
