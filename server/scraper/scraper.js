@@ -1,11 +1,6 @@
 const parseInput = require("./utils");
-const neighborhoods = require("./neighborhoods");
 const axios = require("axios");
 const { load } = require("cheerio");
-
-const oneBedUrl = `https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23&p[413]=1574`;
-const twoBedUrl = `https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23&p[413]=1575`;
-const threeBedUrl = `https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23&p[413]=1576`;
 
 async function getApartments(url) {
   const { data } = await axios.get(url);
@@ -18,23 +13,19 @@ async function getApartments(url) {
 
   apartmentsContainer.find(".listtop-item").each((i, element) => {
     const $element = $(element);
-    let topListing = {};
     let title = $element.find(".listtop-item-title").text();
     let parameters = $element.find(".ads-params-single").text();
 
     parameters = parseInput(parameters);
 
-    topListing = {
+    topListings.push({
       title,
       ...parameters,
-    };
-
-    topListings.push(topListing);
+    });
   });
 
   apartmentsContainer.find(".listvip-params").each((i, listing) => {
     const $listing = $(listing);
-    let vipListing = {};
 
     let title = $listing
       .find(".listvip-item-header")
@@ -50,12 +41,10 @@ async function getApartments(url) {
 
     const parsedParameters = parseInput(parameters);
 
-    vipListing = {
+    vipListings.push({
       title,
       ...parsedParameters,
-    };
-
-    vipListings.push(vipListing);
+    });
   });
 
   return [...topListings, ...vipListings];
@@ -91,11 +80,13 @@ async function getAllApartments(url) {
     }
   }
 
+  // console.table(apartments);
+
   return apartments;
 }
 
-// getAllApartments(
-//   "https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23"
-// );
+getAllApartments(
+  "https://www.alo.bg/obiavi/imoti-prodajbi/apartamenti-stai/?region_id=2&location_ids=300&section_ids=23"
+);
 
 module.exports = getAllApartments;
