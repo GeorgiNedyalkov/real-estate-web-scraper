@@ -15,8 +15,6 @@ const getAllApartments = require("./scraper/scraper");
 
 const app = express();
 
-// router
-
 // middlewares
 app.use(morgan("common"));
 app.use(express.json());

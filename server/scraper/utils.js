@@ -1,15 +1,14 @@
 function parseInput(str) {
   // store the information about the paramters of the apartments
   let parameters = {};
+
   // get all the number data: price, pricePerSqMeters, size, year, floor
   let numbers = [];
-
   for (let char of str) {
     if (!isNaN(char) || char == ".") {
       numbers.push(char);
     }
   }
-
   let numbersArr = numbers
     .join("")
     .split(" ")
