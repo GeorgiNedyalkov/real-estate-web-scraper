@@ -1,0 +1,18 @@
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /c/Users/Missy/.ssh/id_ed25519
+Your public key has been saved in /c/Users/Missy/.ssh/id_ed25519.pub
+The key fingerprint is:
+SHA256:JJ7bJdHpP9BDinLpcKLU5ugOXxLC6kpPqO3ZQm0cvZU gnedyalkov94@gmail.com
+The key's randomart image is:
++--[ED25519 256]--+
+|                 |
+|         . .     |
+|     .. o.o .    |
+| .  .o.+E= +     |
+|  ooo.OoS = o    |
+| .oo+*.X o o .   |
+|.+.o+ + o   o    |
+|+.+* o       .   |
+|+o++=            |
++----[SHA256]-----+
