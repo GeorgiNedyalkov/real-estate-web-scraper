@@ -6,7 +6,7 @@ const Stats = ({ averageSize, averagePrice, averagePricePerSqMeter }) => {
       <Stat value={averagePrice} label="Average Price" percentChange={4.5} />
       <Stat
         value={averagePricePerSqMeter}
-        label="Price Per Sq.m."
+        label="Average Price Per Sq.m."
         percentChange={-4.5}
       />
       <Stat

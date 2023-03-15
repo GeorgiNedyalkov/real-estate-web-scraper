@@ -181,12 +181,12 @@ select {
   top: 90px;
 }
 
-/* containers */
+/* Containers */
 .container {
   margin: 20px;
 }
 
-/* table */
+/* Table */
 .propertyTable {
   margin: 20px 0px;
 }
@@ -201,7 +201,7 @@ select {
   justify-content: space-between;
 }
 
-/* header */
+/* Header */
 .logo {
   text-align: center;
   color: var(--color-primary);
@@ -262,7 +262,7 @@ select {
   color: greenyellow;
 }
 
-/* buttons */
+/* Buttons */
 .filter__button {
   font-family: "Lato";
   width: 100px;
@@ -346,4 +346,12 @@ select {
   margin: 0 auto;
   align-items: center;
   justify-content: center;
+}
+
+.median {
+  margin-bottom: 50px;
+  background-color: #25242b;
+  padding: 20px;
+  width: 200px;
+  border-radius: var(--border-radius);
 }

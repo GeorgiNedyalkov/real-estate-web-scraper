@@ -79,6 +79,20 @@ function App() {
                 averagePricePerSqMeter={averagePricePerSqMeter}
               />
 
+              <div className="median">
+                <h2>Median</h2>
+                <p>
+                  The median size is {findMedian(filteredApartments, "size")}
+                </p>
+                <p>
+                  The median price is {findMedian(filteredApartments, "price")}.
+                </p>
+                <p>
+                  The median price per sq.m. is{" "}
+                  {findMedian(filteredApartments, "pricePerSqMeter")}
+                </p>
+              </div>
+
               <div className="neighborhood__container">
                 <h2 className="neighborhood">
                   Neighbourhood{" "}

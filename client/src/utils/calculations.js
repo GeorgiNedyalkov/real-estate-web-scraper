@@ -35,7 +35,6 @@ export function findMedian(objArr, key) {
   let midIndex;
 
   const sortedArr = objArr.sort((a, b) => b[key] - a[key]);
-  console.table(sortedArr);
   const count = objArr.length;
 
   if (count % 2 == 0) {
@@ -44,5 +43,5 @@ export function findMedian(objArr, key) {
     midIndex = Math.ceil(count / 2);
   }
 
-  return sortedArr[midIndex];
+  return sortedArr[midIndex][key];
 }
