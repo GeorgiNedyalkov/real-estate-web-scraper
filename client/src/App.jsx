@@ -2,29 +2,25 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import Stat from "./components/Stats/Stat";
 import Table from "./components/Table/Table";
-import Button from "./components/Button/Button";
 import { useFetch } from "./utils/useFetch";
+import { IoBed } from "react-icons/io5";
 import { BsFillFilterCircleFill } from "react-icons/bs";
 import { getOneBeds, getTwoBeds, getThreeBeds } from "./api/getApartments";
+import {
+  calcAverage,
+  findMode,
+  findMedian,
+  calcMarketCap,
+} from "./utils/calculations";
 
 function App() {
   const { apartments, loading, setApartments } = useFetch();
-  console.log("app has rendered");
-
   const [neighborhood, setNeighborhood] = useState("Izgrev");
   const [hasFilters, setHasFilters] = useState(false);
-  const [filters, setFilters] = useState({});
-
   const [completionProgress, setCompletionProgress] = useState("");
-
   const [averagePrice, setAveragePrice] = useState(0);
   const [averageSize, setAverageSize] = useState(0);
   const [averagePricePerSqMeter, setAveragePricePerSqMeter] = useState(0);
-
-  // const marketCap = apartments.reduce(
-  //   (prev, current) => prev + current.price,
-  //   0
-  // );
 
   const filteredApartments = apartments.filter((a) => {
     if (completionProgress === "") {
@@ -34,34 +30,24 @@ function App() {
     }
   });
 
-  function calcAveragePrice(apartments) {
-    const newAveragePrice = Math.ceil(Number("marketCap" / apartments.length));
-    setAveragePrice(newAveragePrice);
-  }
+  const calcAverageSize = () => {
+    setAverageSize(calcAverage("size", filteredApartments));
+  };
 
-  function calcAveragePricePerSqMeter(apartments) {
-    const totalPricePSQM = apartments.reduce(
-      (prev, current) => prev + current.pricePerSqMeter,
-      0
-    );
-    const totalApartments = apartments.length;
-    const newAveragePricePSQM = Math.ceil(totalPricePSQM / totalApartments);
-    setAveragePricePerSqMeter(newAveragePricePSQM);
-  }
+  const calcAveragePrice = () => {
+    setAveragePrice(calcAverage("price", filteredApartments));
+  };
 
-  function calcAverageSize(apartments) {
-    const totalSize = apartments.reduce(
-      (prev, current) => prev + current.size,
-      0
+  const calcAveragePricePerSqMeter = () => {
+    setAveragePricePerSqMeter(
+      calcAverage("pricePerSqMeter", filteredApartments)
     );
-    const newAverageSize = totalSize / apartments.length;
-    setAverageSize(newAverageSize);
-  }
+  };
 
   useEffect(() => {
-    calcAveragePrice(filteredApartments);
-    calcAverageSize(filteredApartments);
-    calcAveragePricePerSqMeter(filteredApartments);
+    calcAverageSize();
+    calcAveragePrice();
+    calcAveragePricePerSqMeter();
   }, [filteredApartments]);
 
   return (
@@ -79,7 +65,10 @@ function App() {
                 </h1>
                 <p>
                   Total market cap is{" "}
-                  <b className="highlight"> €{"100".toLocaleString()}</b>
+                  <b className="highlight">
+                    {" "}
+                    {calcMarketCap(filteredApartments).toLocaleString()}
+                  </b>
                 </p>
                 <p>
                   Number of one bed properties{" "}
