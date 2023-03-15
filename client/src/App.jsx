@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import "./App.css";
 import Stat from "./components/Stats/Stat";
 import Table from "./components/Table/Table";
@@ -12,12 +12,14 @@ import {
   findMedian,
   calcMarketCap,
 } from "./utils/calculations";
+import { Highlights } from "./components/Highlights/Highlights";
 
 function App() {
   const { apartments, loading, setApartments } = useFetch();
   const [neighborhood, setNeighborhood] = useState("Izgrev");
   const [hasFilters, setHasFilters] = useState(false);
   const [completionProgress, setCompletionProgress] = useState("");
+  const [marketCap, setMarketCap] = useState(0);
   const [averagePrice, setAveragePrice] = useState(0);
   const [averageSize, setAverageSize] = useState(0);
   const [averagePricePerSqMeter, setAveragePricePerSqMeter] = useState(0);
@@ -44,6 +46,10 @@ function App() {
     );
   };
 
+  const calcMarketCap = () => {
+    setMarketCap(calcMarketCap(filteredApartments));
+  };
+
   useEffect(() => {
     calcAverageSize();
     calcAveragePrice();
@@ -58,38 +64,13 @@ function App() {
         <div className="wrapper">
           <div className="display">
             <div className="container">
-              <div className="highlights">
-                <h1 className="title">
-                  Today's real estate listings prices in{" "}
-                  <b className="highlight">Burgas</b>.
-                </h1>
-                <p>
-                  Total market cap is{" "}
-                  <b className="highlight">
-                    {" "}
-                    {calcMarketCap(filteredApartments).toLocaleString()}
-                  </b>
-                </p>
-                <p>
-                  Number of one bed properties{" "}
-                  <b className="highlight">{apartments.length}</b>
-                </p>
-                <p>
-                  The average price for one bed properties is{" "}
-                  <span className="highlight">
-                    €{averagePrice.toLocaleString()}{" "}
-                  </span>
-                  with an average size of{" "}
-                  <span className="highlight">
-                    {averageSize.toFixed(2)} sq.m.
-                  </span>
-                  resulting in an average price per sq.m. of{" "}
-                  <span className="highlight">
-                    {averagePricePerSqMeter.toLocaleString()} €/м2
-                  </span>
-                </p>
-              </div>
-
+              <Highlights
+                marketCap={marketCap}
+                averageSize={averageSize}
+                averagePrice={averagePrice}
+                averagePricePerSqMeter={averagePricePerSqMeter}
+                apartments={apartments}
+              />
               <div className="stats">
                 <Stat
                   value={averagePrice}
