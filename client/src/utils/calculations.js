@@ -1,3 +1,7 @@
+export function calcMarketCap(apartments) {
+  return apartments.reduce((prev, next) => prev + next.price, 0);
+}
+
 export function calcAverage(key, objArr) {
   const total = objArr.reduce((prev, next) => prev + next[key], 0);
   return total / objArr.length;
@@ -41,8 +45,4 @@ export function findMedian(objArr, key) {
   }
 
   return sortedArr[midIndex];
-}
-
-export function calcMarketCap(apartments) {
-  return apartments.reduce((prev, next) => prev + next.price, 0);
 }
