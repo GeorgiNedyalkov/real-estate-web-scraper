@@ -13,6 +13,7 @@ import {
   calcMarketCap,
 } from "./utils/calculations";
 import { Highlights } from "./components/Highlights/Highlights";
+import Stats from "./components/Stats/Stats";
 
 function App() {
   const { apartments, loading, setApartments } = useFetch();
@@ -65,29 +66,18 @@ function App() {
           <div className="display">
             <div className="container">
               <Highlights
+                apartments={apartments}
                 marketCap={marketCap}
                 averageSize={averageSize}
                 averagePrice={averagePrice}
                 averagePricePerSqMeter={averagePricePerSqMeter}
-                apartments={apartments}
               />
-              <div className="stats">
-                <Stat
-                  value={averagePrice}
-                  label="Average Price"
-                  percentChange={4.5}
-                />
-                <Stat
-                  value={averagePricePerSqMeter}
-                  label="Price Per Sq.m."
-                  percentChange={-4.5}
-                />
-                <Stat
-                  value={averageSize.toFixed(2) + " m2"}
-                  label="Average Size"
-                  percentChange={1}
-                />
-              </div>
+
+              <Stats
+                averageSize={averageSize}
+                averagePrice={averagePrice}
+                averagePricePerSqMeter={averagePricePerSqMeter}
+              />
 
               <div className="neighborhood__container">
                 <h2 className="neighborhood">

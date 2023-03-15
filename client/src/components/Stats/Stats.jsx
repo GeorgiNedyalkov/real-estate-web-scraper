@@ -1,6 +1,6 @@
-import React from "react";
+import Stat from "./Stat";
 
-const Stats = () => {
+const Stats = ({ averageSize, averagePrice, averagePricePerSqMeter }) => {
   return (
     <div className="stats">
       <Stat value={averagePrice} label="Average Price" percentChange={4.5} />
