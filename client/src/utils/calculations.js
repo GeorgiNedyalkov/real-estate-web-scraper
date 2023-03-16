@@ -1,5 +1,6 @@
 export function calcMarketCap(apartments) {
-  return apartments.reduce((prev, next) => prev + next.price, 0);
+  const marketCap = apartments.reduce((prev, next) => prev + next.price, 0);
+  return marketCap.toLocaleString();
 }
 
 export function calcAverage(key, objArr) {

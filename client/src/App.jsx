@@ -47,11 +47,12 @@ function App() {
     );
   };
 
-  const calcMarketCap = () => {
+  const calcMarketCapitalization = () => {
     setMarketCap(calcMarketCap(filteredApartments));
   };
 
   useEffect(() => {
+    calcMarketCapitalization();
     calcAverageSize();
     calcAveragePrice();
     calcAveragePricePerSqMeter();
