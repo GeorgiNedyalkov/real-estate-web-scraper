@@ -1,6 +1,5 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
-import Stat from "./components/Stats/Stat";
 import Table from "./components/Table/Table";
 import { useFetch } from "./utils/useFetch";
 import { IoBed } from "react-icons/io5";
@@ -79,6 +78,15 @@ function App() {
                 averagePrice={averagePrice}
                 averagePricePerSqMeter={averagePricePerSqMeter}
               />
+
+              <div>
+                <h2>Mode</h2>
+
+                <p>
+                  The mode of the sizes is{" "}
+                  {findMode(filteredApartments, "pricePerSqMeter")}
+                </p>
+              </div>
 
               <div className="median">
                 <h2>Median</h2>

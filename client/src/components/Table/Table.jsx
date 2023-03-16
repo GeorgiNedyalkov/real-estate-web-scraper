@@ -4,7 +4,7 @@ import Pagination from "../Pagination/Pagination";
 
 const Table = ({ apartments }) => {
   const [activePage, setActivePage] = useState(1);
-  const rowsPerPage = 20;
+  const rowsPerPage = 300;
   const count = apartments.lenth;
   const totalPages = Math.ceil(count / rowsPerPage);
 
