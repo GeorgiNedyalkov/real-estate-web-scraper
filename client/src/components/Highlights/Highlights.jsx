@@ -14,13 +14,9 @@ export const Highlights = ({
         <b className="highlight">Burgas</b>.
       </h1>
       <p>
-        Total market cap is <b className="highlight">{marketCap}</b>
-      </p>
-      <p>
-        Number of one bed properties{" "}
-        <b className="highlight">{apartments.length}</b>
-      </p>
-      <p>
+        Total market cap is <b className="highlight"> {marketCap}.</b>
+        Number of one bed properties
+        <b className="highlight"> {apartments.length} </b>
         The average price for one bed properties is{" "}
         <span className="highlight">€{averagePrice.toLocaleString()} </span>
         with an average size of{" "}
