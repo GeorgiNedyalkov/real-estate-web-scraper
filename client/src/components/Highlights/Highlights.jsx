@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Highlights = ({
+const Highlights = ({
   apartments,
   marketCap,
   averagePrice,
@@ -29,3 +29,5 @@ export const Highlights = ({
     </div>
   );
 };
+
+export default Highlights;

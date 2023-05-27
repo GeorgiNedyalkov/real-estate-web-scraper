@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
-import "./App.css";
+
 import Table from "./components/Table/Table";
-import { useFetch } from "./utils/useFetch";
+import Stats from "./components/Stats/Stats";
+import Highlights from "./components/Highlights/Highlights";
 import { IoBed } from "react-icons/io5";
 import { BsFillFilterCircleFill } from "react-icons/bs";
+
+import { useFetch } from "./utils/useFetch";
 import { getOneBeds, getTwoBeds, getThreeBeds } from "./api/getApartments";
 import {
   calcAverage,
@@ -11,8 +14,7 @@ import {
   findMedian,
   calcMarketCap,
 } from "./utils/calculations";
-import { Highlights } from "./components/Highlights/Highlights";
-import Stats from "./components/Stats/Stats";
+import "./App.css";
 
 function App() {
   const { apartments, loading, setApartments } = useFetch();
@@ -32,29 +34,18 @@ function App() {
     }
   });
 
-  const calcAverageSize = () => {
+  const modePricePerSqMeter = findMode(
+    filteredApartments,
+    "pricePerSquareMeter"
+  );
+
+  useEffect(() => {
+    setMarketCap(calcMarketCap(filteredApartments));
     setAverageSize(calcAverage("size", filteredApartments));
-  };
-
-  const calcAveragePrice = () => {
     setAveragePrice(calcAverage("price", filteredApartments));
-  };
-
-  const calcAveragePricePerSqMeter = () => {
     setAveragePricePerSqMeter(
       calcAverage("pricePerSqMeter", filteredApartments)
     );
-  };
-
-  const calcMarketCapitalization = () => {
-    setMarketCap(calcMarketCap(filteredApartments));
-  };
-
-  useEffect(() => {
-    calcMarketCapitalization();
-    calcAverageSize();
-    calcAveragePrice();
-    calcAveragePricePerSqMeter();
   }, [filteredApartments]);
 
   return (
@@ -77,6 +68,7 @@ function App() {
                 averageSize={averageSize}
                 averagePrice={averagePrice}
                 averagePricePerSqMeter={averagePricePerSqMeter}
+                modePricePerSqMeter={modePricePerSqMeter}
               />
 
               <div>
