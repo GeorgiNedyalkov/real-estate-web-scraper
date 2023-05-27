@@ -13,6 +13,7 @@ import {
 } from "./utils/calculations";
 import { Highlights } from "./components/Highlights/Highlights";
 import Stats from "./components/Stats/Stats";
+import Filters from "./components/Filters/Filters";
 
 function App() {
   const { apartments, loading, setApartments } = useFetch();
@@ -79,7 +80,7 @@ function App() {
                 averagePricePerSqMeter={averagePricePerSqMeter}
               />
 
-              <div>
+              {/* <div>
                 <h2>Mode</h2>
 
                 <p>
@@ -100,7 +101,9 @@ function App() {
                   The median price per sq.m. is{" "}
                   {findMedian(filteredApartments, "pricePerSqMeter")}
                 </p>
-              </div>
+              </div> */}
+
+              {/* <Filters /> */}
 
               <div className="neighborhood__container">
                 <h2 className="neighborhood">

@@ -18,6 +18,7 @@ export async function getTwoBeds() {
   const twoBeds = await getApartments(twoBedUrl);
   return twoBeds;
 }
+
 export async function getThreeBeds() {
   const threeBeds = await getApartments(threeBedsUrl);
   return threeBeds;
