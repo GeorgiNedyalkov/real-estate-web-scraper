@@ -1,15 +1,24 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400;1,700&display=swap");
 
 :root {
-  --text-color: #fefefe;
+  /* Colors */
   --bg-color-dark: hsl(240, 6%, 10%);
   --bg-navbar: hsl(240, 12%, 6%);
   --bg-color: rgb(237, 235, 235);
   --color-primary: hsl(266, 43%, 48%);
-  /* gray */
   --gray-10: hsl(0, 0%, 11%);
+
+  /* Font color */
+  
+  --font-color-base: #fefefe;
+
+  /* Borders */
   --border: 1px solid lightgray;
   --border-radius: 5px;
+
+  /* Elements */
+  --background-color: #eee;
+  --background-elements: hsl(249, 9%, 15%);
 }
 
 *,
@@ -97,6 +106,7 @@ li {
 option {
   font-family: "Lato";
   font-weight: bold;
+  background-color: var(--background-elements);
   background-color: #25242b;
   color: var(--text-color);
   padding: 2px;
@@ -104,7 +114,7 @@ option {
 }
 
 select {
-  background-color: #25242b;
+  background-color: var(--background-elements);
   color: var(--text-color);
   margin: 10px 0px;
   padding: 5px;
@@ -232,18 +242,18 @@ select {
   align-items: center;
   justify-content: space-between;
   padding: 30px;
-  background-color: #25242b;
   border-radius: var(--border-radius);
 }
 
 .stat {
   height: 200px;
-  width: 250px;
+  width: 400px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: var(--background-elements);
 }
 
 .stat__label {
@@ -272,7 +282,7 @@ select {
   justify-content: center;
   gap: 5px;
   color: white;
-  background-color: #25242b;
+  background-color: var(--background-elements);
   font-size: 1em;
   margin-bottom: 10px;
   cursor: pointer;
@@ -293,12 +303,12 @@ select {
   justify-content: center;
   gap: 5px;
   color: white;
-  background-color: #25242b;
   border: none;
   font-size: 1.2em;
   margin-bottom: 10px;
   cursor: pointer;
   border-radius: var(--border-radius);
+  background-color: var(--background-elements);
 }
 
 .btn:hover {
@@ -320,8 +330,8 @@ select {
 }
 
 .pagination__btn {
-  width: 100px;
-  background-color: #25242b;
+  width: 150px;
+  background-color: var(--background-elements);
   color: var(--text-color);
   font-size: 1em;
   padding: 5px;
@@ -332,8 +342,10 @@ select {
 }
 
 .pagination__btn:hover {
-  color: #25242b;
   background-color: #fefefe;
+  color: var(--color-primary);
+  font-weight: 600;
+  
 }
 
 .active {
@@ -349,9 +361,9 @@ select {
 }
 
 .median {
-  margin-bottom: 50px;
-  background-color: #25242b;
-  padding: 20px;
   width: 200px;
+  padding: 20px;
+  margin-bottom: 50px;
   border-radius: var(--border-radius);
+  background-color: var(--background-elements);
 }
