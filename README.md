@@ -91,3 +91,29 @@ JSON:
   - calculation functions
   - search by type
 - Deploy
+
+## Inspiration for Key Statistics
+
+Median Sales Price: The midpoint price of all properties sold during a specific period. It provides an overview of the overall price trend in the market.
+
+Average Sales Price: The average price of all properties sold during a specific period. It can provide insights into the market's price range and any fluctuations.
+
+Price per Square Foot: Calculating the average price of properties based on their square footage can help identify variations in pricing based on property size.
+
+Number of Sales: The total count of properties sold during a specific period. This statistic helps gauge the level of market activity and demand.
+
+Days on Market: The average or median number of days it takes for properties to sell after being listed. This metric indicates the speed of property sales and the level of buyer interest.
+
+Inventory Levels: The number of properties available for sale at a given time. It can be represented as months of supply, which calculates how long it would take to sell all available properties based on the current sales pace.
+
+Listing Price to Sales Price Ratio: The percentage of the listing price that properties typically sell for. It provides insight into whether sellers are achieving their desired prices or if negotiations are leading to lower sales prices.
+
+Absorption Rate: The rate at which available properties are being sold or absorbed by the market. It helps assess the balance between supply and demand.
+
+Foreclosure Rates: The number or percentage of properties in foreclosure or undergoing foreclosure proceedings. This data is relevant for assessing the health of the market and identifying potential investment opportunities.
+
+New Construction Activity: The number of new residential or commercial construction projects and building permits issued. This statistic reflects the level of development and growth in the real estate market.
+
+Rental Rates: The average rent prices for different types of properties (e.g., apartments, houses) in the market. This information is relevant for both tenants and investors looking for rental income.
+
+Demographic Data: Population growth rates, age distributions, income levels, and other relevant demographic information that can impact the real estate market.
