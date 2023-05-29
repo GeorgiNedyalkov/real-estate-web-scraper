@@ -51,11 +51,17 @@ function App() {
     setMarketCap(calcMarketCap(filteredApartments));
   };
 
+  const calcAverages = () => {
+    setAverageSize(calcAverage("size", filteredApartments));
+    setAveragePrice(calcAverage("price", filteredApartments));
+    setAveragePricePerSqMeter(
+      calcAverage("pricePerSqMeter", filteredApartments)
+    );
+  };
+
   useEffect(() => {
     calcMarketCapitalization();
-    calcAverageSize();
-    calcAveragePrice();
-    calcAveragePricePerSqMeter();
+    calcAverages();
   }, [filteredApartments]);
 
   return (
