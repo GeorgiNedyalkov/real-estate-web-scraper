@@ -201,6 +201,20 @@ select {
   justify-content: space-between;
 }
 
+.pagination__btn {
+  color: var(--font-color-base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.pagination__icons {
+  background-color: #eee;
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
 /* Header */
 .logo {
   text-align: center;

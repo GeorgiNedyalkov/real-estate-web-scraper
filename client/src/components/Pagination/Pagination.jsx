@@ -1,3 +1,7 @@
+import { BiLastPage } from "react-icons/bi";
+import { BiFirstPage } from "react-icons/bi";
+import { GrFormPreviousLink, GrFormNextLink } from "react-icons/gr";
+
 const Pagination = ({
   rowsPerPage,
   activePage,
@@ -16,28 +20,28 @@ const Pagination = ({
           disabled={activePage === 1}
           onClick={() => setActivePage(1)}
         >
-          ⏮ First
+          <BiFirstPage className="pagination__icons" /> First
         </button>
         <button
           className="pagination__btn"
           disabled={activePage === 1}
           onClick={() => setActivePage(activePage - 1)}
         >
-          ⬅ Previous
+          <GrFormPreviousLink className="pagination__icons" /> Previous
         </button>
         <button
           className="pagination__btn"
           disabled={activePage === totalPages}
           onClick={() => setActivePage(activePage + 1)}
         >
-          ➡ Next
+          <GrFormNextLink className="pagination__icons" /> Next
         </button>
         <button
           className="pagination__btn"
           disabled={activePage === totalPages}
           onClick={() => setActivePage(totalPages)}
         >
-          ⏭ Last
+          <BiLastPage className="pagination__icons" /> Last
         </button>
       </div>
       <p>Showing {beggining === end ? end : `${beggining} - ${end}`}</p>
