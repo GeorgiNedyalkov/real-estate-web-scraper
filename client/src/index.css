@@ -119,6 +119,13 @@ select {
   padding: 5px;
 }
 
+/* Sections */
+#top__section {
+  display: flex;
+  justify-content: space-between;
+  gap: 200px;
+}
+
 /* classes */
 .navbar {
   height: 60px;

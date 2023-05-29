@@ -3,13 +3,13 @@ import { useEffect, useState } from "react";
 import Table from "./components/Table/Table";
 import Stats from "./components/Stats/Stats";
 import Highlights from "./components/Highlights/Highlights";
-import { IoBed } from "react-icons/io5";
-import { BsFillFilterCircleFill } from "react-icons/bs";
 
+import { BsFillFilterCircleFill } from "react-icons/bs";
 import { mockApartments } from "./data/mockData";
 
 import { useFetch } from "./utils/useFetch";
 import { getOneBeds, getTwoBeds, getThreeBeds } from "./api/getApartments";
+
 import {
   calcAverage,
   findMode,
@@ -88,14 +88,20 @@ function App() {
       <div className="wrapper">
         <div className="display">
           <div className="container">
-            <Highlights
-              apartments={apartments}
-              marketCap={marketCap}
-              averageSize={averageSize}
-              averagePrice={averagePrice}
-              averagePricePerSqMeter={averagePricePerSqMeter}
-            />
+            <section id="top__section">
+              <Highlights
+                apartments={apartments}
+                marketCap={marketCap}
+                averageSize={averageSize}
+                averagePrice={averagePrice}
+                averagePricePerSqMeter={averagePricePerSqMeter}
+              />
 
+              <Neighborhood
+                neighborhood={neighborhood}
+                setNeighborhood={setNeighborhood}
+              />
+            </section>
             <Stats
               averageSize={averageSize}
               averagePrice={averagePrice}
@@ -109,24 +115,6 @@ function App() {
             />
 
             {/* <Filters /> */}
-
-            <div className="neighborhood__container">
-              <h2 className="neighborhood">
-                Neighbourhood <span className="highlight">{neighborhood}</span>
-              </h2>
-              <select
-                name="neighborhood"
-                onChange={(e) => setNeighborhood(e.target.value)}
-              >
-                <option value="">Select neighborhood</option>
-                <option value="Sarafovo">Sarafovo</option>
-                <option value="Izgrev">Izgrev</option>
-                <option value="Lazur">Lazur</option>
-                <option value="Slaveikov">Slaveikov</option>
-              </select>
-            </div>
-
-            <h3 className="subheading">Choose apartment type:</h3>
 
             <button
               className={`${
@@ -162,3 +150,23 @@ function App() {
 }
 
 export default App;
+
+const Neighborhood = ({ neighborhood, setNeighborhood }) => {
+  return (
+    <div className="neighborhood__container">
+      <h2 className="neighborhood">
+        Neighbourhood <span className="highlight">{neighborhood}</span>
+      </h2>
+      <select
+        name="neighborhood"
+        onChange={(e) => setNeighborhood(e.target.value)}
+      >
+        <option value="">Select neighborhood</option>
+        <option value="Sarafovo">Sarafovo</option>
+        <option value="Izgrev">Izgrev</option>
+        <option value="Lazur">Lazur</option>
+        <option value="Slaveikov">Slaveikov</option>
+      </select>
+    </div>
+  );
+};
