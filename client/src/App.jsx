@@ -20,10 +20,15 @@ function App() {
   const [neighborhood, setNeighborhood] = useState("Izgrev");
   const [hasFilters, setHasFilters] = useState(false);
   const [completionProgress, setCompletionProgress] = useState("");
+
   const [marketCap, setMarketCap] = useState(0);
   const [averagePrice, setAveragePrice] = useState(0);
   const [averageSize, setAverageSize] = useState(0);
   const [averagePricePerSqMeter, setAveragePricePerSqMeter] = useState(0);
+
+  const [modeSize, setModeSize] = useState(0);
+  const [modePrice, setModePrice] = useState(0);
+  const [modePricePerSqMeter, setModePricePerSqMeter] = useState(0);
 
   const filteredApartments = apartments.filter((a) => {
     if (completionProgress === "") {
@@ -45,9 +50,16 @@ function App() {
     );
   };
 
+  const calcModes = () => {
+    setModePrice(findMode(filteredApartments, "price"));
+    setModeSize(findMode(filteredApartments, "size"));
+    setModePricePerSqMeter(findMode(filteredApartments, "pricePerSqMeter"));
+  };
+
   useEffect(() => {
     calcMarketCapitalization();
     calcAverages();
+    calcModes();
   }, [filteredApartments]);
 
   return (
@@ -70,6 +82,9 @@ function App() {
                 averageSize={averageSize}
                 averagePrice={averagePrice}
                 averagePricePerSqMeter={averagePricePerSqMeter}
+                modeSize={modeSize}
+                modePrice={modePrice}
+                modePricePerSqMeter={modePricePerSqMeter}
               />
 
               {/* <div>
