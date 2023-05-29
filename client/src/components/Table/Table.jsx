@@ -15,6 +15,7 @@ const Table = ({ apartments }) => {
 
   return (
     <>
+      <h2>Properties</h2>
       <table className="propertyTable">
         <thead>
           <tr>

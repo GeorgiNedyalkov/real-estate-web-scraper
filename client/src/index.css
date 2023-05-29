@@ -16,7 +16,6 @@
   --font-color-headings: var(--color-primary-100);
 
   /* Borders */
-  --border: 1px solid var(var(--color-primary));
   --border-table: 1px solid hsla(266, 43%, 48%, 50%);
   --border-radius: 5px;
 
@@ -118,6 +117,7 @@ select {
   color: var(--font-color-base);
   margin: 10px 0px;
   padding: 5px;
+  cursor: pointer;
 }
 
 /* Sections */
@@ -287,22 +287,26 @@ select {
   color: greenyellow;
 }
 
+.filters {
+  margin-bottom: 50px;
+}
+
 /* Buttons */
 .filter__button {
   font-family: "Lato";
+  margin-bottom: 20px;
   width: 100px;
   height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 5px;
-  color: white;
-  background-color: var(--background-elements);
   font-size: 1em;
-  margin-bottom: 10px;
-  cursor: pointer;
+  gap: 10px;
   border: none;
+  color: var(--font-color-base);
   border-radius: var(--border-radius);
+  background-color: var(--background-elements);
+  cursor: pointer;
 }
 
 .filter__button:hover {
@@ -327,10 +331,6 @@ select {
 }
 
 .btn:hover {
-  border: 1px solid var(--color-primary);
-}
-
-.activeBtn {
   border: 1px solid var(--color-primary);
 }
 
@@ -359,7 +359,9 @@ select {
 }
 
 .active {
-  border: 1px solid var(--color-primary);
+  color: var(--color-primary-900);
+  background-color: var(--color-primary);
+  font-weight: 900;
 }
 
 .loader {
