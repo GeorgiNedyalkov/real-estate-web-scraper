@@ -55,6 +55,36 @@ h1 {
   font-size: 2em;
 }
 
+li {
+  font-size: 1.5em;
+  list-style-type: none;
+  color: white;
+}
+
+select {
+  background-color: var(--background-elements);
+  color: var(--font-color-base);
+  padding: 10px;
+  cursor: pointer;
+  margin: 10px auto;
+  border: none;
+  border-radius: var(--border-radius);
+}
+
+select:hover {
+  border: 2px solid var(--color-primary);
+}
+
+
+option {
+  font-family: "Lato";
+  font-weight: bold;
+  background-color: var(--background-elements);
+  color: var(--font-color-base);
+  padding: 2px;
+  margin: 2px;
+}
+
 /* Table */
 table {
   table-layout: fixed;
@@ -95,29 +125,6 @@ td:nth-child(6),
 td:nth-child(7),
 td:nth-child(8) {
   text-align: center;
-}
-
-li {
-  font-size: 1.5em;
-  list-style-type: none;
-  color: white;
-}
-
-option {
-  font-family: "Lato";
-  font-weight: bold;
-  background-color: var(--background-elements);
-  color: var(--font-color-base);
-  padding: 2px;
-  margin: 2px;
-}
-
-select {
-  background-color: var(--background-elements);
-  color: var(--font-color-base);
-  margin: 10px 0px;
-  padding: 5px;
-  cursor: pointer;
 }
 
 /* Sections */
