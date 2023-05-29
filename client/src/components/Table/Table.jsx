@@ -5,7 +5,7 @@ import Pagination from "../Pagination/Pagination";
 const Table = ({ apartments }) => {
   const [activePage, setActivePage] = useState(1);
   const rowsPerPage = 50;
-  const count = apartments.lenth;
+  const count = apartments.length;
   const totalPages = Math.ceil(count / rowsPerPage);
 
   const calculatedRows = apartments.slice(
