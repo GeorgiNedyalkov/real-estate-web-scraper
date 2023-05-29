@@ -98,48 +98,42 @@ function App() {
 
   return (
     <div className="App">
-      <div className="wrapper">
-        <div className="display">
-          <div className="container">
-            <section id="top__section">
-              <Highlights
-                apartments={apartments}
-                marketCap={marketCap}
-                averageSize={averageSize}
-                averagePrice={averagePrice}
-                averagePricePerSqMeter={averagePricePerSqMeter}
-              />
+      <div className="container">
+        <section id="top__section">
+          <Highlights
+            apartments={apartments}
+            marketCap={marketCap}
+            averageSize={averageSize}
+            averagePrice={averagePrice}
+            averagePricePerSqMeter={averagePricePerSqMeter}
+          />
 
-              <Neighborhood
-                neighborhood={neighborhood}
-                onChooseNeighborhood={onChooseNeighborhood}
-              />
-            </section>
-            <Stats
-              averageSize={averageSize}
-              averagePrice={averagePrice}
-              averagePricePerSqMeter={averagePricePerSqMeter}
-              modeSize={modeSize}
-              modePrice={modePrice}
-              modePricePerSqMeter={modePricePerSqMeter}
-              medianPrice={medianPrice}
-              medianSize={medianSize}
-              medianPricePerSqMeters={medianPricePerSqMeters}
-            />
+          <Neighborhood
+            neighborhood={neighborhood}
+            onChooseNeighborhood={onChooseNeighborhood}
+          />
+        </section>
+        <Stats
+          averageSize={averageSize}
+          averagePrice={averagePrice}
+          averagePricePerSqMeter={averagePricePerSqMeter}
+          modeSize={modeSize}
+          modePrice={modePrice}
+          modePricePerSqMeter={modePricePerSqMeter}
+          medianPrice={medianPrice}
+          medianSize={medianSize}
+          medianPricePerSqMeters={medianPricePerSqMeters}
+        />
 
-            {/* <Filters /> */}
+        {/* <Filters /> */}
 
-            <FilterButton onFilter={onFilter} hasFilters={hasFilters} />
+        <FilterButton onFilter={onFilter} hasFilters={hasFilters} />
 
-            {hasFilters && (
-              <Filters
-                onCompletionProgressChanged={onCompletionProgressChanged}
-              />
-            )}
+        {hasFilters && (
+          <Filters onCompletionProgressChanged={onCompletionProgressChanged} />
+        )}
 
-            <Table apartments={filteredApartments} />
-          </div>
-        </div>
+        <Table apartments={filteredApartments} />
       </div>
     </div>
   );

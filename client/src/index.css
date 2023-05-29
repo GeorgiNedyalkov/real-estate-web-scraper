@@ -5,11 +5,14 @@
   --bg-color-dark: hsl(240, 6%, 10%);
   --bg-navbar: hsl(240, 12%, 6%);
   --bg-color: rgb(237, 235, 235);
+
   --color-primary: hsl(266, 43%, 48%);
+  --color-primary-100: hsl(266, 43%, 100%);
   --gray-10: hsl(0, 0%, 11%);
 
   /* Font color */
   --font-color-base: #fefefe;
+  --font-color-headings: var(--color-primary-100);
 
   /* Borders */
   --border: 1px solid lightgray;
@@ -33,26 +36,16 @@ body {
   background-color: var(--bg-color-dark);
 }
 
-h1,
-p,
-li,
-label,
-td,
-th {
-  color: rgb(234, 232, 232);
+ p, li, label, td, th {
+  color: var(--font-color-base);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--font-color-headings);
 }
 
 h1 {
   font-size: 2em;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: rgb(234, 232, 232);
 }
 
 /* Table */
@@ -175,15 +168,6 @@ select {
 }
 
 /* Layout */
-.wrapper {
-  display: flex;
-  gap: 50px;
-}
-
-.display {
-  margin: 0 auto;
-  margin-top: 20px;
-}
 
 .sidebar {
   flex: 2/3;
@@ -242,7 +226,6 @@ select {
 
 /* Statistics */
 .stats {
-  margin: 50px 0px;
   padding: 30px;
   display: flex;
   flex-wrap: wrap;
@@ -352,7 +335,6 @@ select {
   background-color: #fefefe;
   color: var(--color-primary);
   font-weight: 600;
-  
 }
 
 .active {
@@ -365,12 +347,4 @@ select {
   margin: 0 auto;
   align-items: center;
   justify-content: center;
-}
-
-.median {
-  width: 200px;
-  padding: 20px;
-  margin-bottom: 50px;
-  border-radius: var(--border-radius);
-  background-color: var(--background-elements);
 }
