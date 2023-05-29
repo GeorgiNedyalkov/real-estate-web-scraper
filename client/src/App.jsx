@@ -6,6 +6,8 @@ import Highlights from "./components/Highlights/Highlights";
 import { IoBed } from "react-icons/io5";
 import { BsFillFilterCircleFill } from "react-icons/bs";
 
+import { mockApartments } from "./data/mockData";
+
 import { useFetch } from "./utils/useFetch";
 import { getOneBeds, getTwoBeds, getThreeBeds } from "./api/getApartments";
 import {
@@ -17,7 +19,8 @@ import {
 import "./App.css";
 
 function App() {
-  const { apartments, loading, setApartments } = useFetch();
+  // const { apartments, loading, setApartments } = useFetch();
+  const [apartments, setApartments] = useState(mockApartments);
   const [neighborhood, setNeighborhood] = useState("Izgrev");
   const [hasFilters, setHasFilters] = useState(false);
   const [completionProgress, setCompletionProgress] = useState("");
@@ -69,121 +72,91 @@ function App() {
     );
   };
 
+  // if (loading) {
+  //   return <h1 className="loader">Loading...</h1>;
+  // }
+
   useEffect(() => {
     calcMarketCapitalization();
     calcAverages();
     calcModes();
-    // calcMedians();
+    calcMedians();
   }, [filteredApartments]);
 
   return (
     <div className="App">
-      {loading ? (
-        <h1 className="loader">Loading...</h1>
-      ) : (
-        <div className="wrapper">
-          <div className="display">
-            <div className="container">
-              <Highlights
-                apartments={apartments}
-                marketCap={marketCap}
-                averageSize={averageSize}
-                averagePrice={averagePrice}
-                averagePricePerSqMeter={averagePricePerSqMeter}
-              />
+      <div className="wrapper">
+        <div className="display">
+          <div className="container">
+            <Highlights
+              apartments={apartments}
+              marketCap={marketCap}
+              averageSize={averageSize}
+              averagePrice={averagePrice}
+              averagePricePerSqMeter={averagePricePerSqMeter}
+            />
 
-              <Stats
-                averageSize={averageSize}
-                averagePrice={averagePrice}
-                averagePricePerSqMeter={averagePricePerSqMeter}
-                modeSize={modeSize}
-                modePrice={modePrice}
-                modePricePerSqMeter={modePricePerSqMeter}
-                medianPrice={medianPrice}
-                medianSize={medianSize}
-                medianPricePerSqMeters={medianPricePerSqMeters}
-              />
+            <Stats
+              averageSize={averageSize}
+              averagePrice={averagePrice}
+              averagePricePerSqMeter={averagePricePerSqMeter}
+              modeSize={modeSize}
+              modePrice={modePrice}
+              modePricePerSqMeter={modePricePerSqMeter}
+              medianPrice={medianPrice}
+              medianSize={medianSize}
+              medianPricePerSqMeters={medianPricePerSqMeters}
+            />
 
-              {/* <Filters /> */}
+            {/* <Filters /> */}
 
-              <div className="neighborhood__container">
-                <h2 className="neighborhood">
-                  Neighbourhood{" "}
-                  <span className="highlight">{neighborhood}</span>
-                </h2>
+            <div className="neighborhood__container">
+              <h2 className="neighborhood">
+                Neighbourhood <span className="highlight">{neighborhood}</span>
+              </h2>
+              <select
+                name="neighborhood"
+                onChange={(e) => setNeighborhood(e.target.value)}
+              >
+                <option value="">Select neighborhood</option>
+                <option value="Sarafovo">Sarafovo</option>
+                <option value="Izgrev">Izgrev</option>
+                <option value="Lazur">Lazur</option>
+                <option value="Slaveikov">Slaveikov</option>
+              </select>
+            </div>
+
+            <h3 className="subheading">Choose apartment type:</h3>
+
+            <button
+              className={`${
+                hasFilters ? "filter__button active" : "filter__button "
+              }`}
+              onClick={() => setHasFilters(!hasFilters)}
+            >
+              <BsFillFilterCircleFill />
+              Filters
+            </button>
+
+            {hasFilters && (
+              <div className="filters">
+                <h3>Contruction type</h3>
                 <select
-                  name="neighborhood"
-                  onChange={(e) => setNeighborhood(e.target.value)}
+                  name="construction progress"
+                  onChange={(e) => setCompletionProgress(e.target.value)}
                 >
-                  <option value="">Select neighborhood</option>
-                  <option value="Sarafovo">Sarafovo</option>
-                  <option value="Izgrev">Izgrev</option>
-                  <option value="Lazur">Lazur</option>
-                  <option value="Slaveikov">Slaveikov</option>
+                  <option value="">All Properties</option>
+                  <option value="completed">Completed</option>
+                  <option value="construction">In construction</option>
+                  <option value="project">In Project</option>
                 </select>
               </div>
+            )}
 
-              <h3 className="subheading">Choose apartment type:</h3>
-              <div className="apartment__type-btns">
-                <button
-                  className={`btn`}
-                  onClick={() => {
-                    setApartments(getOneBeds());
-                  }}
-                >
-                  <IoBed />
-                  One
-                </button>
-                <button
-                  className="btn"
-                  onClick={() => {
-                    setApartments(getTwoBeds());
-                  }}
-                >
-                  <IoBed />
-                  Two
-                </button>
-                <button
-                  className="btn"
-                  onClick={() => {
-                    setApartments(getThreeBeds());
-                  }}
-                >
-                  <IoBed />
-                  Three
-                </button>
-              </div>
-
-              <button
-                className={`${
-                  hasFilters ? "filter__button active" : "filter__button "
-                }`}
-                onClick={() => setHasFilters(!hasFilters)}
-              >
-                <BsFillFilterCircleFill />
-                Filters
-              </button>
-
-              {hasFilters && (
-                <div className="filters">
-                  <h3>Contruction type</h3>
-                  <select
-                    name="construction progress"
-                    onChange={(e) => setCompletionProgress(e.target.value)}
-                  >
-                    <option value="">All Properties</option>
-                    <option value="completed">Completed</option>
-                    <option value="construction">In construction</option>
-                    <option value="project">In Project</option>
-                  </select>
-                </div>
-              )}
-
-              <Table apartments={filteredApartments} />
-            </div>
+            <Table apartments={filteredApartments} />
           </div>
         </div>
-      )}
+      </div>
     </div>
   );
 }
