@@ -46,6 +46,13 @@ body {
   color: var(--font-color-base);
 }
 
+@media screen and (min-width: 1080px) {
+  .highlights p {
+    line-height: 1.5rem;
+  }
+  
+}
+
 h1, h2, h3, h4, h5, h6 {
 
   color: var(--font-color-headings);
