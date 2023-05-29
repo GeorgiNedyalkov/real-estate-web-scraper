@@ -8,6 +8,7 @@
 
   --color-primary: hsl(266, 43%, 48%);
   --color-primary-100: hsl(266, 43%, 100%);
+  --color-primary-900: hsl(0, 0%, 100%);
   --gray-10: hsl(0, 0%, 11%);
 
   /* Font color */
@@ -15,7 +16,8 @@
   --font-color-headings: var(--color-primary-100);
 
   /* Borders */
-  --border: 1px solid lightgray;
+  --border: 1px solid var(var(--color-primary));
+  --border-table: 1px solid hsla(266, 43%, 48%, 50%);
   --border-radius: 5px;
 
   /* Elements */
@@ -58,7 +60,7 @@ h1 {
 table {
   table-layout: fixed;
   border-collapse: collapse;
-  width: 1080px;
+  width: 100%;
   margin: auto;
 }
 
@@ -85,7 +87,7 @@ td:first-child {
 
 th,
 td {
-  border-bottom: var(--border);
+  border-bottom: var(--border-table);
   padding: 5px 10px;
   padding: 0.5em;
 }
@@ -304,7 +306,7 @@ select {
 }
 
 .filter__button:hover {
-  border: 1px solid var(--color-primary);
+  border: 2px solid var(--color-primary);
 }
 
 .btn {
@@ -336,10 +338,6 @@ select {
   display: flex;
   align-items: center;
   gap: 10px;
-}
-
-.pagination {
-  width: 1000px;
 }
 
 .pagination__btn {
