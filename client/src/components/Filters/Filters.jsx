@@ -1,25 +1,18 @@
 import React from "react";
 
-const Filters = () => {
+const Filters = ({ onCompletionProgressChanged }) => {
   return (
     <div className="filters">
-      <div>
-        <label htmlFor="bedrooms"></label>
-        <input type="number" name="bedrooms" id="bedrooms" />
-      </div>
-
-      <div>
-        <label htmlFor="bedrooms"></label>
-        <input type="number" name="bedrooms" id="bedrooms" />
-      </div>
-      <div>
-        <label htmlFor="bedrooms"></label>
-        <input type="number" name="bedrooms" id="bedrooms" />
-      </div>
-      <div>
-        <label htmlFor="bedrooms"></label>
-        <input type="number" name="bedrooms" id="bedrooms" />
-      </div>
+      <h3>Contruction type</h3>
+      <select
+        name="construction progress"
+        onChange={(e) => onCompletionProgressChanged(e.target.value)}
+      >
+        <option value="">All Properties</option>
+        <option value="completed">Completed</option>
+        <option value="construction">In construction</option>
+        <option value="project">In Project</option>
+      </select>
     </div>
   );
 };

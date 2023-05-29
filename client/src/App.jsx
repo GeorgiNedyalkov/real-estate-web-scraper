@@ -3,12 +3,12 @@ import { useEffect, useState } from "react";
 import Table from "./components/Table/Table";
 import Stats from "./components/Stats/Stats";
 import Highlights from "./components/Highlights/Highlights";
-
-import { BsFillFilterCircleFill } from "react-icons/bs";
-import { mockApartments } from "./data/mockData";
+import Neighborhood from "./components/Neighborhood/Neighborhood";
+import FilterButton from "./components/Filters/FilterButton/FilterButton";
 
 import { useFetch } from "./utils/useFetch";
 import { getOneBeds, getTwoBeds, getThreeBeds } from "./api/getApartments";
+import { mockApartments } from "./data/mockData";
 
 import {
   calcAverage,
@@ -17,6 +17,7 @@ import {
   calcMarketCap,
 } from "./utils/calculations";
 import "./App.css";
+import Filters from "./components/Filters/Filters";
 
 function App() {
   // const { apartments, loading, setApartments } = useFetch();
@@ -72,6 +73,18 @@ function App() {
     );
   };
 
+  const onCompletionProgressChanged = (completionProgress) => {
+    setCompletionProgress(completionProgress);
+  };
+
+  const onChooseNeighborhood = (neighborhood) => {
+    setNeighborhood(neighborhood);
+  };
+
+  const onFilter = () => {
+    setHasFilters(!hasFilters);
+  };
+
   // if (loading) {
   //   return <h1 className="loader">Loading...</h1>;
   // }
@@ -99,7 +112,7 @@ function App() {
 
               <Neighborhood
                 neighborhood={neighborhood}
-                setNeighborhood={setNeighborhood}
+                onChooseNeighborhood={onChooseNeighborhood}
               />
             </section>
             <Stats
@@ -116,29 +129,12 @@ function App() {
 
             {/* <Filters /> */}
 
-            <button
-              className={`${
-                hasFilters ? "filter__button active" : "filter__button "
-              }`}
-              onClick={() => setHasFilters(!hasFilters)}
-            >
-              <BsFillFilterCircleFill />
-              Filters
-            </button>
+            <FilterButton onFilter={onFilter} hasFilters={hasFilters} />
 
             {hasFilters && (
-              <div className="filters">
-                <h3>Contruction type</h3>
-                <select
-                  name="construction progress"
-                  onChange={(e) => setCompletionProgress(e.target.value)}
-                >
-                  <option value="">All Properties</option>
-                  <option value="completed">Completed</option>
-                  <option value="construction">In construction</option>
-                  <option value="project">In Project</option>
-                </select>
-              </div>
+              <Filters
+                onCompletionProgressChanged={onCompletionProgressChanged}
+              />
             )}
 
             <Table apartments={filteredApartments} />
@@ -150,23 +146,3 @@ function App() {
 }
 
 export default App;
-
-const Neighborhood = ({ neighborhood, setNeighborhood }) => {
-  return (
-    <div className="neighborhood__container">
-      <h2 className="neighborhood">
-        Neighbourhood <span className="highlight">{neighborhood}</span>
-      </h2>
-      <select
-        name="neighborhood"
-        onChange={(e) => setNeighborhood(e.target.value)}
-      >
-        <option value="">Select neighborhood</option>
-        <option value="Sarafovo">Sarafovo</option>
-        <option value="Izgrev">Izgrev</option>
-        <option value="Lazur">Lazur</option>
-        <option value="Slaveikov">Slaveikov</option>
-      </select>
-    </div>
-  );
-};
