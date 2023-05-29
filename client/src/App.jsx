@@ -27,9 +27,13 @@ function App() {
   const [averageSize, setAverageSize] = useState(0);
   const [averagePricePerSqMeter, setAveragePricePerSqMeter] = useState(0);
 
-  const [modeSize, setModeSize] = useState(0);
   const [modePrice, setModePrice] = useState(0);
+  const [modeSize, setModeSize] = useState(0);
   const [modePricePerSqMeter, setModePricePerSqMeter] = useState(0);
+
+  const [medianSize, setMedianSize] = useState(0);
+  const [medianPrice, setMedianPrice] = useState(0);
+  const [medianPricePerSqMeters, setMedianPricePerSqMeters] = useState(0);
 
   const filteredApartments = apartments.filter((a) => {
     if (completionProgress === "") {
@@ -57,10 +61,19 @@ function App() {
     setModePricePerSqMeter(findMode(filteredApartments, "pricePerSqMeter"));
   };
 
+  const calcMedians = () => {
+    setMedianPrice(findMedian(filteredApartments, "price"));
+    setMedianSize(findMedian(filteredApartments, "size"));
+    setMedianPricePerSqMeters(
+      findMedian(filteredApartments, "pricePerSqMeter")
+    );
+  };
+
   useEffect(() => {
     calcMarketCapitalization();
     calcAverages();
     calcModes();
+    // calcMedians();
   }, [filteredApartments]);
 
   return (
@@ -86,6 +99,9 @@ function App() {
                 modeSize={modeSize}
                 modePrice={modePrice}
                 modePricePerSqMeter={modePricePerSqMeter}
+                medianPrice={medianPrice}
+                medianSize={medianSize}
+                medianPricePerSqMeters={medianPricePerSqMeters}
               />
 
               {/* <Filters /> */}
