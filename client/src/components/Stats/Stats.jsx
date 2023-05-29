@@ -1,21 +1,12 @@
 import Stat from "./Stat";
 
 const Stats = ({
-<<<<<<< HEAD
   averageSize,
   averagePrice,
   averagePricePerSqMeter,
   modeSize,
   modePrice,
   modePricePerSqMeter,
-=======
-  modePricePerSqMeter,
-  medianPrice,
-  medianSize,
-  averageSize,
-  averagePrice,
-  averagePricePerSqMeter,
->>>>>>> 51f49fb658eb1fb69a6dd45104121aeded8b4ac8
 }) => {
   return (
     <div className="stats">
@@ -30,7 +21,6 @@ const Stats = ({
         label="Average Size"
         percentChange={1}
       />
-<<<<<<< HEAD
       <Stat value={modePrice + " m2"} label="Mode Price" percentChange={1} />
       <Stat
         value={modePricePerSqMeter + " m2"}
@@ -38,13 +28,6 @@ const Stats = ({
         percentChange={1}
       />
       <Stat value={modeSize + " m2"} label="Mode Size" percentChange={1} />
-=======
-      <Stat
-        value={modePricePerSqMeter + " m2"}
-        label="Mode"
-        percentChange={1}
-      />
->>>>>>> 51f49fb658eb1fb69a6dd45104121aeded8b4ac8
     </div>
   );
 };

@@ -39,13 +39,6 @@ function App() {
     }
   });
 
-  const modePricePerSqMeter = findMode(
-    filteredApartments,
-    "pricePerSquareMeter"
-  );
-
-  useEffect(() => {
-    setMarketCap(calcMarketCap(filteredApartments));
   const calcMarketCapitalization = () => {
     setMarketCap(calcMarketCap(filteredApartments));
   };
@@ -94,29 +87,6 @@ function App() {
                 modePrice={modePrice}
                 modePricePerSqMeter={modePricePerSqMeter}
               />
-
-              <div>
-                <h2>Mode</h2>
-
-                <p>
-                  The mode of the sizes is{" "}
-                  {findMode(filteredApartments, "pricePerSqMeter")}
-                </p>
-              </div>
-
-              <div className="median">
-                <h2>Median</h2>
-                <p>
-                  The median size is {findMedian(filteredApartments, "size")}
-                </p>
-                <p>
-                  The median price is {findMedian(filteredApartments, "price")}.
-                </p>
-                <p>
-                  The median price per sq.m. is{" "}
-                  {findMedian(filteredApartments, "pricePerSqMeter")}
-                </p>
-              </div>
 
               {/* <Filters /> */}
 
