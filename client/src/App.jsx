@@ -33,20 +33,6 @@ function App() {
     }
   });
 
-  const calcAverageSize = () => {
-    setAverageSize(calcAverage("size", filteredApartments));
-  };
-
-  const calcAveragePrice = () => {
-    setAveragePrice(calcAverage("price", filteredApartments));
-  };
-
-  const calcAveragePricePerSqMeter = () => {
-    setAveragePricePerSqMeter(
-      calcAverage("pricePerSqMeter", filteredApartments)
-    );
-  };
-
   const calcMarketCapitalization = () => {
     setMarketCap(calcMarketCap(filteredApartments));
   };
