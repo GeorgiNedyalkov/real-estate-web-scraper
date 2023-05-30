@@ -16,6 +16,12 @@ const ApartmentSchema = new mongoose.Schema(
     constructionType: String,
     completionProgress: String,
     floor: Number,
+    priceHistory: [
+      {
+        price: { type: Number, required: true },
+        date: { type: Date, default: Date.now() },
+      },
+    ],
   },
   { timestamps: true }
 );
