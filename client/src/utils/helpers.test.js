@@ -5,7 +5,6 @@ describe("filterRows", () => {
   it.todo("filters rows based on given key", () => {});
 });
 // Tests with strings
-// console.log(filterRows(mockApartments, { title: "Арена" }));
 // console.log(filterRows(mockApartments, { completionProgress: "construction" }));
 // console.log(filterRows(mockApartments, { constructionType: "brick" }));
 

@@ -1,3 +1,5 @@
+import { mockApartments } from "../data/mockData.js";
+
 export default function filterRows(rows, filters) {
   // if the filters are empty return the initial array
   if (Object.keys(filters).length === 0) return rows;
