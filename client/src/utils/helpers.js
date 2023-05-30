@@ -26,3 +26,15 @@ export default function filterRows(rows, filters) {
     });
   });
 }
+
+console.log(
+  filterRows(mockApartments, {
+    title: "",
+    bedrooms: "",
+    bathrooms: "",
+    size: "105",
+    price: "",
+    completionProgress: "",
+    constructionType: "",
+  })
+);

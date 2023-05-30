@@ -90,13 +90,18 @@ function App() {
     }
   });
 
-  // const applyFilters = (filters) => {
-  //   console.log(`applying filters`);
-  //   console.log(filters);
-  //   // const filteredApartments = filterRows(apartments, filters);
+  const applyFilters = (filters) => {
+    // remove empty filters
+    for (let filter in filters) {
+      if (filters[filter] === "") {
+        delete filters[filter];
+      }
+    }
 
-  //   console.log(filteredApartments);
-  // };
+    const filteredApartments = filterRows(apartments, filters);
+
+    setApartments(filteredApartments);
+  };
 
   useEffect(() => {
     calcMarketCapitalization();

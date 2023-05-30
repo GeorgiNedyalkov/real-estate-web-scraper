@@ -6,8 +6,6 @@ const INITIAL_FORM_VALUES = {
   bathrooms: "",
   size: "",
   price: "",
-  completionProgress: "",
-  constructionType: "",
 };
 
 const Filters = ({ onCompletionProgressChanged, applyFilters }) => {
@@ -85,7 +83,7 @@ const Filters = ({ onCompletionProgressChanged, applyFilters }) => {
           />
         </div>
         <div>
-          <label htmlFor="size">Price</label>
+          <label htmlFor="price">Price</label>
           <input
             value={formValues.price}
             onChange={onFormChange}
@@ -93,17 +91,6 @@ const Filters = ({ onCompletionProgressChanged, applyFilters }) => {
             name="price"
             id="price"
             placeholder="Price"
-          />
-        </div>
-        <div>
-          <label htmlFor="size">Size</label>
-          <input
-            value={formValues.size}
-            onChange={onFormChange}
-            type="number"
-            name="size"
-            id="size"
-            placeholder="Size"
           />
         </div>
         <div>

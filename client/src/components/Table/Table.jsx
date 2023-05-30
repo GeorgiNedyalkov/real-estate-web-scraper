@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { columns } from "../../data/columns";
 import Pagination from "../Pagination/Pagination";
 
 const Table = ({ apartments }) => {
@@ -28,6 +27,7 @@ const Table = ({ apartments }) => {
           {calculatedRows.map((apartment, index) => {
             const {
               title,
+              bedrooms,
               price,
               size,
               pricePerSqMeter,
@@ -41,6 +41,7 @@ const Table = ({ apartments }) => {
               <tr key={id}>
                 <td>{index + 1}</td>
                 <td className="left">{title.slice(0, 25)}...</td>
+                <td>{bedrooms}</td>
                 <td>€{price.toLocaleString()}</td>
                 <td>{size}</td>
                 <td>{Number(pricePerSqMeter)}</td>
@@ -64,3 +65,15 @@ const Table = ({ apartments }) => {
 };
 
 export default Table;
+
+const columns = [
+  { assessor: "id", label: "ID" },
+  { assessor: "title", label: "Title" },
+  { assessor: "bedrooms", label: "Bedrooms" },
+  { assessor: "price", label: "Price" },
+  { assessor: "size", label: "Size" },
+  { assessor: "pricePerSqMeter", label: "Price / sq.m." },
+  { assessor: "completionProgress", label: "Completion Progress" },
+  { assessor: "constructionType", label: "Construction Type" },
+  { assessor: "floor", label: "Floor" },
+];
