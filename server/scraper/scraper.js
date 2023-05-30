@@ -80,7 +80,8 @@ async function getAllApartments(url) {
     }
   }
 
-  // console.table(apartments);
+  console.log(apartments.length);
+  console.table(apartments);
 
   return apartments;
 }

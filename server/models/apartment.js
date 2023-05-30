@@ -14,9 +14,8 @@ const ApartmentSchema = new mongoose.Schema(
     pricePerSqMeter: requiredNumber,
     yearBuilt: Number,
     constructionType: String,
-    completionPhase: String,
+    completionProgress: String,
     floor: Number,
-    description: String,
   },
   { timestamps: true }
 );

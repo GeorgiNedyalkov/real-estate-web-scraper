@@ -30,6 +30,7 @@ app.use(express.static("./public"));
 
 // routes
 app.use("/api/v1/apartments", apartments);
+app.use("/api/v1/neighborhood");
 app.use("/", home);
 
 app.get("/api/v1/oneBedroomApartments", async (req, res) => {
