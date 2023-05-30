@@ -1,15 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, version } from "react";
 
 import Table from "./components/Table/Table";
 import Stats from "./components/Stats/Stats";
 import Highlights from "./components/Highlights/Highlights";
 import Neighborhood from "./components/Neighborhood/Neighborhood";
 import FilterButton from "./components/Filters/FilterButton/FilterButton";
+import Filters from "./components/Filters/Filters";
 
 import { useFetch } from "./utils/useFetch";
 import { getOneBeds, getTwoBeds, getThreeBeds } from "./api/getApartments";
 import { mockApartments } from "./data/mockData";
 
+import filterRows from "./utils/helpers";
 import {
   calcAverage,
   findMode,
@@ -17,7 +19,6 @@ import {
   calcMarketCap,
 } from "./utils/calculations";
 import "./App.css";
-import Filters from "./components/Filters/Filters";
 
 function App() {
   // const { apartments, loading, setApartments } = useFetch();
@@ -38,14 +39,6 @@ function App() {
   const [medianSize, setMedianSize] = useState(0);
   const [medianPrice, setMedianPrice] = useState(0);
   const [medianPricePerSqMeters, setMedianPricePerSqMeters] = useState(0);
-
-  const filteredApartments = apartments.filter((a) => {
-    if (completionProgress === "") {
-      return apartments;
-    } else {
-      return a.completionProgress === completionProgress;
-    }
-  });
 
   const calcMarketCapitalization = () => {
     setMarketCap(calcMarketCap(filteredApartments));
@@ -89,6 +82,22 @@ function App() {
   //   return <h1 className="loader">Loading...</h1>;
   // }
 
+  const filteredApartments = apartments.filter((a) => {
+    if (completionProgress === "") {
+      return apartments;
+    } else {
+      return a.completionProgress === completionProgress;
+    }
+  });
+
+  // const applyFilters = (filters) => {
+  //   console.log(`applying filters`);
+  //   console.log(filters);
+  //   // const filteredApartments = filterRows(apartments, filters);
+
+  //   console.log(filteredApartments);
+  // };
+
   useEffect(() => {
     calcMarketCapitalization();
     calcAverages();
@@ -130,7 +139,10 @@ function App() {
         <FilterButton onFilter={onFilter} hasFilters={hasFilters} />
 
         {hasFilters && (
-          <Filters onCompletionProgressChanged={onCompletionProgressChanged} />
+          <Filters
+            onCompletionProgressChanged={onCompletionProgressChanged}
+            applyFilters={applyFilters}
+          />
         )}
 
         <Table apartments={filteredApartments} />

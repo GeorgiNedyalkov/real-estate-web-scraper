@@ -1,6 +1,8 @@
 export const mockApartments = [
   {
     id: 1,
+    bedrooms: 1,
+    bathrooms: 1,
     completionProgress: "construction",
     constructionType: "brick",
     floor: 7,
@@ -11,6 +13,8 @@ export const mockApartments = [
   },
   {
     id: 2,
+    bedrooms: 1,
+    bathrooms: 1,
     completionProgress: "project",
     constructionType: "brick",
     floor: 1,
@@ -21,6 +25,8 @@ export const mockApartments = [
   },
   {
     id: 3,
+    bedrooms: 1,
+    bathrooms: 1,
     completionProgress: "construction",
     constructionType: "brick",
     floor: 3,
@@ -31,6 +37,8 @@ export const mockApartments = [
   },
   {
     id: 4,
+    bedrooms: 1,
+    bathrooms: 1,
     completionProgress: "project",
     constructionType: "brick",
     floor: 4,
@@ -41,6 +49,8 @@ export const mockApartments = [
   },
   {
     id: 5,
+    bedrooms: 1,
+    bathrooms: 1,
     completionProgress: "construction",
     constructionType: "brick",
     floor: 1,
@@ -51,6 +61,8 @@ export const mockApartments = [
   },
   {
     id: 6,
+    bedrooms: 1,
+    bathrooms: 1,
     completionProgress: "construction",
     constructionType: "brick",
     floor: 1,
@@ -62,6 +74,8 @@ export const mockApartments = [
   },
   {
     id: 7,
+    bedrooms: 1,
+    bathrooms: 1,
     completionProgress: "construction",
     constructionType: "brick",
     floor: 9,
@@ -72,6 +86,8 @@ export const mockApartments = [
   },
   {
     id: 8,
+    bedrooms: 3,
+    bathrooms: 1,
     completionProgress: "construction",
     constructionType: "brick",
     floor: 1.1,
@@ -82,6 +98,8 @@ export const mockApartments = [
   },
   {
     id: 9,
+    bedrooms: 1,
+    bathrooms: 1,
     completionProgress: "construction",
     constructionType: "brick",
     floor: 1.1,
@@ -92,6 +110,8 @@ export const mockApartments = [
   },
   {
     id: 10,
+    bedrooms: 2,
+    bathrooms: 1,
     completionProgress: "project",
     constructionType: "brick",
     floor: 2,
@@ -103,6 +123,8 @@ export const mockApartments = [
   },
   {
     id: 11,
+    bedrooms: 3,
+    bathrooms: 1,
     completionProgress: "construction",
     constructionType: "brick",
     floor: 5,
@@ -113,6 +135,8 @@ export const mockApartments = [
   },
   {
     id: 12,
+    bedrooms: 2,
+    bathrooms: 1,
     completionProgress: "completed",
     constructionType: "brick",
     floor: null,
@@ -123,6 +147,8 @@ export const mockApartments = [
   },
   {
     id: 13,
+    bedrooms: 1,
+    bathrooms: 1,
     completionProgress: "completed",
     constructionType: "brick",
     floor: null,
