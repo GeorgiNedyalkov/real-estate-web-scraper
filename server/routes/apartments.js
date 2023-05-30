@@ -10,17 +10,12 @@ const {
 } = require("../controllers/apartments");
 
 const {
-  getAllApartmentsIzgrev,
-  getAllApartmentsSarafovo,
-  getAllApartmentsLazur,
-  getAllApartmentsSlaveikov,
+  getAllNeighborhoodApartments,
 } = require("../controllers/priceController");
 
 // get all apartments based on neighborhood
-router.route("/izgrev").get(getAllApartmentsIzgrev);
-router.route("/lazur").get(getAllApartmentsLazur);
-router.route("/sarafovo").get(getAllApartmentsSarafovo);
-router.route("/slaveikov").get(getAllApartmentsSlaveikov);
+
+// CRUD Apartment operations
 
 router.route("/").get(getAllApartments).post(createApartment);
 router

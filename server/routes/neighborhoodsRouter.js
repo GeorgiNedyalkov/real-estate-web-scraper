@@ -1,8 +1,6 @@
-const express = require("express");
-const router = express.Router();
+const router = require("express").Router();
+const neighborhoodsController = require("../controllers/neighborhoodsController.js");
 
-const neighborhoodsController = require("../controllers/");
-
-router.use(neighborhoodsController);
+router.use("/", neighborhoodsController);
 
 module.exports = router;

@@ -50,19 +50,6 @@ async function getApartments(url) {
   return [...topListings, ...vipListings];
 }
 
-async function getTotalPages(url) {
-  const { data } = await axios.get(url);
-  const $ = load(data);
-
-  // get total pages
-  const totalListings = $(".obiavicnt").contents().text().split(" ")[0];
-  return Math.ceil(Number(totalListings) / 30);
-}
-
-async function getFirstPage(url) {
-  return await getApartments(url);
-}
-
 // get all pages
 async function getAllApartments(url) {
   let apartments = [];
@@ -80,8 +67,8 @@ async function getAllApartments(url) {
     }
   }
 
-  console.log(apartments.length);
-  console.table(apartments);
+  // console.log(apartments.length);
+  // console.table(apartments);
 
   return apartments;
 }
@@ -91,3 +78,16 @@ getAllApartments(
 );
 
 module.exports = getAllApartments;
+
+async function getTotalPages(url) {
+  const { data } = await axios.get(url);
+  const $ = load(data);
+
+  // get total pages
+  const totalListings = $(".obiavicnt").contents().text().split(" ")[0];
+  return Math.ceil(Number(totalListings) / 30);
+}
+
+async function getFirstPage(url) {
+  return await getApartments(url);
+}

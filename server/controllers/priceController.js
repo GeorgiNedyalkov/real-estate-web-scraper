@@ -1,9 +1,15 @@
-const getAllApartments = require("../scraper/scraper");
-const Apartment = require("../models/apartment");
+const getAllNeighborhoodApartments = async (req, res) => {
+  let neighborhoodData = [];
+  let scraperData;
 
-const getAllApartmentsIzgrev = async (req, res) => {
   try {
-    const scraperData = await getAllApartments(izgrev);
+    for (let neighborhood in neighborhoods) {
+      // scraperData = await getAllApartments(neighborhoods[neighborhood]);
+      // neighborhoodData.push(scraperData);
+
+      console.log(neighborhoods[neighborhood]);
+    }
+
     // TODO: save scraped data to database
 
     // scraperData.forEach(async (apartment) => {
@@ -18,8 +24,8 @@ const getAllApartmentsIzgrev = async (req, res) => {
     // });
 
     return res.status(200).json({
-      count: scraperData.length,
-      result: scraperData,
+      // count: scraperData.length,
+      // result: scraperData,
     });
   } catch (error) {
     console.error(error);
@@ -30,8 +36,5 @@ const getAllApartmentsIzgrev = async (req, res) => {
 };
 
 module.exports = {
-  getAllApartmentsIzgrev,
-  getAllApartmentsLazur,
-  getAllApartmentsSarafovo,
-  getAllApartmentsSlaveikov,
+  getAllNeighborhoodApartments,
 };
