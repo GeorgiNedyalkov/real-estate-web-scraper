@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
 const requiredNumber = {
-  type: Number,
-  required: true,
+  type: String,
+  required: Number,
 };
 
 const ApartmentSchema = new mongoose.Schema(
@@ -12,10 +12,21 @@ const ApartmentSchema = new mongoose.Schema(
     size: requiredNumber,
     price: requiredNumber,
     pricePerSqMeter: requiredNumber,
-    yearBuilt: Number,
-    constructionType: String,
-    completionProgress: String,
-    floor: Number,
+    // yearBuilt: Number,
+    constructionType: {
+      type: String,
+      enum: {
+        values: ["Тухла", "Панел", "ЕПК/ПК"],
+      },
+    },
+    completionProgress: {
+      type: String,
+      enum: {
+        values: ["project", "construction", "completed"],
+      },
+    },
+    // floor: Number,
+    latfloor: Boolean,
     priceHistory: [
       {
         price: { type: Number, required: true },
@@ -25,6 +36,21 @@ const ApartmentSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+// Apartments without listing prices should be removed
+// Apartments with floor or size as null should be eliminated
+
+ApartmentSchema.pre("save", (next) => {
+  if (this.floor === null || this.size === null) {
+    next(
+      new Error(
+        "Apartment has either floor or size values of null, skip saving."
+      )
+    );
+  } else {
+    next();
+  }
+});
 
 const Apartment = mongoose.model("Apartments", ApartmentSchema);
 
