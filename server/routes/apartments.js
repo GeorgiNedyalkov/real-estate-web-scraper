@@ -7,15 +7,7 @@ const {
   getApartment,
   updateApartment,
   deleteApartment,
-} = require("../controllers/apartments");
-
-const {
-  getAllNeighborhoodApartments,
-} = require("../controllers/priceController");
-
-// get all apartments based on neighborhood
-
-// CRUD Apartment operations
+} = require("../controllers/apartmentsController");
 
 router.route("/").get(getAllApartments).post(createApartment);
 router

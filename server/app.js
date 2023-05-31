@@ -8,10 +8,8 @@ const apartments = require("./routes/apartments");
 const neighborhoods = require("./routes/neighborhoodsRouter");
 const connectDB = require("./db/connect");
 
-// scraper
 const notFound = require("./middlewares/not-found");
 const errorHandler = require("./middlewares/error-handler");
-const getAllApartments = require("./scraper/scraper");
 
 const app = express();
 

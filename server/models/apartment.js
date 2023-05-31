@@ -2,10 +2,10 @@ const mongoose = require("mongoose");
 
 const requiredNumber = {
   type: String,
-  required: Number,
+  required: true,
 };
 
-const ApartmentSchema = new mongoose.Schema(
+const apartmentSchema = new mongoose.Schema(
   {
     title: String,
     type: String,
@@ -37,10 +37,7 @@ const ApartmentSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// Apartments without listing prices should be removed
-// Apartments with floor or size as null should be eliminated
-
-ApartmentSchema.pre("save", (next) => {
+apartmentSchema.pre("save", (next) => {
   if (this.floor === null || this.size === null) {
     next(
       new Error(
@@ -52,7 +49,7 @@ ApartmentSchema.pre("save", (next) => {
   }
 });
 
-const Apartment = mongoose.model("Apartments", ApartmentSchema);
+const Apartment = mongoose.model("Apartments", apartmentSchema);
 
 module.exports = Apartment;
 

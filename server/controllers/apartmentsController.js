@@ -1,4 +1,4 @@
-const Apartment = require("../models/apartment");
+const Apartment = require("../models/Apartment");
 const asyncWrapper = require("../middlewares/asyncWrapper");
 const { createCustomError } = require("../errors/custom-error");
 
