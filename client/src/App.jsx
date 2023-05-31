@@ -23,8 +23,6 @@ import "./App.css";
 const izgrevUrl = "http://localhost:3001/api/v1/neighborhoods/izgrev";
 
 function App() {
-  console.log("I am rendering");
-
   const { apartments, loading, setApartments } = useFetch(izgrevUrl);
   const [neighborhood, setNeighborhood] = useState("Izgrev");
   const [hasFilters, setHasFilters] = useState(false);

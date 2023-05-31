@@ -10,7 +10,6 @@ export const useFetch = (url) => {
       const res = await fetch(url);
       const data = await res.json();
       const apartments = data.neighborhood[0].apartments;
-      console.log(apartments);
       setApartments(apartments);
       setLoading(false);
     } catch (error) {
