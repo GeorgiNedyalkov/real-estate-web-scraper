@@ -6,7 +6,6 @@ require("dotenv").config();
 
 const apartments = require("./routes/apartments");
 const neighborhoods = require("./routes/neighborhoodsRouter");
-const home = require("./routes/home");
 const connectDB = require("./db/connect");
 
 // scraper
@@ -31,7 +30,6 @@ app.use(express.static("./public"));
 // routes
 app.use("/api/v1/apartments", apartments);
 app.use("/api/v1/neighborhoods", neighborhoods);
-app.use("/", home);
 
 // middlewares
 app.use(notFound);
