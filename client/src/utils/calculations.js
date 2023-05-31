@@ -1,10 +1,19 @@
 export function calcMarketCap(apartments) {
-  const marketCap = apartments.reduce((prev, next) => prev + next.price, 0);
+  const marketCap = apartments.reduce(
+    (prev, next) => prev + Number(next.price),
+    0
+  );
   return marketCap.toLocaleString();
 }
 
 export function calcAverage(key, objArr) {
-  const total = objArr.reduce((prev, next) => prev + next[key], 0);
+  console.log(key);
+  const total = objArr.reduce(
+    (prev, next) => Number(prev) + Number(next[key]),
+    0
+  );
+
+  console.log(total);
   return total / objArr.length;
 }
 
@@ -34,10 +43,8 @@ export function findMode(objArr, key) {
 
 export function findMedian(objArr, key) {
   let midIndex;
-
-  const sortedArr = objArr.sort((a, b) => b[key] - a[key]);
+  const sortedArr = objArr.sort((a, b) => Number(b[key]) - Number(a[key]));
   const count = objArr.length;
-
   if (count % 2 == 0) {
     midIndex = objArr.length / 2;
   } else {

@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
 
-const oneBedsUrl = "http://localhost:3001/api/v1/oneBedroomApartments";
-const twoBedUrl = "http://localhost:3001/api/v1/twoBedroomApartments";
-
-export const useFetch = () => {
+export const useFetch = (url) => {
   const [apartments, setApartments] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -12,7 +9,9 @@ export const useFetch = () => {
     try {
       const res = await fetch(url);
       const data = await res.json();
-      setApartments(data.result);
+      const apartments = data.neighborhood[0].apartments;
+      console.log(apartments);
+      setApartments(apartments);
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -20,7 +19,7 @@ export const useFetch = () => {
   };
 
   useEffect(() => {
-    getApartments(twoBedUrl);
+    getApartments(url);
   }, []);
 
   return { apartments, loading, setApartments, setLoading };

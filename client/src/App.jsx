@@ -1,4 +1,4 @@
-import { useEffect, useState, version } from "react";
+import { useEffect, useState } from "react";
 
 import Table from "./components/Table/Table";
 import Stats from "./components/Stats/Stats";
@@ -20,9 +20,12 @@ import {
 } from "./utils/calculations";
 import "./App.css";
 
+const izgrevUrl = "http://localhost:3001/api/v1/neighborhoods/izgrev";
+
 function App() {
-  // const { apartments, loading, setApartments } = useFetch();
-  const [apartments, setApartments] = useState(mockApartments);
+  console.log("I am rendering");
+
+  const { apartments, loading, setApartments } = useFetch(izgrevUrl);
   const [neighborhood, setNeighborhood] = useState("Izgrev");
   const [hasFilters, setHasFilters] = useState(false);
   const [completionProgress, setCompletionProgress] = useState("");
@@ -39,6 +42,14 @@ function App() {
   const [medianSize, setMedianSize] = useState(0);
   const [medianPrice, setMedianPrice] = useState(0);
   const [medianPricePerSqMeters, setMedianPricePerSqMeters] = useState(0);
+
+  const filteredApartments = apartments.filter((a) => {
+    if (completionProgress === "") {
+      return apartments;
+    } else {
+      return a.completionProgress === completionProgress;
+    }
+  });
 
   const calcMarketCapitalization = () => {
     setMarketCap(calcMarketCap(filteredApartments));
@@ -78,18 +89,6 @@ function App() {
     setHasFilters(!hasFilters);
   };
 
-  // if (loading) {
-  //   return <h1 className="loader">Loading...</h1>;
-  // }
-
-  const filteredApartments = apartments.filter((a) => {
-    if (completionProgress === "") {
-      return apartments;
-    } else {
-      return a.completionProgress === completionProgress;
-    }
-  });
-
   const applyFilters = (filters) => {
     // remove empty filters
     for (let filter in filters) {
@@ -104,54 +103,60 @@ function App() {
   };
 
   useEffect(() => {
-    calcMarketCapitalization();
-    calcAverages();
-    calcModes();
-    calcMedians();
+    if (!loading) {
+      calcMarketCapitalization();
+      calcAverages();
+      calcMedians();
+      calcModes();
+    }
   }, [filteredApartments]);
 
   return (
     <div className="App">
-      <div className="container">
-        <section id="top__section">
-          <Highlights
-            apartments={apartments}
-            marketCap={marketCap}
+      {loading ? (
+        <h1 className="loader">Loading...</h1>
+      ) : (
+        <div className="container">
+          <section id="top__section">
+            <Highlights
+              apartments={apartments}
+              marketCap={marketCap}
+              averageSize={averageSize}
+              averagePrice={averagePrice}
+              averagePricePerSqMeter={averagePricePerSqMeter}
+            />
+
+            <Neighborhood
+              neighborhood={neighborhood}
+              onChooseNeighborhood={onChooseNeighborhood}
+            />
+          </section>
+          <Stats
             averageSize={averageSize}
             averagePrice={averagePrice}
             averagePricePerSqMeter={averagePricePerSqMeter}
+            modeSize={modeSize}
+            modePrice={modePrice}
+            modePricePerSqMeter={modePricePerSqMeter}
+            medianPrice={medianPrice}
+            medianSize={medianSize}
+            medianPricePerSqMeters={medianPricePerSqMeters}
           />
 
-          <Neighborhood
-            neighborhood={neighborhood}
-            onChooseNeighborhood={onChooseNeighborhood}
-          />
-        </section>
-        <Stats
-          averageSize={averageSize}
-          averagePrice={averagePrice}
-          averagePricePerSqMeter={averagePricePerSqMeter}
-          modeSize={modeSize}
-          modePrice={modePrice}
-          modePricePerSqMeter={modePricePerSqMeter}
-          medianPrice={medianPrice}
-          medianSize={medianSize}
-          medianPricePerSqMeters={medianPricePerSqMeters}
-        />
+          {/* <Filters /> */}
 
-        {/* <Filters /> */}
+          <FilterButton onFilter={onFilter} hasFilters={hasFilters} />
 
-        <FilterButton onFilter={onFilter} hasFilters={hasFilters} />
+          {hasFilters && (
+            <Filters
+              onCompletionProgressChanged={onCompletionProgressChanged}
+              applyFilters={applyFilters}
+            />
+          )}
 
-        {hasFilters && (
-          <Filters
-            onCompletionProgressChanged={onCompletionProgressChanged}
-            applyFilters={applyFilters}
-          />
-        )}
-
-        <Table apartments={filteredApartments} />
-      </div>
+          <Table apartments={filteredApartments} />
+        </div>
+      )}
     </div>
   );
 }
