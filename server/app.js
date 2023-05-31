@@ -4,7 +4,7 @@ const helmet = require("helmet");
 const cors = require("cors");
 require("dotenv").config();
 
-const apartments = require("./routes/apartments");
+const apartments = require("./routes/apartmentsRouter");
 const neighborhoods = require("./routes/neighborhoodsRouter");
 const connectDB = require("./db/connect");
 
