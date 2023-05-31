@@ -16,7 +16,7 @@ const apartmentSchema = new mongoose.Schema(
     constructionType: {
       type: String,
       enum: {
-        values: ["Тухла", "Панел", "ЕПК/ПК"],
+        values: ["Тухла", "Панел", "ЕПК/ПК", "Гредоред"],
       },
     },
     completionProgress: {
