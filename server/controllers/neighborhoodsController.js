@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
+
 const Apartment = require("../models/Apartment");
 const Neighborhood = require("../models/Neighborhood");
-
-const getAllApartments = require("../scraper/scraper");
 const neighborhoods = require("../constants/neighborhoods");
+const getAllApartments = require("../scraper/scraper");
+const filterData = require("../utils/filterData");
 
 router.get("/", async (req, res) => {
   try {
@@ -35,17 +36,11 @@ router.get("/:neighborhoodId/scraper", async (req, res) => {
       neighborhoods[neighborhood]
     );
 
-    for (let apartment of neighborhoodsdata) {
-      const newApartment = await Apartment.create({
-        title: apartment.title,
-        type: apartment.type,
-        price: apartment.price,
-        pricepersqmeter: apartment.pricepersqmeter,
-        constructiontype: apartment.constructiontype,
-        completionprogress: apartment.completionprogress,
-        floor: apartment.floor,
-        ...apartment,
-      });
+    const [filteredApartments, skippedApartments] =
+      filterData(neighborhoodsdata);
+
+    for (let apartment of filteredApartments) {
+      const newApartment = await Apartment.create(apartment);
 
       addedApartments.push(newApartment);
     }
@@ -54,6 +49,7 @@ router.get("/:neighborhoodId/scraper", async (req, res) => {
       name: neighborhood,
       numberOfProperties: addedApartments.length,
       apartments: addedApartments,
+      skippedApartments: skippedApartments,
     });
 
     res.status(200).json({ newNeighborhood });

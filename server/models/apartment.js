@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const requiredNumber = {
-  type: String,
+  type: Number,
   required: true,
 };
 
@@ -12,6 +12,7 @@ const apartmentSchema = new mongoose.Schema(
     size: requiredNumber,
     price: requiredNumber,
     pricePerSqMeter: requiredNumber,
+    // floor: Number,
     // yearBuilt: Number,
     constructionType: {
       type: String,
@@ -25,7 +26,6 @@ const apartmentSchema = new mongoose.Schema(
         values: ["project", "construction", "completed"],
       },
     },
-    // floor: Number,
     latfloor: Boolean,
     priceHistory: [
       {
@@ -36,18 +36,6 @@ const apartmentSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-
-apartmentSchema.pre("save", (next) => {
-  if (this.floor === null || this.size === null) {
-    next(
-      new Error(
-        "Apartment has either floor or size values of null, skip saving."
-      )
-    );
-  } else {
-    next();
-  }
-});
 
 const Apartment = mongoose.model("Apartments", apartmentSchema);
 

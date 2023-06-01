@@ -1,4 +1,4 @@
-const parseInput = require("./utils");
+const parseInput = require("./parseInput");
 const axios = require("axios");
 const { load } = require("cheerio");
 

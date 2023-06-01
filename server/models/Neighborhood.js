@@ -8,6 +8,7 @@ const neighborhoodSchema = new mongoose.Schema({
   },
   numberOfProperties: Number,
   apartments: [Apartment.schema],
+  skippedApartments: [],
 });
 
 const Neighborhood = mongoose.model("Neighborhood", neighborhoodSchema);
