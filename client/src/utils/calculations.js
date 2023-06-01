@@ -15,7 +15,7 @@ export function calcAverage(key, objArr) {
   return total / objArr.length;
 }
 
-export function findMode(objArr, key) {
+export function findMode(key, objArr) {
   // we need to take into consideration two or more modes
   const mode = {};
   let max = 0;
@@ -39,7 +39,7 @@ export function findMode(objArr, key) {
   return max;
 }
 
-export function findMedian(objArr, key) {
+export function findMedian(key, objArr) {
   let midIndex;
   const sortedArr = objArr.sort((a, b) => Number(b[key]) - Number(a[key]));
   const count = objArr.length;

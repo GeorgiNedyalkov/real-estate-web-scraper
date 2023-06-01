@@ -56,13 +56,13 @@ function App() {
     setAveragePricePerSqMeter(
       calcAverage("pricePerSqMeter", filteredApartments)
     );
-    setModePrice(findMode(filteredApartments, "price"));
-    setModeSize(findMode(filteredApartments, "size"));
-    setModePricePerSqMeter(findMode(filteredApartments, "pricePerSqMeter"));
-    setMedianPrice(findMedian(filteredApartments, "price"));
-    setMedianSize(findMedian(filteredApartments, "size"));
+    setModePrice(findMode("price", filteredApartments));
+    setModeSize(findMode("size", filteredApartments));
+    setModePricePerSqMeter(findMode("pricePerSqMeter", filteredApartments));
+    setMedianPrice(findMedian("price", filteredApartments));
+    setMedianSize(findMedian("size", filteredApartments));
     setMedianPricePerSqMeters(
-      findMedian(filteredApartments, "pricePerSqMeter")
+      findMedian("pricePerSqMeter", filteredApartments)
     );
   };
 
