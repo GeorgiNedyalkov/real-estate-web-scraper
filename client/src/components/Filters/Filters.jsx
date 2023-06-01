@@ -6,9 +6,10 @@ const INITIAL_FORM_VALUES = {
   bathrooms: "",
   size: "",
   price: "",
+  completionProgress: "",
 };
 
-const Filters = ({ onCompletionProgressChanged, applyFilters }) => {
+const Filters = ({ applyFilters }) => {
   const [formValues, setFormValues] = useState(INITIAL_FORM_VALUES);
 
   const onFormChange = (e) => {
@@ -27,10 +28,7 @@ const Filters = ({ onCompletionProgressChanged, applyFilters }) => {
   return (
     <div className="filters">
       <h3>Contruction type</h3>
-      <select
-        name="construction progress"
-        onChange={(e) => onCompletionProgressChanged(e.target.value)}
-      >
+      <select name="construction progress" onChange={(e) => onFormChange}>
         <option value="">All Properties</option>
         <option value="completed">Completed</option>
         <option value="construction">In construction</option>

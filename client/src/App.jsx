@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 
 import Table from "./components/Table/Table";
 import Stats from "./components/Stats/Stats";
@@ -8,14 +8,6 @@ import FilterButton from "./components/Filters/FilterButton/FilterButton";
 import Filters from "./components/Filters/Filters";
 
 import { useFetch } from "./utils/useFetch";
-import {
-  getOneBeds,
-  getTwoBeds,
-  getThreeBeds,
-  getApartments,
-} from "./api/getApartments";
-import { mockApartments } from "./data/mockData";
-
 import filterRows from "./utils/helpers";
 import {
   calcAverage,
@@ -28,10 +20,9 @@ import "./App.css";
 const apiURL = "http://localhost:3001/api/v1/neighborhoods";
 
 function App() {
-  const { apartments, loading, setUrl } = useFetch();
+  const { apartments, loading, setUrl, setApartments } = useFetch();
   const [neighborhood, setNeighborhood] = useState("izgrev");
   const [hasFilters, setHasFilters] = useState(false);
-  const [completionProgress, setCompletionProgress] = useState("");
 
   const [marketCap, setMarketCap] = useState(0);
   const [averagePrice, setAveragePrice] = useState(0);
@@ -59,10 +50,6 @@ function App() {
     setMedianPricePerSqMeters(findMedian("pricePerSqMeter", apartments));
   };
 
-  const onCompletionProgressChanged = (completionProgress) => {
-    setCompletionProgress(completionProgress);
-  };
-
   const onNeighborhoodChange = (neighborhood) => {
     setNeighborhood(neighborhood);
     setUrl(`${apiURL}/${neighborhood}`);
@@ -73,13 +60,6 @@ function App() {
   };
 
   const applyFilters = (filters) => {
-    // remove empty filters
-    for (let filter in filters) {
-      if (filters[filter] === "") {
-        delete filters[filter];
-      }
-    }
-
     const apartments = filterRows(apartments, filters);
 
     setApartments(apartments);
@@ -127,12 +107,7 @@ function App() {
 
           <FilterButton onFilter={onFilter} hasFilters={hasFilters} />
 
-          {hasFilters && (
-            <Filters
-              onCompletionProgressChanged={onCompletionProgressChanged}
-              applyFilters={applyFilters}
-            />
-          )}
+          {hasFilters && <Filters applyFilters={applyFilters} />}
 
           <Table apartments={apartments} />
         </div>
