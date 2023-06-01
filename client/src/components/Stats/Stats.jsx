@@ -13,31 +13,49 @@ const Stats = ({
 }) => {
   return (
     <div className="stats">
-      <Stat value={averagePrice} label="Average Price" percentChange={4.5} />
       <Stat
-        value={averagePricePerSqMeter}
+        value={"€ " + Number(averagePrice.toFixed(0)).toLocaleString()}
+        label="Average Price"
+        percentChange={4.5}
+      />
+      <Stat
+        value={
+          "€ " +
+          Number(averagePricePerSqMeter.toFixed(0)).toLocaleString() +
+          " m2"
+        }
         label="Average Price Per Sq.m."
         percentChange={-4.5}
       />
       <Stat
-        value={averageSize.toFixed(2) + " m2"}
+        value={Math.round(averageSize) + " m2"}
         label="Average Size"
         percentChange={1}
       />
-      <Stat value={modePrice + " m2"} label="Mode Price" percentChange={1} />
       <Stat
-        value={modePricePerSqMeter + " m2"}
+        value={"€ " + Number(modePrice.toFixed(0)).toLocaleString()}
+        label="Mode Price"
+        percentChange={1}
+      />
+      <Stat
+        value={
+          "€ " + Number(modePricePerSqMeter.toFixed(0)).toLocaleString() + " m2"
+        }
         label="Mode Price Per Sq.m."
         percentChange={1}
       />
       <Stat value={modeSize + " m2"} label="Mode Size" percentChange={1} />
       <Stat
-        value={medianPrice + " m2"}
+        value={"€ " + Number(medianPrice.toFixed(0)).toLocaleString()}
         label="Median Price"
         percentChange={1}
       />
       <Stat
-        value={medianPricePerSqMeters + " m2"}
+        value={
+          "€ " +
+          Number(medianPricePerSqMeters.toFixed(0)).toLocaleString() +
+          " m2"
+        }
         label="Median Price Per Sq.m."
         percentChange={1}
       />
