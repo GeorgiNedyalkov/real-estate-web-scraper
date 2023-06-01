@@ -1,21 +1,22 @@
 const cron = require("node-cron");
-const fetch = require("node-fetch");
+const axios = require("axios");
+const neighborhoods = require("../constants/neighborhoods");
+const apiURL = "http://localhost:3001/api/v1/neighborhoods";
 
-console.log("Scheduler is on");
+let initialScraping = true;
 
-const apiURL = "http://localhost:3001/api/v1/neighborhoods/";
+const startScheduler = async () => {
+  console.log("Scheduler is on");
 
-cron.schedule("* * * * *", async () => {
-  console.log(`A minute has passed`);
-  try {
-    console.log(`trying to scrape`);
-    await fetch(`${apiURL}/lazur/scraper`);
-    console.log("Sucessfull scraping");
-  } catch (error) {
-    console.log(`Error has occured during scraping: ${error.message}`);
+  if (initialScraping) {
+    console.log("there has been initial scraping");
+
+    initialScraping = false;
+  } else {
+    cron.schedule("*/10 * * * *", async () => {
+      console.log("Updating prices");
+    });
   }
-});
+};
 
-cron.schedule("0,30 * * * *", () => {
-  console.log(`-----------------------`);
-});
+startScheduler();

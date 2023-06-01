@@ -4,6 +4,7 @@ const helmet = require("helmet");
 const cors = require("cors");
 require("dotenv").config();
 
+require("./scraper/scheduler");
 const apartments = require("./routes/apartmentsRouter");
 const neighborhoods = require("./routes/neighborhoodsRouter");
 const connectDB = require("./db/connect");
@@ -38,8 +39,9 @@ const port = process.env.PORT || 3001;
 const start = async () => {
   try {
     await connectDB(process.env.MONGO_URI);
+    console.log("Database connected");
     app.listen(port, () => {
-      console.log(`App is listening on port: ${port}`);
+      console.log(`App is listening on port: ${port}...`);
     });
   } catch (error) {
     console.log(error);
