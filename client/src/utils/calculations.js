@@ -7,13 +7,11 @@ export function calcMarketCap(apartments) {
 }
 
 export function calcAverage(key, objArr) {
-  console.log(key);
   const total = objArr.reduce(
     (prev, next) => Number(prev) + Number(next[key]),
     0
   );
 
-  console.log(total);
   return total / objArr.length;
 }
 
