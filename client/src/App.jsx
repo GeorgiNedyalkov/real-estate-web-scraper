@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 
 import Table from "./components/Table/Table";
 import Stats from "./components/Stats/Stats";
@@ -8,7 +8,12 @@ import FilterButton from "./components/Filters/FilterButton/FilterButton";
 import Filters from "./components/Filters/Filters";
 
 import { useFetch } from "./utils/useFetch";
-import { getOneBeds, getTwoBeds, getThreeBeds } from "./api/getApartments";
+import {
+  getOneBeds,
+  getTwoBeds,
+  getThreeBeds,
+  getApartments,
+} from "./api/getApartments";
 import { mockApartments } from "./data/mockData";
 
 import filterRows from "./utils/helpers";
@@ -20,11 +25,11 @@ import {
 } from "./utils/calculations";
 import "./App.css";
 
-const izgrevUrl = "http://localhost:3001/api/v1/neighborhoods/lazur";
+const apiURL = "http://localhost:3001/api/v1/neighborhoods";
 
 function App() {
-  const { apartments, loading, setApartments } = useFetch(izgrevUrl);
-  const [neighborhood, setNeighborhood] = useState("Izgrev");
+  const { apartments, loading, setUrl } = useFetch();
+  const [neighborhood, setNeighborhood] = useState("izgrev");
   const [hasFilters, setHasFilters] = useState(false);
   const [completionProgress, setCompletionProgress] = useState("");
 
@@ -41,37 +46,26 @@ function App() {
   const [medianPrice, setMedianPrice] = useState(0);
   const [medianPricePerSqMeters, setMedianPricePerSqMeters] = useState(0);
 
-  const filteredApartments = apartments.filter((a) => {
-    if (completionProgress === "") {
-      return apartments;
-    } else {
-      return a.completionProgress === completionProgress;
-    }
-  });
-
   const calcStatistic = () => {
-    setMarketCap(calcMarketCap(filteredApartments));
-    setAverageSize(calcAverage("size", filteredApartments));
-    setAveragePrice(calcAverage("price", filteredApartments));
-    setAveragePricePerSqMeter(
-      calcAverage("pricePerSqMeter", filteredApartments)
-    );
-    setModePrice(findMode("price", filteredApartments));
-    setModeSize(findMode("size", filteredApartments));
-    setModePricePerSqMeter(findMode("pricePerSqMeter", filteredApartments));
-    setMedianPrice(findMedian("price", filteredApartments));
-    setMedianSize(findMedian("size", filteredApartments));
-    setMedianPricePerSqMeters(
-      findMedian("pricePerSqMeter", filteredApartments)
-    );
+    setMarketCap(calcMarketCap(apartments));
+    setAverageSize(calcAverage("size", apartments));
+    setAveragePrice(calcAverage("price", apartments));
+    setAveragePricePerSqMeter(calcAverage("pricePerSqMeter", apartments));
+    setModePrice(findMode("price", apartments));
+    setModeSize(findMode("size", apartments));
+    setModePricePerSqMeter(findMode("pricePerSqMeter", apartments));
+    setMedianPrice(findMedian("price", apartments));
+    setMedianSize(findMedian("size", apartments));
+    setMedianPricePerSqMeters(findMedian("pricePerSqMeter", apartments));
   };
 
   const onCompletionProgressChanged = (completionProgress) => {
     setCompletionProgress(completionProgress);
   };
 
-  const onChooseNeighborhood = (neighborhood) => {
+  const onNeighborhoodChange = (neighborhood) => {
     setNeighborhood(neighborhood);
+    setUrl(`${apiURL}/${neighborhood}`);
   };
 
   const onFilter = () => {
@@ -86,16 +80,16 @@ function App() {
       }
     }
 
-    const filteredApartments = filterRows(apartments, filters);
+    const apartments = filterRows(apartments, filters);
 
-    setApartments(filteredApartments);
+    setApartments(apartments);
   };
 
   useEffect(() => {
     if (!loading) {
       calcStatistic();
     }
-  }, [filteredApartments]);
+  }, [apartments]);
 
   return (
     <div className="App">
@@ -114,7 +108,7 @@ function App() {
 
             <Neighborhood
               neighborhood={neighborhood}
-              onChooseNeighborhood={onChooseNeighborhood}
+              onNeighborhoodChange={onNeighborhoodChange}
             />
           </section>
           <Stats
@@ -140,7 +134,7 @@ function App() {
             />
           )}
 
-          <Table apartments={filteredApartments} />
+          <Table apartments={apartments} />
         </div>
       )}
     </div>

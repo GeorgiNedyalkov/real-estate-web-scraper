@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 
-export const useFetch = (url) => {
+const apiURL = "http://localhost:3001/api/v1/neighborhoods/izgrev";
+
+export const useFetch = (initialURL = apiURL) => {
   const [apartments, setApartments] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [url, setUrl] = useState(initialURL);
 
   const getApartments = async (url) => {
     setLoading(true);
@@ -19,7 +22,7 @@ export const useFetch = (url) => {
 
   useEffect(() => {
     getApartments(url);
-  }, []);
+  }, [url]);
 
-  return { apartments, loading, setApartments, setLoading };
+  return { apartments, loading, setUrl };
 };

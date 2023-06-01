@@ -1,4 +1,4 @@
-const Neighborhood = ({ neighborhood, onChooseNeighborhood }) => {
+const Neighborhood = ({ neighborhood, onNeighborhoodChange }) => {
   return (
     <div className="neighborhood__container">
       <h2 className="neighborhood">
@@ -6,13 +6,13 @@ const Neighborhood = ({ neighborhood, onChooseNeighborhood }) => {
       </h2>
       <select
         name="neighborhood"
-        onChange={(e) => onChooseNeighborhood(e.target.value)}
+        onChange={(e) => onNeighborhoodChange(e.target.value)}
       >
         <option value="">Select neighborhood</option>
-        <option value="Sarafovo">Sarafovo</option>
-        <option value="Izgrev">Izgrev</option>
-        <option value="Lazur">Lazur</option>
-        <option value="Slaveikov">Slaveikov</option>
+        <option value="sarafovo">Sarafovo</option>
+        <option value="izgrev">Izgrev</option>
+        <option value="lazur">Lazur</option>
+        <option value="slaveikov">Slaveikov</option>
       </select>
     </div>
   );
