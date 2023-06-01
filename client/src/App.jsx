@@ -20,7 +20,7 @@ import {
 } from "./utils/calculations";
 import "./App.css";
 
-const izgrevUrl = "http://localhost:3001/api/v1/neighborhoods/izgrev";
+const izgrevUrl = "http://localhost:3001/api/v1/neighborhoods/lazur";
 
 function App() {
   const { apartments, loading, setApartments } = useFetch(izgrevUrl);
@@ -49,25 +49,16 @@ function App() {
     }
   });
 
-  const calcMarketCapitalization = () => {
+  const calcStatistic = () => {
     setMarketCap(calcMarketCap(filteredApartments));
-  };
-
-  const calcAverages = () => {
     setAverageSize(calcAverage("size", filteredApartments));
     setAveragePrice(calcAverage("price", filteredApartments));
     setAveragePricePerSqMeter(
       calcAverage("pricePerSqMeter", filteredApartments)
     );
-  };
-
-  const calcModes = () => {
     setModePrice(findMode(filteredApartments, "price"));
     setModeSize(findMode(filteredApartments, "size"));
     setModePricePerSqMeter(findMode(filteredApartments, "pricePerSqMeter"));
-  };
-
-  const calcMedians = () => {
     setMedianPrice(findMedian(filteredApartments, "price"));
     setMedianSize(findMedian(filteredApartments, "size"));
     setMedianPricePerSqMeters(
@@ -102,10 +93,7 @@ function App() {
 
   useEffect(() => {
     if (!loading) {
-      calcMarketCapitalization();
-      calcAverages();
-      calcMedians();
-      calcModes();
+      calcStatistic();
     }
   }, [filteredApartments]);
 
