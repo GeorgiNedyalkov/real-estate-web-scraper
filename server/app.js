@@ -4,7 +4,6 @@ const helmet = require("helmet");
 const cors = require("cors");
 require("dotenv").config();
 
-require("./scraper/scheduler");
 const apartments = require("./routes/apartmentsRouter");
 const neighborhoods = require("./routes/neighborhoodsRouter");
 const connectDB = require("./db/connect");
@@ -23,7 +22,7 @@ app.use(
     origin: process.env.CORS_ORIGIN,
   })
 );
-// Serve Static Files
+// serve static Files
 app.use(express.static("./public"));
 
 // routes

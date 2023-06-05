@@ -32,7 +32,7 @@ console.log(
     title: "",
     bedrooms: "",
     bathrooms: "",
-    size: "105",
+    size: "",
     price: "",
     completionProgress: "",
     constructionType: "",

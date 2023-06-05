@@ -67,9 +67,6 @@ async function getAllApartments(url) {
     }
   }
 
-  // console.log(apartments.length);
-  // console.table(apartments);
-
   return apartments;
 }
 

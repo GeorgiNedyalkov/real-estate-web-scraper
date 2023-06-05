@@ -13,5 +13,3 @@ const getData = async () => {
     }
   }
 };
-
-getData().then(() => console.log("Initial Scraping has been completed"));

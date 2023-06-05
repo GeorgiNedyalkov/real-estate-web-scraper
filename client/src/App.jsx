@@ -7,7 +7,7 @@ import Neighborhood from "./components/Neighborhood/Neighborhood";
 import FilterButton from "./components/Filters/FilterButton/FilterButton";
 import Filters from "./components/Filters/Filters";
 
-import { useFetch } from "./utils/useFetch";
+import { useFetch } from "./hooks/useFetch";
 import filterRows from "./utils/helpers";
 import {
   calcAverage,
@@ -16,8 +16,6 @@ import {
   calcMarketCap,
 } from "./utils/calculations";
 import "./App.css";
-
-const apiURL = "http://localhost:3001/api/v1/neighborhoods";
 
 function App() {
   const { apartments, loading, setUrl, setApartments } = useFetch();
