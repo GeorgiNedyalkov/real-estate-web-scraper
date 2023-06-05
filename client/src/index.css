@@ -406,3 +406,8 @@ td:nth-child(8) {
   align-items: center;
   justify-content: center;
 }
+
+#search {
+  margin-bottom: 20px;
+
+}

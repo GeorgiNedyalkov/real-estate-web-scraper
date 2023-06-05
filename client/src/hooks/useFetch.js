@@ -31,5 +31,5 @@ export const useFetch = (initialURL = apiURL) => {
       });
   }, [url]);
 
-  return { apartments, loading, setUrl };
+  return { apartments, loading, setUrl, setApartments };
 };
