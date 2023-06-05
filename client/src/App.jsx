@@ -97,7 +97,7 @@ function App() {
         <div className="container">
           <section id="top__section">
             <Highlights
-              apartments={apartments}
+              apartments={filteredApartments}
               marketCap={marketCap}
               averageSize={averageSize}
               averagePrice={averagePrice}
