@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 import Table from "./components/Table/Table";
 import Stats from "./components/Stats/Stats";
@@ -72,9 +72,10 @@ function App() {
     setApartments(apartments);
   };
 
-  const onSearchChange = (e) => {
-    setSearch(e.target.value);
-  };
+  const onSearchChange = useCallback(
+    (e) => setSearch(e.target.value),
+    [setSearch]
+  );
 
   const filteredApartments = useMemo(() => {
     return apartments.filter((apartment) =>
