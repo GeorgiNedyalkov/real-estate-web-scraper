@@ -22,7 +22,6 @@ function App() {
   const { apartments, loading, setUrl, setApartments } = useFetch();
   const [neighborhood, setNeighborhood] = useState("izgrev");
   const [hasFilters, setHasFilters] = useState(false);
-
   const [medianSize, setMedianSize] = useState(0);
   const [medianPrice, setMedianPrice] = useState(0);
   const [medianPricePerSqMeters, setMedianPricePerSqMeters] = useState(0);
