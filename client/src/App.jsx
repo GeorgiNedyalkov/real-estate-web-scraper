@@ -22,31 +22,33 @@ function App() {
   const { apartments, loading, setUrl, setApartments } = useFetch();
   const [neighborhood, setNeighborhood] = useState("izgrev");
   const [hasFilters, setHasFilters] = useState(false);
-  const [averagePrice, setAveragePrice] = useState(0);
-  const [averageSize, setAverageSize] = useState(0);
-  const [averagePricePerSqMeter, setAveragePricePerSqMeter] = useState(0);
-  const [modePrice, setModePrice] = useState(0);
-  const [modeSize, setModeSize] = useState(0);
-  const [modePricePerSqMeter, setModePricePerSqMeter] = useState(0);
+
   const [medianSize, setMedianSize] = useState(0);
   const [medianPrice, setMedianPrice] = useState(0);
   const [medianPricePerSqMeters, setMedianPricePerSqMeters] = useState(0);
-
   const [search, setSearch] = useState("");
+
+  const filteredApartments = useMemo(() => {
+    return apartments.filter((apartment) =>
+      apartment.title.toLowerCase().includes(search.toLowerCase())
+    );
+  }, [search, apartments]);
+
+  const modePrice = findMode("price", filteredApartments);
+  const modeSize = findMode("size", filteredApartments);
+  const modePricePerSqMeter = findMode("pricePerSqMeter", filteredApartments);
+  const averageSize = calcAverage("size", filteredApartments);
+  const averagePrice = calcAverage("price", filteredApartments);
+  const averagePricePerSqMeter = calcAverage(
+    "pricePerSqMeter",
+    filteredApartments
+  );
 
   const calcStatistic = () => {
     if (filteredApartments.length === 0) {
       return apartments;
     }
 
-    setAverageSize(calcAverage("size", filteredApartments));
-    setAveragePrice(calcAverage("price", filteredApartments));
-    setAveragePricePerSqMeter(
-      calcAverage("pricePerSqMeter", filteredApartments)
-    );
-    setModePrice(findMode("price", filteredApartments));
-    setModeSize(findMode("size", filteredApartments));
-    setModePricePerSqMeter(findMode("pricePerSqMeter", filteredApartments));
     setMedianPrice(findMedian("price", filteredApartments));
     setMedianSize(findMedian("size", filteredApartments));
     setMedianPricePerSqMeters(
@@ -73,12 +75,6 @@ function App() {
     (e) => setSearch(e.target.value),
     [setSearch]
   );
-
-  const filteredApartments = useMemo(() => {
-    return apartments.filter((apartment) =>
-      apartment.title.toLowerCase().includes(search.toLowerCase())
-    );
-  }, [search, apartments]);
 
   useEffect(() => {
     if (!loading) {
