@@ -25,29 +25,17 @@ const Table = ({ apartments }) => {
         </thead>
         <tbody>
           {calculatedRows.map((apartment, index) => {
-            const {
-              title,
-              bedrooms,
-              price,
-              size,
-              pricePerSqMeter,
-              id,
-              constructionType,
-              floor,
-              completionProgress,
-            } = apartment;
-
             return (
-              <tr key={id}>
+              <tr key={apartment._id}>
                 <td>{index + 1}</td>
-                <td className="left">{title.slice(0, 25)}...</td>
-                <td>{bedrooms}</td>
-                <td>€{price.toLocaleString()}</td>
-                <td>{size}</td>
-                <td>{Number(pricePerSqMeter)}</td>
-                <td>{completionProgress}</td>
-                <td>{constructionType}</td>
-                <td>{floor}</td>
+                <td className="left">{apartment.title.slice(0, 25)}...</td>
+                <td>{apartment.bedrooms}</td>
+                <td>€{apartment.price.toLocaleString()}</td>
+                <td>{apartment.size}</td>
+                <td>{Number(apartment.pricePerSqMeter)}</td>
+                <td>{apartment.completionProgress}</td>
+                <td>{apartment.constructionType}</td>
+                <td>{apartment.floor}</td>
               </tr>
             );
           })}
