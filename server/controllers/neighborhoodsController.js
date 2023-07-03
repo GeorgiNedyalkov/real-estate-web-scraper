@@ -27,6 +27,7 @@ router.get("/:neighborhoodId", async (req, res) => {
   }
 });
 
+// Add authorization middleware
 router.get("/:neighborhoodId/scraper", async (req, res) => {
   const neighborhood = req.params.neighborhoodId;
   const addedApartments = [];

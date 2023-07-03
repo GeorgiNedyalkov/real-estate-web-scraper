@@ -23,7 +23,6 @@ function App() {
   const [neighborhood, setNeighborhood] = useState("izgrev");
   const [hasFilters, setHasFilters] = useState(false);
 
-  const [marketCap, setMarketCap] = useState(0);
   const [averagePrice, setAveragePrice] = useState(0);
   const [averageSize, setAverageSize] = useState(0);
   const [averagePricePerSqMeter, setAveragePricePerSqMeter] = useState(0);
@@ -41,7 +40,6 @@ function App() {
       return apartments;
     }
 
-    setMarketCap(calcMarketCap(filteredApartments));
     setAverageSize(calcAverage("size", filteredApartments));
     setAveragePrice(calcAverage("price", filteredApartments));
     setAveragePricePerSqMeter(
@@ -88,6 +86,11 @@ function App() {
       calcStatistic();
     }
   }, [filteredApartments]);
+
+  const marketCap = useMemo(
+    () => calcMarketCap(filteredApartments),
+    [filteredApartments]
+  );
 
   return (
     <div className="App">
