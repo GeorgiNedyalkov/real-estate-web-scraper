@@ -11,124 +11,126 @@ import SearchBar from "./components/SearchBar/SearchBar";
 import { useFetch } from "./hooks/useFetch";
 import filterRows from "./utils/helpers";
 import {
-  calcAverage,
-  findMode,
-  findMedian,
-  calcMarketCap,
+    calcAverage,
+    findMode,
+    findMedian,
+    calcMarketCap,
 } from "./utils/calculations";
 import "./App.css";
 
+const neighborhoodURL = "http://localhost:3001/api/v1/neighborhoods";
+
 function App() {
-  const { apartments, loading, setUrl, setApartments } = useFetch();
-  const [neighborhood, setNeighborhood] = useState("izgrev");
-  const [hasFilters, setHasFilters] = useState(false);
-  const [medianSize, setMedianSize] = useState(0);
-  const [medianPrice, setMedianPrice] = useState(0);
-  const [medianPricePerSqMeters, setMedianPricePerSqMeters] = useState(0);
-  const [search, setSearch] = useState("");
+    const { apartments, loading, setUrl, setApartments } = useFetch();
+    const [neighborhood, setNeighborhood] = useState("izgrev");
+    const [hasFilters, setHasFilters] = useState(false);
+    const [medianSize, setMedianSize] = useState(0);
+    const [medianPrice, setMedianPrice] = useState(0);
+    const [medianPricePerSqMeters, setMedianPricePerSqMeters] = useState(0);
+    const [search, setSearch] = useState("");
 
-  const filteredApartments = useMemo(() => {
-    return apartments.filter((apartment) =>
-      apartment.title.toLowerCase().includes(search.toLowerCase())
+    const filteredApartments = useMemo(() => {
+        return apartments.filter((apartment) =>
+            apartment.title.toLowerCase().includes(search.toLowerCase())
+        );
+    }, [search, apartments]);
+
+    const modePrice = findMode("price", filteredApartments);
+    const modeSize = findMode("size", filteredApartments);
+    const modePricePerSqMeter = findMode("pricePerSqMeter", filteredApartments);
+    const averageSize = calcAverage("size", filteredApartments);
+    const averagePrice = calcAverage("price", filteredApartments);
+    const averagePricePerSqMeter = calcAverage(
+        "pricePerSqMeter",
+        filteredApartments
     );
-  }, [search, apartments]);
 
-  const modePrice = findMode("price", filteredApartments);
-  const modeSize = findMode("size", filteredApartments);
-  const modePricePerSqMeter = findMode("pricePerSqMeter", filteredApartments);
-  const averageSize = calcAverage("size", filteredApartments);
-  const averagePrice = calcAverage("price", filteredApartments);
-  const averagePricePerSqMeter = calcAverage(
-    "pricePerSqMeter",
-    filteredApartments
-  );
+    const calcStatistic = () => {
+        if (filteredApartments.length === 0) {
+            return apartments;
+        }
 
-  const calcStatistic = () => {
-    if (filteredApartments.length === 0) {
-      return apartments;
-    }
+        setMedianPrice(findMedian("price", filteredApartments));
+        setMedianSize(findMedian("size", filteredApartments));
+        setMedianPricePerSqMeters(
+            findMedian("pricePerSqMeter", filteredApartments)
+        );
+    };
 
-    setMedianPrice(findMedian("price", filteredApartments));
-    setMedianSize(findMedian("size", filteredApartments));
-    setMedianPricePerSqMeters(
-      findMedian("pricePerSqMeter", filteredApartments)
+    const onNeighborhoodChange = (neighborhood) => {
+        setNeighborhood(neighborhood);
+        setUrl(`${neighborhoodURL}/${neighborhood}`);
+    };
+
+    const onFilter = () => {
+        setHasFilters(!hasFilters);
+    };
+
+    const applyFilters = (filters) => {
+        const apartments = filterRows(apartments, filters);
+
+        setApartments(apartments);
+    };
+
+    const onSearchChange = useCallback(
+        (e) => setSearch(e.target.value),
+        [setSearch]
     );
-  };
 
-  const onNeighborhoodChange = (neighborhood) => {
-    setNeighborhood(neighborhood);
-    setUrl(`${apiURL}/${neighborhood}`);
-  };
+    useEffect(() => {
+        if (!loading) {
+            calcStatistic();
+        }
+    }, [filteredApartments]);
 
-  const onFilter = () => {
-    setHasFilters(!hasFilters);
-  };
+    const marketCap = useMemo(
+        () => calcMarketCap(filteredApartments),
+        [filteredApartments]
+    );
 
-  const applyFilters = (filters) => {
-    const apartments = filterRows(apartments, filters);
+    if (loading) return <h1 className="loader">Loading...</h1>;
 
-    setApartments(apartments);
-  };
+    return (
+        <div className="App">
+            <div className="container">
+                <section id="top__section">
+                    <Highlights
+                        apartments={filteredApartments}
+                        marketCap={marketCap}
+                        averageSize={averageSize}
+                        averagePrice={averagePrice}
+                        averagePricePerSqMeter={averagePricePerSqMeter}
+                    />
 
-  const onSearchChange = useCallback(
-    (e) => setSearch(e.target.value),
-    [setSearch]
-  );
+                    <Neighborhood
+                        neighborhood={neighborhood}
+                        onNeighborhoodChange={onNeighborhoodChange}
+                    />
+                </section>
+                <Stats
+                    averageSize={averageSize}
+                    averagePrice={averagePrice}
+                    averagePricePerSqMeter={averagePricePerSqMeter}
+                    modeSize={modeSize}
+                    modePrice={modePrice}
+                    modePricePerSqMeter={modePricePerSqMeter}
+                    medianPrice={medianPrice}
+                    medianSize={medianSize}
+                    medianPricePerSqMeters={medianPricePerSqMeters}
+                />
 
-  useEffect(() => {
-    if (!loading) {
-      calcStatistic();
-    }
-  }, [filteredApartments]);
+                {/* <Filters /> */}
 
-  const marketCap = useMemo(
-    () => calcMarketCap(filteredApartments),
-    [filteredApartments]
-  );
+                <FilterButton onFilter={onFilter} hasFilters={hasFilters} />
 
-  if (loading) return <h1 className="loader">Loading...</h1>;
+                {hasFilters && <Filters applyFilters={applyFilters} />}
 
-  return (
-    <div className="App">
-      <div className="container">
-        <section id="top__section">
-          <Highlights
-            apartments={filteredApartments}
-            marketCap={marketCap}
-            averageSize={averageSize}
-            averagePrice={averagePrice}
-            averagePricePerSqMeter={averagePricePerSqMeter}
-          />
+                <SearchBar search={search} onSearchChange={onSearchChange} />
 
-          <Neighborhood
-            neighborhood={neighborhood}
-            onNeighborhoodChange={onNeighborhoodChange}
-          />
-        </section>
-        <Stats
-          averageSize={averageSize}
-          averagePrice={averagePrice}
-          averagePricePerSqMeter={averagePricePerSqMeter}
-          modeSize={modeSize}
-          modePrice={modePrice}
-          modePricePerSqMeter={modePricePerSqMeter}
-          medianPrice={medianPrice}
-          medianSize={medianSize}
-          medianPricePerSqMeters={medianPricePerSqMeters}
-        />
-
-        {/* <Filters /> */}
-
-        {/* <FilterButton onFilter={onFilter} hasFilters={hasFilters} />
-
-          {hasFilters && <Filters applyFilters={applyFilters} />} */}
-
-        <SearchBar search={search} onSearchChange={onSearchChange} />
-
-        <Table apartments={filteredApartments} />
-      </div>
-    </div>
-  );
+                <Table apartments={filteredApartments} />
+            </div>
+        </div>
+    );
 }
 
 export default App;

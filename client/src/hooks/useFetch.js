@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const apiURL = "http://localhost:3001/api/v1/neighborhoods/izgrev";
+const apiURL = "http://localhost:3001/api/v1/neighborhoods/centar";
 
 export const useFetch = (initialURL = apiURL) => {
     const [apartments, setApartments] = useState([]);
