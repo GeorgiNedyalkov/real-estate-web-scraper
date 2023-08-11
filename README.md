@@ -1,39 +1,114 @@
-# Real Estate Market Pulse
+<p align="center">
+  <a href="" rel="noopener">
+ <img width=200px height=200px src="https://i.imgur.com/6wj0hh6.jpg" alt="Project logo"></a>
+</p>
 
-Web Scraper for Real Estate Market Prices.
+<h3 align="center">Real Estate Market Pulse</h3>
+
+---
+
+<p align="center"> 
+The web scrapper collects data from listing channels, stores the information in a mongoDB database using an express REST API and displays the information in a frontend app developed with React.
+    <br> 
+</p>
+
+## 📝 Table of Contents
+
+-   [About](#about)
+-   [Getting Started](#getting_started)
+-   [Deployment](#deployment)
+-   [Usage](#usage)
+-   [Built Using](#built_using)
+-   [TODO](../TODO.md)
+-   [Contributing](../CONTRIBUTING.md)
+-   [Authors](#authors)
+-   [Acknowledgments](#acknowledgement)
 
 ## About
 
-Collects information for apartments from listing channels for Izgrev neighborhood.
-The scraper collects data for apartment listings from [alo.bg](www.alo.bg), sorts the apartments based on price, performs calclulations for average price, size and price per sqare meters, and displays the information in easy to read format.
+The scraper collects data for apartment listings from listing channels, sorts the apartments based on price, performs calclulations for average price, size and price per sqare meters, and displays the information in easy to read format.
+
+## Getting Started
+
+### Installation
+
+1. Clone this repo
+
+```
+git clone https://github.com/GeorgiNedyalkov/real-estate-web-scraper.git
+```
+
+2. Change to the project directory
+
+```
+cd real-estate-web-scraper
+```
+
+3. Change to server directory
+
+```
+cd server
+```
+
+4. Install dependencies
+
+```
+npm install
+```
+
+5. Run the server in a development environment
+
+```
+npm run dev
+```
+
+6. Change directoy to client
+
+```
+cd ../client
+```
+
+7. Install dependencies using yarn
+
+```
+yarn
+```
+
+8. Start a local server
+
+```
+yarn dev
+```
+
+The project should be running on http://127.0.0.1:5173/
 
 ## MVP specification
 
-- Scrapes the information for one bedroom properties only.
-- Displays the properties in a table.
-- Calculates key statistics for simple view.
-- Filter functionality based on different parameters.
-- Backend API for the storage of the data and updating every day.
+-   Scrapes the information for one bedroom properties only.
+-   Displays the properties in a table.
+-   Calculates key statistics for simple view.
+-   Filter functionality based on different parameters.
+-   Backend API for the storage of the data and updating every day.
 
 ## Features
 
-- Collects all the information for properties listend on listing channels.
-  First only [alo.bg](www.alo.bg) for one bedroom properties
-  - Will include other listing channels, all property types, neighborhood and cities.
-- Performs calculations for average prices, sizes and price per sq.m.
-- Displays key statistics.
-- Ranks and sorts properties based on price and presents them in a table.
-- Filters properties based on different parameters.
-- Price range
-- Size range
-- Completion progress
-- Construction Type
-- Floor
-- Year Built
+-   Collects all the information for properties listend on listing channels.
+    First only [alo.bg](www.alo.bg) for one bedroom properties
+    -   Will include other listing channels, all property types, neighborhood and cities.
+-   Performs calculations for average prices, sizes and price per sq.m.
+-   Displays key statistics.
+-   Ranks and sorts properties based on price and presents them in a table.
+-   Filters properties based on different parameters.
+-   Price range
+-   Size range
+-   Completion progress
+-   Construction Type
+-   Floor
+-   Year Built
 
 ### Additional (optional features)
 
-- Performs a comparative analysis based on a property.
+-   Performs a comparative analysis based on a property.
 
 The user inputs information about the home. Afterwards a report is generated with the 5 closest properties
 to these characteristics.
@@ -42,25 +117,25 @@ to these characteristics.
 
 User Types:
 
-- Investors
-- Agents
-- Buyers
-- Sellers
-- Loaners
-- Developers
+-   Investors
+-   Agents
+-   Buyers
+-   Sellers
+-   Loaners
+-   Developers
 
 1. Developers
    Quickly determine what is the average price for a specific property type in a given neighborhood.
 
-- View the average price per property type (1, 2, 3 bedroom).
-- View the cheapest and most expensive prices for a type of property.
-- View the average size of the property for the given type.
-- View the number of properties offered based on three progress completion phases:
-  - Completed
-  - In Progress
-  - Pre construction
-- View the number of properties based on different construction type.
-- Compare different properties based on floor, year built, completion progress, size range and price range.
+-   View the average price per property type (1, 2, 3 bedroom).
+-   View the cheapest and most expensive prices for a type of property.
+-   View the average size of the property for the given type.
+-   View the number of properties offered based on three progress completion phases:
+    -   Completed
+    -   In Progress
+    -   Pre construction
+-   View the number of properties based on different construction type.
+-   Compare different properties based on floor, year built, completion progress, size range and price range.
 
 ## Property data scruture
 
@@ -79,18 +154,6 @@ JSON:
     "floor": Number,
 }
 ```
-
-## TODO
-
-- To Implement:
-
-  - search by neighborhood
-
-- Bugs:
-  - filter
-  - calculation functions
-  - search by type
-- Deploy
 
 ## Inspiration for Key Statistics
 
@@ -117,3 +180,7 @@ New Construction Activity: The number of new residential or commercial construct
 Rental Rates: The average rent prices for different types of properties (e.g., apartments, houses) in the market. This information is relevant for both tenants and investors looking for rental income.
 
 Demographic Data: Population growth rates, age distributions, income levels, and other relevant demographic information that can impact the real estate market.
+
+```
+
+```

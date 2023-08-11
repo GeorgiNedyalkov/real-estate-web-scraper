@@ -37,6 +37,16 @@ export const useFetch = (initialURL = apiURL) => {
     useEffect(() => {
         getApartments(url);
     }, [url]);
+    useEffect(() => {
+        getApartments(url);
+        // setLoading(true);
+        // fetch("http://127.0.0.1:5174/apartments.json")
+        //   .then((res) => res.json())
+        //   .then((result) => {
+        //     setLoading(false);
+        //     setApartments(result.neighborhood[0].apartments);
+        //   });
+    }, [url]);
 
     return { apartments, loading, setUrl, setApartments };
 };
