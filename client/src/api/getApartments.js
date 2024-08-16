@@ -1,6 +1,6 @@
 export async function getApartments(url) {
-  const res = await fetch(url);
-  const data = await res.json();
+    const res = await fetch(url);
+    const data = await res.json();
 
-  return data.result;
+    return data.result;
 }

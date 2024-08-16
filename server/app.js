@@ -18,9 +18,9 @@ app.use(morgan("common"));
 app.use(express.json());
 app.use(helmet());
 app.use(
-  cors({
-    origin: process.env.CORS_ORIGIN,
-  })
+    cors({
+        origin: process.env.CORS_ORIGIN,
+    })
 );
 // serve static Files
 app.use(express.static("./public"));
@@ -36,15 +36,15 @@ app.use(errorHandler);
 const port = process.env.PORT || 3001;
 
 const start = async () => {
-  try {
-    await connectDB(process.env.MONGO_URI);
-    console.log("Database connected");
-    app.listen(port, () => {
-      console.log(`App is listening on port: ${port}...`);
-    });
-  } catch (error) {
-    console.log(error);
-  }
+    try {
+        await connectDB(process.env.MONGO_URI);
+        console.log("Database connected");
+        app.listen(port, () => {
+            console.log(`App is listening on port: ${port}...`);
+        });
+    } catch (error) {
+        console.log(error);
+    }
 };
 
 start();

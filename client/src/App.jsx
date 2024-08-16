@@ -10,12 +10,7 @@ import SearchBar from "./components/SearchBar/SearchBar";
 
 import { useFetch } from "./hooks/useFetch";
 import filterRows from "./utils/helpers";
-import {
-    calcAverage,
-    findMode,
-    findMedian,
-    calcMarketCap,
-} from "./utils/calculations";
+import { calcAverage, findMode, findMedian, calcMarketCap } from "./utils/calculations";
 import "./App.css";
 
 const neighborhoodURL = "http://localhost:3001/api/v1/neighborhoods";
@@ -40,10 +35,7 @@ function App() {
     const modePricePerSqMeter = findMode("pricePerSqMeter", filteredApartments);
     const averageSize = calcAverage("size", filteredApartments);
     const averagePrice = calcAverage("price", filteredApartments);
-    const averagePricePerSqMeter = calcAverage(
-        "pricePerSqMeter",
-        filteredApartments
-    );
+    const averagePricePerSqMeter = calcAverage("pricePerSqMeter", filteredApartments);
 
     const calcStatistic = () => {
         if (filteredApartments.length === 0) {
@@ -52,9 +44,7 @@ function App() {
 
         setMedianPrice(findMedian("price", filteredApartments));
         setMedianSize(findMedian("size", filteredApartments));
-        setMedianPricePerSqMeters(
-            findMedian("pricePerSqMeter", filteredApartments)
-        );
+        setMedianPricePerSqMeters(findMedian("pricePerSqMeter", filteredApartments));
     };
 
     const onNeighborhoodChange = (neighborhood) => {
@@ -72,10 +62,7 @@ function App() {
         setApartments(apartments);
     };
 
-    const onSearchChange = useCallback(
-        (e) => setSearch(e.target.value),
-        [setSearch]
-    );
+    const onSearchChange = useCallback((e) => setSearch(e.target.value), [setSearch]);
 
     useEffect(() => {
         if (!loading) {
@@ -83,10 +70,7 @@ function App() {
         }
     }, [filteredApartments]);
 
-    const marketCap = useMemo(
-        () => calcMarketCap(filteredApartments),
-        [filteredApartments]
-    );
+    const marketCap = useMemo(() => calcMarketCap(filteredApartments), [filteredApartments]);
 
     if (loading) return <h1 className="loader">Loading...</h1>;
 
